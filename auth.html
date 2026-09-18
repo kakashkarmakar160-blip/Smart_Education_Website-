@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login • Smart Education</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#f7f8fc;--card:#fff;--text:#111a35;--muted:#687089;--line:#e7e8f0;--primary:#5b22c9;--primary2:#7744e8;--soft:#f1edff;--shadow:0 12px 40px rgba(34,25,75,.08)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,'Noto Sans Bengali',sans-serif;line-height:1.55}
+body.dark{--bg:#10111a;--card:#191b27;--text:#f7f7fb;--muted:#a9aec1;--line:#2d3040;--soft:#28213d;--shadow:0 12px 40px rgba(0,0,0,.25)}
+a{text-decoration:none;color:inherit}.topbar{height:70px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:20}.dark .topbar{background:rgba(16,17,26,.9)}
+.brand{font-size:22px;font-weight:800}.top-actions{display:flex;gap:10px;align-items:center}.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--text);width:44px;height:44px;border-radius:14px;cursor:pointer;font-size:19px;display:grid;place-items:center}
+.wrap{min-height:calc(100vh - 70px);display:grid;place-items:center;padding:28px 16px 70px}.auth-card{width:min(520px,100%);background:var(--card);border:1px solid var(--line);border-radius:28px;padding:30px;box-shadow:var(--shadow)}
+.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.5px;color:var(--primary);margin:0}.auth-card h1{font-size:32px;margin:6px 0}.muted{color:var(--muted)}.role-pill{display:inline-flex;padding:7px 12px;border-radius:999px;background:var(--soft);color:var(--primary);font-weight:800;font-size:13px;margin:5px 0 18px}
+.field{display:flex;flex-direction:column;gap:7px;margin:14px 0}.field label{font-weight:800;font-size:14px}.field input{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:12px;padding:13px;outline:none;font-size:16px}.field input:focus{border-color:var(--primary)}
+.primary{width:100%;border:0;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;padding:13px 18px;border-radius:12px;font-weight:800;font-size:15px;cursor:pointer}.outline{width:100%;display:inline-flex;justify-content:center;border:1px solid var(--line);background:var(--card);color:var(--text);padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer;margin-top:10px}
+.switch{border:0;background:none;color:var(--primary);font-weight:800;cursor:pointer}.message{padding:12px 14px;border-radius:12px;background:var(--soft);margin:15px 0;display:none}.message.show{display:block}.message.error{background:#ffecee;color:#b21e2b}.message.success{background:#eaf9f0;color:#167545}
+@media(max-width:600px){.topbar{padding:0 14px}.brand{font-size:18px}.auth-card{padding:23px}.auth-card h1{font-size:27px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+</head>
+<body>
+<header class="topbar">
+<a class="icon-btn" href="index.html" aria-label="Home">←</a>
+<div class="brand">Smart Education</div>
+<div class="top-actions"><button class="icon-btn" id="themeBtn" type="button">☾</button></div>
+</header>
+<main class="wrap">
+<section class="auth-card">
+<p class="eyebrow">SUPABASE ACCOUNT</p>
+<h1 id="title">Login</h1>
+<p class="muted" id="subtitle">তোমার account-এ login করে Smart Education ব্যবহার করো।</p>
+<div class="role-pill" id="rolePill">Smart Education</div>
+<div id="message" class="message"></div>
+<form id="authForm">
+<div class="field"><label>Email</label><input id="email" type="email" required autocomplete="email" placeholder="example@gmail.com"></div>
+<div class="field"><label>Password</label><input id="password" type="password" required minlength="6" autocomplete="current-password" placeholder="কমপক্ষে ৬ অক্ষর"></div>
+<button class="primary" id="submitBtn" type="submit">Login</button>
+</form>
+<button class="outline" id="toggleMode" type="button">নতুন account? Sign Up</button>
+<p class="muted" style="text-align:center;margin:18px 0 0;font-size:13px">Password কখনো কারও সঙ্গে শেয়ার করবে না।</p>
+</section>
+</main>
+<script>
+const THEME_KEY='smartEduTheme';
+const params=new URLSearchParams(location.search);
+const role=params.get('role')||'';
+const next=params.get('next')||'index.html';
+let mode='login';
+const roleNames={student:'Student',teacher:'Teacher',computer:'Computer'};
+const rolePill=document.getElementById('rolePill');
+const message=document.getElementById('message');
+const form=document.getElementById('authForm');
+
+function applyTheme(){
+  document.body.classList.toggle('dark',localStorage.getItem(THEME_KEY)==='dark');
+  document.getElementById('themeBtn').textContent=document.body.classList.contains('dark')?'☀':'☾';
+}
+document.getElementById('themeBtn').addEventListener('click',()=>{
+  localStorage.setItem(THEME_KEY,localStorage.getItem(THEME_KEY)==='dark'?'light':'dark');applyTheme();
+});
+applyTheme();
+
+if(roleNames[role]) rolePill.textContent=roleNames[role]+' Login';
+function show(text,type=''){
+  message.textContent=text; message.className='message show '+type;
+}
+function setMode(){
+  const signup=mode==='signup';
+  document.getElementById('title').textContent=signup?'Create Account':'Login';
+  document.getElementById('subtitle').textContent=signup?'নতুন account তৈরি করে Smart Education-এ প্রবেশ করো।':'তোমার account-এ login করে Smart Education ব্যবহার করো।';
+  document.getElementById('submitBtn').textContent=signup?'Sign Up':'Login';
+  document.getElementById('toggleMode').textContent=signup?'আগে account আছে? Login':'নতুন account? Sign Up';
+  document.getElementById('password').autocomplete=signup?'new-password':'current-password';
+  message.className='message';
+}
+document.getElementById('toggleMode').addEventListener('click',()=>{mode=mode==='login'?'signup':'login';setMode();});
+
+async function redirectAfterAuth(){
+  const u=await smartEduAuth.user();
+  if(u){ location.href=next; }
+}
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const email=document.getElementById('email').value.trim();
+  const password=document.getElementById('password').value;
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true; btn.textContent='Please wait...'; message.className='message';
+  try{
+    if(mode==='signup'){
+      const {data,error}=await supabaseClient.auth.signUp({
+        email,password,
+        options:{data:{preferred_role:role||null}}
+      });
+      if(error) throw error;
+      if(data.session){
+        show('Account তৈরি হয়েছে। এখন Profile information পূরণ করো।','success');
+        setTimeout(()=>location.href=next,500);
+      }else{
+        show('Account তৈরি হয়েছে। তোমার email inbox-এ verification link পাঠানো হয়েছে। Email verify করে আবার Login করো।','success');
+        mode='login'; setMode();
+      }
+    }else{
+      const {error}=await supabaseClient.auth.signInWithPassword({email,password});
+      if(error) throw error;
+      await redirectAfterAuth();
+    }
+  }catch(err){
+    console.error(err);
+    show(err.message||'Login/Sign Up failed. আবার চেষ্টা করো।','error');
+  }finally{
+    btn.disabled=false;
+    setMode();
+  }
+});
+</script>
+</body>
+</html>

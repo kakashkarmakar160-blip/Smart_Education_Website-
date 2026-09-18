@@ -123,6 +123,61 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 </script><script data-internal-js="js/student-save.js">
-document.getElementById('studentForm').addEventListener('submit',e=>{e.preventDefault();localStorage.setItem('studentProfile',JSON.stringify({name:document.getElementById('studentName').value.trim(),id:document.getElementById('studentId').value.trim(),className:document.getElementById('studentClass').value,semester:document.getElementById('semester').value}));location.href='student-rules.html';});
+
+document.getElementById('studentForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const profile = {
+    name: document.getElementById('studentName').value.trim(),
+    id: document.getElementById('studentId').value.trim(),
+    className: document.getElementById('studentClass').value,
+    semester: document.getElementById('semester').value,
+    role: 'student'
+  };
+  const user = await smartEduAuth.user();
+  if (!user) {
+    sessionStorage.setItem('pendingStudentProfile', JSON.stringify(profile));
+    location.href='auth.html?role=student&next=student-save.html';
+    return;
+  }
+  const button=e.submitter;
+  if(button) {button.disabled=true; button.textContent='Saving...';}
+  try {
+    await smartEduAuth.saveProfile(profile);
+    localStorage.setItem('studentProfile', JSON.stringify(profile)); // compatibility for existing pages
+    location.href='student-rules.html';
+  } catch(err) {
+    console.error(err);
+    alert('Profile save হয়নি: '+(err.message||'Unknown error'));
+    if(button) {button.disabled=false; button.textContent='Save & Continue →';}
+  }
+});
+
+(async function restoreStudentProfile(){
+  const user=await smartEduAuth.user();
+  if(!user){
+    // Direct visits are allowed; clicking Save will take the user to Login.
+    return;
+  }
+  try{
+    const p=await smartEduAuth.profile();
+    if(p && p.role==='student'){
+      document.getElementById('studentName').value=p.name||'';
+      document.getElementById('studentClass').value=p.class_name||'Class 5';
+      document.getElementById('semester').value=p.semester||'1st Semester';
+      if(p.phone) document.getElementById('studentId').value=p.phone;
+    }
+  }catch(e){console.warn(e);}
+  const pending=sessionStorage.getItem('pendingStudentProfile');
+  if(pending){
+    try{
+      const p=JSON.parse(pending);
+      document.getElementById('studentName').value=p.name||'';
+      document.getElementById('studentId').value=p.id||'';
+      document.getElementById('studentClass').value=p.className||'Class 5';
+      document.getElementById('semester').value=p.semester||'1st Semester';
+      sessionStorage.removeItem('pendingStudentProfile');
+    }catch{}
+  }
+})();
 
 </script></body></html>

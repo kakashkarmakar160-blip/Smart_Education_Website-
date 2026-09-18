@@ -123,6 +123,58 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 </script><script data-internal-js="js/teacher-save.js">
-document.getElementById('teacherForm').addEventListener('submit',e=>{e.preventDefault();localStorage.setItem('teacherProfile',JSON.stringify({name:teacherName.value,phone:teacherPhone.value,className:teacherClass.value,semester:teacherSemester.value}));location.href='teacher-question.html';});
+
+document.getElementById('teacherForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const profile = {
+    name: document.getElementById('teacherName').value.trim(),
+    phone: document.getElementById('teacherPhone').value.trim(),
+    className: document.getElementById('teacherClass').value.trim(),
+    semester: document.getElementById('teacherSemester').value.trim(),
+    role: 'teacher'
+  };
+  const user = await smartEduAuth.user();
+  if (!user) {
+    sessionStorage.setItem('pendingTeacherProfile', JSON.stringify(profile));
+    location.href='auth.html?role=teacher&next=teacher-save.html';
+    return;
+  }
+  const button=e.submitter;
+  if(button) {button.disabled=true; button.textContent='Saving...';}
+  try {
+    await smartEduAuth.saveProfile(profile);
+    localStorage.setItem('teacherProfile', JSON.stringify(profile)); // compatibility for existing pages
+    location.href='teacher-question.html';
+  } catch(err) {
+    console.error(err);
+    alert('Profile save হয়নি: '+(err.message||'Unknown error'));
+    if(button) {button.disabled=false; button.textContent='Save & Continue →';}
+  }
+});
+
+(async function restoreTeacherProfile(){
+  const user=await smartEduAuth.user();
+  if(!user) return;
+  try{
+    const p=await smartEduAuth.profile();
+    if(p && p.role==='teacher'){
+      document.getElementById('teacherName').value=p.name||'';
+      document.getElementById('teacherPhone').value=p.phone||'';
+      document.getElementById('teacherClass').value=p.class_name||'';
+      document.getElementById('teacherSemester').value=p.semester||'';
+    }
+  }catch(e){console.warn(e);}
+  const pending=sessionStorage.getItem('pendingTeacherProfile');
+  if(pending){
+    try{
+      const p=JSON.parse(pending);
+      document.getElementById('teacherName').value=p.name||'';
+      document.getElementById('teacherPhone').value=p.phone||'';
+      document.getElementById('teacherClass').value=p.className||'';
+      document.getElementById('teacherSemester').value=p.semester||'';
+      sessionStorage.removeItem('pendingTeacherProfile');
+    }catch{}
+  }
+})();
 
 </script></body></html>

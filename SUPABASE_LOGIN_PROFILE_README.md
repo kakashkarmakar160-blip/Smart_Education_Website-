@@ -1,0 +1,18 @@
+# Smart Education — Supabase Login + Profile
+This version preserves the existing UI and adds Supabase Email/Password authentication and profile storage.
+
+### Added
+- `auth.html`: Login + Sign Up using Supabase Auth.
+- `student-save.html`: saves Student profile to `public.profiles`.
+- `teacher-save.html`: saves Teacher profile to `public.profiles`.
+- `student-profile.html`: loads the signed-in Student profile from Supabase.
+- `teacher-profile.html`: loads the signed-in Teacher profile from Supabase.
+- `profile.html`: shows login status and Logout.
+- `supabase-config.js`: Supabase client and profile helpers.
+
+### Existing database requirement
+The `public.profiles` table and RLS policies must already exist as configured in Supabase.
+The current stage intentionally keeps question/exam/result data on the existing localStorage/JSON system. The next stage will migrate those to Supabase.
+
+### Security
+Only the Publishable key belongs in the browser. Never put an `sb_secret_...` key in GitHub or HTML.
