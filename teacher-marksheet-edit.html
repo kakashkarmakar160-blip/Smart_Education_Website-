@@ -29,7 +29,11 @@
 @media(max-width:760px){.teacher-edit-summary{grid-template-columns:1fr 1fr}.question-edit-card{grid-template-columns:1fr}.question-mark-control{border-left:0;border-top:1px solid var(--line);padding:14px 0 0}.teacher-answer-lines{grid-template-columns:1fr}.result-student-head,.teacher-edit-head{align-items:flex-start;flex-direction:column}}
 @media(max-width:480px){.teacher-edit-summary{grid-template-columns:1fr}.question-edit-title{flex-wrap:wrap}.q-type{order:3}}
 
-</style></head><body><header class="topbar"><a href="teacher-profile.html" class="icon-btn">←</a><div class="brand">Student Result Edit</div><div class="top-actions"><button class="icon-btn" id="themeBtn">☾</button><a href="profile.html" class="avatar">AK</a></div></header><main class="role-wrap"><div id="editArea"></div></main><script data-internal-js="js/app.js">
+</style><!-- Smart Education Supabase connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<!-- End Supabase connection -->
+</head><body><header class="topbar"><a href="teacher-profile.html" class="icon-btn">←</a><div class="brand">Student Result Edit</div><div class="top-actions"><button class="icon-btn" id="themeBtn">☾</button><a href="profile.html" class="avatar">AK</a></div></header><main class="role-wrap"><div id="editArea"></div></main><script data-internal-js="js/app.js">
 const THEME_KEY='smartEduTheme';
 
 function applyTheme(){

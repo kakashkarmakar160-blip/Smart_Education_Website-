@@ -7,7 +7,11 @@
 </style><style data-internal-css="css/teacher-publish.css">
 .publish-layout{display:grid;grid-template-columns:minmax(0,760px) 320px;gap:18px}.password-row{display:flex;gap:8px}.password-row input{flex:1}.publish-help{padding:28px;text-align:center;height:max-content}.big-lock{font-size:50px}.published-code{margin:15px 0;padding:18px;border-radius:15px;background:var(--soft);font-size:28px;font-weight:900;letter-spacing:3px;color:var(--primary)}.hidden{display:none!important}@media(max-width:850px){.publish-layout{grid-template-columns:1fr}}
 
-</style></head><body>
+</style><!-- Smart Education Supabase connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<!-- End Supabase connection -->
+</head><body>
 <header class="topbar"><a href="teacher-preview.html" class="icon-btn">←</a><div class="brand">Publish Question Paper</div><div class="top-actions"><button class="icon-btn" id="themeBtn">☾</button><div class="avatar">AK</div></div></header>
 <main class="role-wrap"><section class="publish-layout">
 <div class="form-card"><p class="eyebrow">FINAL STEP</p><h1>Publish Question Set</h1><p class="muted">Publish করার আগে নাম ও password/code সেট করো।</p>

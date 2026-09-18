@@ -3,7 +3,11 @@
 </style><style data-internal-css="css/teacher-preview.css">
 .paper-wrap{max-width:1000px;margin:auto;padding:28px 20px 70px}.paper-head{background:var(--soft);border:1px solid var(--line);border-radius:24px;padding:25px;display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:18px}.paper-head h1{margin:4px 0}.preview-actions{display:flex;gap:10px;flex-wrap:wrap}.paper-question{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;margin:13px 0;box-shadow:var(--shadow)}.paper-question h3{margin:0 0 10px}.paper-question .q-text{font-size:18px;font-weight:700}.paper-options{margin-top:12px;display:grid;gap:7px}.paper-options div{padding:9px 11px;border-radius:10px;background:var(--bg);border:1px solid var(--line)}.answer-note{margin-top:12px;padding:10px 12px;background:#eefaf2;border-radius:10px;color:#176b39;font-size:13px}.empty-paper{text-align:center;padding:40px}@media(max-width:650px){.paper-head{align-items:flex-start;flex-direction:column}}
 
-</style></head><body>
+</style><!-- Smart Education Supabase connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<!-- End Supabase connection -->
+</head><body>
 <header class="topbar"><a href="teacher-question.html" class="icon-btn">←</a><div class="brand">Question Paper Preview</div><div class="top-actions"><button class="icon-btn" id="themeBtn">☾</button><div class="avatar">AK</div></div></header>
 <main class="paper-wrap"><section class="paper-head"><div><p class="eyebrow">PREVIEW BEFORE PUBLISH</p><h1 id="paperTitle">Teacher Question Paper</h1><p id="paperMeta" class="muted"></p></div><div class="preview-actions"><a href="teacher-question.html" class="outline">+ Add Question</a><a href="teacher-publish.html" class="primary">Publish →</a></div></section><section id="paperList"></section></main>
 <script data-internal-js="js/app.js">

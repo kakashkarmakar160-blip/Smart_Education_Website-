@@ -6,7 +6,11 @@
 </style><style data-internal-css="css/student-paper.css">
 .access-card{padding:28px;margin-bottom:18px}.access-row{display:flex;gap:10px;margin-top:15px}.access-row input{flex:1;border:1px solid var(--line);border-radius:12px;padding:13px;background:var(--bg);color:var(--text);font:inherit}.danger{color:#c52c38;font-weight:700}@media(max-width:600px){.access-row{flex-direction:column}}
 
-</style></head><body>
+</style><!-- Smart Education Supabase connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<!-- End Supabase connection -->
+</head><body>
 <header class="topbar"><a href="student-save.html" class="icon-btn">←</a><div class="brand">Teacher Paper</div><div class="top-actions"><button class="icon-btn" id="themeBtn">☾</button><div class="avatar">AK</div></div></header>
 <main class="paper-wrap"><section class="access-card card"><p class="eyebrow">STUDENT ACCESS</p><h1>Enter Teacher Password</h1><p class="muted">Teacher যে password/code দিয়েছেন সেটি লিখে question paper খুলুন।</p><div class="access-row"><input id="paperCode" placeholder="Enter password / code" autocomplete="off"><button id="openPaper" class="primary">Open Paper →</button></div><p id="accessMsg" class="danger"></p></section><section id="paperArea" class="hidden"></section></main>
 <script data-internal-js="js/app.js">
