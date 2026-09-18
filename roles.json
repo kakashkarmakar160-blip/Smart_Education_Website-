@@ -1,0 +1,20 @@
+[
+  {
+    "id": "student",
+    "name": "Student",
+    "image": "assets/roles/student.svg",
+    "description": "প্রশ্ন অনুশীলন ও ফলাফল দেখো"
+  },
+  {
+    "id": "teacher",
+    "name": "Teacher",
+    "image": "assets/roles/teacher.svg",
+    "description": "প্রশ্ন তৈরি ও পরিচালনা করো"
+  },
+  {
+    "id": "computer",
+    "name": "Computer",
+    "image": "assets/roles/computer.svg",
+    "description": "Computer-based practice ও exam"
+  }
+]

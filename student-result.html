@@ -1,0 +1,133 @@
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Student Exam Result</title><style data-internal-css="css/style.css">
+*{box-sizing:border-box} :root{--bg:#f7f8fc;--card:#fff;--text:#111a35;--muted:#687089;--line:#e7e8f0;--primary:#5b22c9;--primary2:#7744e8;--soft:#f1edff;--shadow:0 12px 40px rgba(34,25,75,.08)} body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,'Noto Sans Bengali',sans-serif;line-height:1.55} body.dark{--bg:#10111a;--card:#191b27;--text:#f7f7fb;--muted:#a9aec1;--line:#2d3040;--soft:#28213d;--shadow:0 12px 40px rgba(0,0,0,.25)} a{text-decoration:none;color:inherit}.topbar{height:70px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:20}.dark .topbar{background:rgba(16,17,26,.9)}.brand{font-size:22px;font-weight:800;letter-spacing:-.4px}.top-actions{display:flex;align-items:center;gap:10px}.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--text);width:44px;height:44px;border-radius:14px;cursor:pointer;font-size:19px;display:grid;place-items:center}.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#6d35d4,#9c6af1);font-weight:800}.container{max-width:1180px;margin:auto;padding:28px 22px 70px}.hero{min-height:280px;border:1px solid #eee8ff;border-radius:28px;padding:42px 48px;display:flex;justify-content:space-between;align-items:center;background:radial-gradient(circle at 85% 50%,#eee7ff,transparent 35%),linear-gradient(135deg,#fff,#f4f0ff);box-shadow:var(--shadow);overflow:hidden}.dark .hero{background:linear-gradient(135deg,#1d1d2a,#211c35)}.hero h1{font-size:44px;line-height:1.15;margin:8px 0 14px;letter-spacing:-1.6px}.hero h1 span{color:#5e38d2}.hero p{color:var(--muted);max-width:650px}.hero-art{font-size:78px;text-align:center;transform:rotate(-3deg)}.hero-art div{font-size:90px;margin-top:-18px}.hero-art small{font-size:22px;color:#7142df}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--primary);margin:0}.search-wrap{margin:18px 0 34px;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 28px rgba(35,28,75,.05);display:flex;align-items:center;padding:0 20px}.search-wrap span{font-size:30px;color:var(--muted)}.search-wrap input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:17px;padding:20px 14px}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:15px}.section-head h2,.page-intro h1{margin:4px 0;font-size:30px;letter-spacing:-.7px}.muted{color:var(--muted)}.primary{display:inline-flex;justify-content:center;align-items:center;border:0;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer}.full{width:100%}.page-intro{padding:15px 0 25px}.page-intro p:last-child{color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.result-card{max-width:620px;margin:70px auto;text-align:center;background:var(--card);border:1px solid var(--line);padding:45px;border-radius:28px;box-shadow:var(--shadow)}.score-ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;background:var(--soft);color:var(--primary);font-size:36px;font-weight:900}.hidden{display:none!important}.modal{position:fixed;inset:0;background:rgba(12,12,22,.48);display:grid;place-items:end center;z-index:50}.modal-card{width:min(900px,100%);max-height:88vh;overflow:auto;background:var(--card);border-radius:28px 28px 0 0;padding:30px;position:relative}.close{position:absolute;right:20px;top:18px;border:0;background:var(--soft);font-size:25px;width:42px;height:42px;border-radius:50%;cursor:pointer}@media(max-width:720px){.topbar{padding:0 14px}.brand{font-size:17px}.container{padding:18px 14px 55px}.hero{padding:28px 22px;min-height:240px}.hero h1{font-size:32px}.hero-art{font-size:55px}.hero-art div{font-size:65px}.hero-art small{font-size:16px}}
+</style><style data-internal-css="css/student-result.css">
+.result-hero{display:flex;justify-content:space-between;align-items:center;padding:22px 25px;border-radius:22px;background:linear-gradient(135deg,#f2efff,#fff);border:1px solid var(--line);box-shadow:var(--shadow)}.result-hero h1{margin:5px 0}.trophy{font-size:62px}.result-main{margin-top:16px;display:grid;grid-template-columns:180px 1fr 1.4fr;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:var(--shadow)}.ring{width:155px;height:155px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);font-size:32px;font-weight:900;color:var(--primary);border:8px solid var(--soft)}.grade-box{text-align:center}.grade-box span,.grade-box small{display:block;color:var(--muted)}.grade-box strong{display:block;font-size:72px;line-height:1;color:#198c4f}.result-side{display:grid;gap:8px}.result-side div{display:flex;justify-content:space-between;padding:11px 13px;border-radius:12px;background:var(--soft)}.section-title{margin:20px 0 10px}.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.summary-grid>div{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;text-align:center}.summary-grid span{display:block;color:var(--muted);font-size:13px}.summary-grid b{display:block;font-size:26px;margin-top:6px}@media(max-width:760px){.result-main{grid-template-columns:1fr;text-align:center}.ring{margin:auto}.result-side{width:100%}.summary-grid{grid-template-columns:1fr 1fr}}
+#resultReview{margin-top:18px}.review-q{display:flex;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}.review-q:last-child{border-bottom:0}.review-q p{margin:7px 0 0;color:var(--muted);font-size:13px}.review-good{color:#15834a;font-weight:800}.review-bad{color:#c43b49;font-weight:800}.review-answer{color:var(--primary);font-weight:800}.review-status{align-self:flex-start;white-space:nowrap;padding:6px 9px;border-radius:9px;font-size:12px}.review-status.ok{background:#dcf7e7;color:#15834a}.review-status.no{background:#ffe2e5;color:#c43b49}
+.review-mark{align-self:flex-start;white-space:nowrap;padding:6px 9px;border-radius:9px;background:var(--soft);color:var(--primary);font-size:12px;font-weight:800}
+@media(max-width:700px){.review-mark{align-self:flex-start}}
+
+</style></head><body><header class="topbar"><a href="index.html" class="icon-btn">←</a><div class="brand">Student Exam Result</div><div class="top-actions"><button class="icon-btn" id="themeBtn">☾</button><a href="student-profile.html" class="avatar">AK</a></div></header><main class="role-wrap"><section class="result-hero"><div><p class="eyebrow">TEST COMPLETED!</p><h1 id="resultTitle">Class 12 Mathematics</h1><p id="resultMeta" class="muted"></p></div><div class="trophy">🏆</div></section><section class="result-main"><div class="ring" id="ring">0%</div><div class="grade-box"><span>Grade</span><strong id="grade">A</strong><small id="performance">Excellent!</small></div><div class="result-side"><div><span>Total Marks</span><b id="total">0</b></div><div><span>Obtained Marks</span><b id="obtained">0</b></div><div><span>Percentage</span><b id="percentage">0%</b></div><div><span>Rank</span><b>Top 5%</b></div></div></section><h3 class="section-title">Performance Summary</h3><section class="summary-grid"><div><span>Correct Answers</span><b id="correct">0</b></div><div><span>Incorrect Answers</span><b id="wrong">0</b></div><div><span>Unattempted</span><b id="unattempted">0</b></div><div><span>Time Taken</span><b>04:30</b></div></section><div class="action-row"><a class="primary" href="student-marksheet.html">View Mark Sheet →</a><a class="outline" href="index.html">Back Home</a></div></main><script data-internal-js="js/app.js">
+const THEME_KEY='smartEduTheme';
+
+function applyTheme(){
+  document.body.classList.toggle('dark', localStorage.getItem(THEME_KEY)==='dark');
+  document.querySelectorAll('#themeBtn').forEach(btn=>{
+    btn.textContent=document.body.classList.contains('dark')?'☀':'☾';
+  });
+}
+
+function roleTarget(id){
+  return id==='teacher'?'teacher-save.html':id==='computer'?'computer-save.html':'student-save.html';
+}
+
+function escapeHtml(s){
+  return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+async function loadJSON(path){
+  const candidates=[path];
+  if(location.pathname.includes('/frontend/')) candidates.push('../'+path);
+  let last;
+  for(const candidate of candidates){try{const r=await fetch(candidate,{cache:'no-store'});if(r.ok)return await r.json();last=new Error('HTTP '+r.status+' '+candidate)}catch(e){last=e}}
+  throw last||new Error('Cannot load '+path);
+}
+
+function params(){ return new URLSearchParams(location.search); }
+
+async function initRoles(){
+  const grid=document.getElementById('roleGrid');
+  if(!grid) return;
+  const roles=await loadJSON('data/roles.json');
+  const html=roles.map(r=>`
+    <button class="role-card" data-role="${r.id}" type="button">
+      <img src="${r.image}" alt="${escapeHtml(r.name)}">
+      <div><h3>${escapeHtml(r.name)}</h3><p>${escapeHtml(r.description)}</p></div>
+      <span>→</span>
+    </button>`).join('');
+  grid.innerHTML=html;
+  document.querySelectorAll('.role-card').forEach(b=>{
+    b.addEventListener('click',()=>location.href=roleTarget(b.dataset.role));
+  });
+}
+
+function bindGlobal(){
+  applyTheme();
+
+  document.querySelectorAll('#themeBtn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      localStorage.setItem(THEME_KEY, localStorage.getItem(THEME_KEY)==='dark'?'light':'dark');
+      applyTheme();
+    });
+  });
+
+  document.getElementById('profileBtn')?.addEventListener('click',()=>location.href='profile.html');
+
+  // Any avatar that is not already a link works as the profile button.
+  document.querySelectorAll('.avatar:not(a)').forEach(a=>{
+    if(a.id==='profileBtn') return;
+    a.setAttribute('role','button');
+    a.setAttribute('tabindex','0');
+    a.addEventListener('click',()=>location.href='profile.html');
+    a.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')location.href='profile.html';});
+  });
+
+  // The purple logo is now the switch for the two question-edit pages.
+  const pageMenu=document.getElementById('pageMenu');
+  const pagePasswordModal=document.getElementById('pagePasswordModal');
+  const pagePassword=document.getElementById('pagePassword');
+  const pagePasswordMsg=document.getElementById('pagePasswordMsg');
+  let pendingPage='';
+  document.getElementById('pageSwitchBtn')?.addEventListener('click',()=>{
+    pageMenu?.classList.remove('hidden');
+  });
+  document.getElementById('closePageMenu')?.addEventListener('click',()=>pageMenu?.classList.add('hidden'));
+  document.getElementById('closePagePassword')?.addEventListener('click',()=>pagePasswordModal?.classList.add('hidden'));
+  function openPagePassword(page){
+    pendingPage=page;
+    if(pagePassword){pagePassword.value='';pagePassword.focus();}
+    if(pagePasswordMsg)pagePasswordMsg.textContent='';
+    pagePasswordModal?.classList.remove('hidden');
+    pageMenu?.classList.add('hidden');
+  }
+  document.getElementById('addPage1Btn')?.addEventListener('click',()=>openPagePassword('1'));
+  document.getElementById('addPage2Btn')?.addEventListener('click',()=>openPagePassword('2'));
+  function unlockSelectedPage(){
+    if(pagePassword?.value==='AK1234'){
+      if(pendingPage==='1'){
+        sessionStorage.setItem('computerEditorUnlocked','1');
+        location.href='computer-question-paper.html';
+      }else if(pendingPage==='2'){
+        sessionStorage.setItem('practiceEditorUnlocked','1');
+        location.href='practice-question-paper.html?class=5&semester=1&subject=bangla';
+      }
+    }else if(pagePasswordMsg){
+      pagePasswordMsg.textContent='this is wrong password';
+    }
+  }
+  document.getElementById('unlockPage')?.addEventListener('click',unlockSelectedPage);
+  pagePassword?.addEventListener('keydown',e=>{if(e.key==='Enter')unlockSelectedPage()});
+
+  document.getElementById('closeProfilePanel')?.addEventListener('click',()=>{
+    document.getElementById('profilePanel')?.classList.add('hidden');
+  });
+  document.querySelectorAll('.side-overlay').forEach(x=>x.addEventListener('click',e=>{
+    if(e.target===x)x.classList.add('hidden');
+  }));
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  bindGlobal();
+  initRoles().catch(console.error);
+});
+
+</script><script data-internal-js="js/student-result.js">
+const id=new URLSearchParams(location.search).get('resultId');
+const all=JSON.parse(localStorage.getItem('studentResults')||'[]');
+let r=(id&&all.find(x=>x.id===id))||JSON.parse(sessionStorage.getItem('examResult')||'{}');
+const total=Number(r.total)||0,correct=Number(r.correct)||0,attempted=Number(r.attempted)||0,wrong=Number(r.wrong??Math.max(0,attempted-correct)),unattempted=Number(r.unattempted??Math.max(0,total-attempted));
+const totalMarks=Number(r.totalMarks)||total,obtained=Number(r.obtained)||0,pct=Number(r.percentage??(totalMarks?Math.round(obtained/totalMarks*100):0));
+document.getElementById('resultTitle').textContent=r.title||'Practice Result';document.getElementById('resultMeta').textContent=[r.school,r.subject,r.teacher].filter(Boolean).join(' • ');document.getElementById('ring').textContent=pct+'%';document.getElementById('ring').style.background=`conic-gradient(var(--primary) ${pct*3.6}deg,var(--soft) ${pct*3.6}deg)`;const grade=pct>=90?'A+':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=40?'D':'F';document.getElementById('grade').textContent=grade;document.getElementById('performance').textContent=pct>=80?'Excellent!':pct>=50?'Good Job!':'Keep Practising';document.getElementById('total').textContent=totalMarks;document.getElementById('obtained').textContent=obtained;document.getElementById('percentage').textContent=pct+'%';document.getElementById('correct').textContent=correct;document.getElementById('wrong').textContent=wrong;document.getElementById('unattempted').textContent=unattempted;
+const main=document.querySelector('.role-wrap');let review=document.getElementById('resultReview');if(!review){review=document.createElement('section');review.id='resultReview';review.className='history-card';main.appendChild(review);}const qs=r.questions||[];const ans=r.answers||{};const awarded=Array.isArray(r.awardedMarks)?r.awardedMarks:qs.map((q,i)=>ans[i]?.correct?Number(q.marks||1):0);review.innerHTML=`<div class="section-head"><div><p class="eyebrow">QUESTION REVIEW</p><h2>Answer Review</h2></div><span class="muted">Student view • Read only</span></div>${qs.length?qs.map((q,i)=>{const a=ans[i],ok=a?.correct;let given=a?.value||'Not answered';return `<article class="review-q"><div><b>${i+1}. ${escapeHtml(q.question)}</b><p>Your Answer: <span class="${ok?'review-good':'review-bad'}">${escapeHtml(given)}</span></p>${q.type==='mcq'?`<p>Correct Answer: <span class="review-answer">${escapeHtml(q.answer||'')}</span></p>`:''}</div><div class="review-mark">Marks: ${Number(awarded[i]||0)}/${Number(q.marks||1)}</div><strong class="review-status ${!a?'no':ok?'ok':'no'}">${!a?'— Not Answered':ok?'✓ Correct':'✕ Incorrect'}</strong></article>`}).join(''):'<p class="muted">Detailed review data is not available for this result.</p>'}`;
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+
+</script></body></html>

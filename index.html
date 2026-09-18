@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Smart Education</title>
+  <style data-internal-css="css/style.css">
+*{box-sizing:border-box} :root{--bg:#f7f8fc;--card:#fff;--text:#111a35;--muted:#687089;--line:#e7e8f0;--primary:#5b22c9;--primary2:#7744e8;--soft:#f1edff;--shadow:0 12px 40px rgba(34,25,75,.08)} body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,'Noto Sans Bengali',sans-serif;line-height:1.55} body.dark{--bg:#10111a;--card:#191b27;--text:#f7f7fb;--muted:#a9aec1;--line:#2d3040;--soft:#28213d;--shadow:0 12px 40px rgba(0,0,0,.25)} a{text-decoration:none;color:inherit}.topbar{height:70px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:20}.dark .topbar{background:rgba(16,17,26,.9)}.brand{font-size:22px;font-weight:800;letter-spacing:-.4px}.top-actions{display:flex;align-items:center;gap:10px}.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--text);width:44px;height:44px;border-radius:14px;cursor:pointer;font-size:19px;display:grid;place-items:center}.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#6d35d4,#9c6af1);font-weight:800}.container{max-width:1180px;margin:auto;padding:28px 22px 70px}.hero{min-height:280px;border:1px solid #eee8ff;border-radius:28px;padding:42px 48px;display:flex;justify-content:space-between;align-items:center;background:radial-gradient(circle at 85% 50%,#eee7ff,transparent 35%),linear-gradient(135deg,#fff,#f4f0ff);box-shadow:var(--shadow);overflow:hidden}.dark .hero{background:linear-gradient(135deg,#1d1d2a,#211c35)}.hero h1{font-size:44px;line-height:1.15;margin:8px 0 14px;letter-spacing:-1.6px}.hero h1 span{color:#5e38d2}.hero p{color:var(--muted);max-width:650px}.hero-art{font-size:78px;text-align:center;transform:rotate(-3deg)}.hero-art div{font-size:90px;margin-top:-18px}.hero-art small{font-size:22px;color:#7142df}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--primary);margin:0}.search-wrap{margin:18px 0 34px;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 28px rgba(35,28,75,.05);display:flex;align-items:center;padding:0 20px}.search-wrap span{font-size:30px;color:var(--muted)}.search-wrap input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:17px;padding:20px 14px}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:15px}.section-head h2,.page-intro h1{margin:4px 0;font-size:30px;letter-spacing:-.7px}.muted{color:var(--muted)}.primary{display:inline-flex;justify-content:center;align-items:center;border:0;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer}.full{width:100%}.page-intro{padding:15px 0 25px}.page-intro p:last-child{color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.result-card{max-width:620px;margin:70px auto;text-align:center;background:var(--card);border:1px solid var(--line);padding:45px;border-radius:28px;box-shadow:var(--shadow)}.score-ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;background:var(--soft);color:var(--primary);font-size:36px;font-weight:900}.hidden{display:none!important}.modal{position:fixed;inset:0;background:rgba(12,12,22,.48);display:grid;place-items:end center;z-index:50}.modal-card{width:min(900px,100%);max-height:88vh;overflow:auto;background:var(--card);border-radius:28px 28px 0 0;padding:30px;position:relative}.close{position:absolute;right:20px;top:18px;border:0;background:var(--soft);font-size:25px;width:42px;height:42px;border-radius:50%;cursor:pointer}@media(max-width:720px){.topbar{padding:0 14px}.brand{font-size:17px}.container{padding:18px 14px 55px}.hero{padding:28px 22px;min-height:240px}.hero h1{font-size:32px}.hero-art{font-size:55px}.hero-art div{font-size:65px}.hero-art small{font-size:16px}}
+
+/* Inline logos: no external image path is required. */
+.inline-logo{display:block;flex:none}.inline-home-logo{width:44px;height:34px}.inline-menu-logo{width:128px;height:128px;filter:drop-shadow(0 14px 20px rgba(91,34,201,.18))}.inline-role-logo{width:88px;height:72px;border-radius:15px}.role-card .inline-role-logo{width:88px;height:72px}.role-card-big .inline-role-logo{width:88px;height:72px}@media(max-width:720px){.inline-menu-logo{width:104px;height:104px}.inline-home-logo{width:40px;height:30px}.role-card .inline-role-logo,.role-card-big .inline-role-logo{width:76px;height:64px}}
+</style>
+  <style data-internal-css="css/home.css">
+ .class-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.class-card{padding:22px;min-height:180px;position:relative;overflow:hidden;cursor:pointer;transition:.2s}.class-card:hover{transform:translateY(-4px)}.class-icon{font-size:34px}.class-card h3{font-size:21px;margin:14px 0 3px}.class-card p{color:var(--muted);margin:0}.arrow{position:absolute;right:18px;bottom:18px;width:38px;height:38px;border-radius:50%;background:var(--soft);display:grid;place-items:center;color:var(--primary)}@media(max-width:900px){.class-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.class-grid{grid-template-columns:1fr}}
+.role-section{margin:4px 0 30px}.role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.role-card{position:relative;text-align:left;border:1px solid var(--line);background:var(--card);border-radius:22px;padding:14px;display:grid;grid-template-columns:88px 1fr 30px;gap:14px;align-items:center;box-shadow:var(--shadow);cursor:pointer;transition:.2s;color:var(--text)}.role-card:hover{transform:translateY(-4px);border-color:#bda7f4}.role-card img{width:88px;height:72px;object-fit:cover;border-radius:15px}.role-card h3{margin:0 0 4px;font-size:20px}.role-card p{margin:0;color:var(--muted);font-size:13px}.role-card>span{font-size:25px;color:var(--primary);font-weight:900}.side-overlay{position:fixed;inset:0;background:rgba(15,16,28,.45);z-index:80;display:flex;justify-content:flex-start}.side-panel{width:min(430px,92vw);height:100%;background:var(--card);padding:35px 24px;box-shadow:20px 0 60px rgba(0,0,0,.18);overflow:auto;position:relative}.side-panel .close{right:18px;top:18px}.side-panel h2{margin-top:6px}.side-panel .role-card{width:100%;margin:12px 0}.profile-panel{text-align:center}.profile-avatar{width:86px;height:86px;border-radius:50%;display:grid;place-items:center;margin:30px auto 14px;background:linear-gradient(135deg,#6d35d4,#9c6af1);color:#fff;font-size:28px;font-weight:900}.profile-panel .role-card{text-align:left}.hidden{display:none!important}@media(max-width:760px){.role-grid{grid-template-columns:1fr}.role-card{grid-template-columns:76px 1fr 26px}.role-card img{width:76px;height:64px}}
+.home-paper-actions{display:flex;align-items:center;gap:14px}.add-paper2-btn{border:0;border-radius:14px;padding:12px 18px;background:#ffe600;color:#111;font-weight:900;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.08)}.add-paper2-btn:hover{transform:translateY(-2px)}.paper2-label{display:grid;gap:8px;text-align:left;font-weight:800;margin:18px 0}.paper2-label input{padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--text);outline:none}.danger{color:#d52b39;font-weight:700;min-height:20px}@media(max-width:650px){.home-paper-actions{align-items:stretch;flex-direction:column}.add-paper2-btn{width:100%}}
+
+/* New header/home controls */
+.hat-home-btn{width:50px;height:50px;display:grid;place-items:center;border:1px solid var(--line);background:var(--card);border-radius:15px;box-shadow:0 8px 22px rgba(20,20,40,.08);overflow:hidden;transition:.2s}
+.hat-home-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(20,20,40,.12)}
+.hat-home-btn img{width:44px;height:34px;object-fit:contain}
+.smart-switch{border:0;background:transparent;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:9px;transition:.2s}
+.smart-switch:hover{transform:translateY(-4px) scale(1.02)}
+.smart-switch img{width:128px;height:128px;object-fit:contain;filter:drop-shadow(0 14px 20px rgba(91,34,201,.18))}
+.smart-switch span{font-size:11px;font-weight:900;letter-spacing:1.5px;color:var(--primary);background:var(--card);border:1px solid var(--line);padding:7px 12px;border-radius:999px;box-shadow:0 8px 20px rgba(30,20,70,.06)}
+.page-menu-panel{padding-top:54px}
+.page-menu-buttons{display:grid;gap:12px;margin-top:24px}
+.page-menu-btn{width:100%;display:grid;grid-template-columns:48px 1fr 24px;gap:13px;align-items:center;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:18px;padding:14px;cursor:pointer;box-shadow:var(--shadow);transition:.2s;font:inherit}
+.page-menu-btn:hover{transform:translateY(-2px);border-color:#a98be9}
+.page-menu-btn b{display:block;font-size:16px}.page-menu-btn small{display:block;color:var(--muted);margin-top:2px}.page-menu-btn strong{color:var(--primary);font-size:22px}
+.page-menu-icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--primary2));color:#fff;font-weight:900;font-size:18px}
+.password-side-panel{padding-top:54px}
+@media(max-width:650px){.smart-switch img{width:104px;height:104px}.hat-home-btn{width:46px;height:46px}.hat-home-btn img{width:40px;height:30px}.hero-art{font-size:0}}
+
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="hat-home-btn" id="menuBtn" href="index.html" aria-label="Home"><svg class="inline-logo inline-home-logo" viewBox="0 0 64 64" aria-hidden="true"><path d="M8 29 32 9l24 20v25H8z" fill="#f4f0ff" stroke="#111a35" stroke-width="3"/><path d="m5 31 27-23 27 23" fill="none" stroke="#111a35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 54V39h16v15" fill="#5b22c9"/><rect x="18" y="28" width="10" height="10" rx="2" fill="#5b22c9"/><rect x="36" y="28" width="10" height="10" rx="2" fill="#5b22c9"/></svg></a>
+  <div class="brand">Smart Education</div>
+  <div class="top-actions">
+    <button class="icon-btn" id="themeBtn" aria-label="Theme">☾</button>
+    <button class="icon-btn" id="langBtn" type="button">বাংলা</button>
+    <button class="avatar avatar-btn" id="profileBtn" aria-label="Profile">AK</button>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">SMART LEARNING • MODEL QUESTIONS • PRACTICE</p>
+      <h1>Let’s start a <span>smart class</span><br>with AKS</h1>
+      <p>Class 5–8 থেকে Class 12 পর্যন্ত সাজানো প্রশ্ন, Model Set, Practice এবং Solution এক জায়গায়।</p>
+    </div>
+    <button class="smart-switch" id="pageSwitchBtn" type="button" aria-label="Open menu"><svg class="inline-logo inline-menu-logo" viewBox="0 0 120 90" aria-hidden="true"><path d="m10 37 50-28 50 28-50 28z" fill="#fff"/><path d="m23 43 37 21 37-21v24c-18 12-56 12-74 0z" fill="#f1edff"/></svg></button>
+  </section>
+
+  <section class="role-section">
+    <div class="section-head"><div><p class="eyebrow">CHOOSE YOUR MODE</p><h2>Student, Teacher or Computer</h2></div></div>
+    <div id="roleGrid" class="role-grid">
+      <a class="role-card" href="student-save.html">
+        <svg class="inline-logo inline-role-logo" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="45" fill="#dff0ff"/><circle cx="48" cy="34" r="15" fill="#ffd0b0"/><path d="M29 77c3-18 11-27 19-27s16 9 19 27" fill="#2567c8"/><path d="M32 34c2-14 27-20 34-2-5-5-11-7-18-5-5 1-10 4-16 7z" fill="#202a3d"/><path d="M30 61c6-8 11-11 18-11 7 0 13 3 19 11v19H30z" fill="#2466c4"/><path d="M39 51h18" stroke="#fff" stroke-width="3"/></svg>
+        <div><h3>Student</h3><p>প্রশ্ন অনুশীলন ও ফলাফল দেখো</p></div>
+        <span>→</span>
+      </a>
+      <a class="role-card" href="teacher-save.html">
+        <svg class="inline-logo inline-role-logo" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="45" fill="#fff0cf"/><circle cx="48" cy="31" r="14" fill="#ffd0b0"/><path d="M29 78c2-18 10-28 19-28s17 10 19 28" fill="#24528e"/><path d="M34 29c3-13 24-17 30-2-7-4-20-4-30 2z" fill="#202a3d"/><circle cx="42" cy="32" r="2.5" fill="#202a3d"/><circle cx="54" cy="32" r="2.5" fill="#202a3d"/><path d="M42 39c4 3 8 3 12 0" fill="none" stroke="#9b5b4a" stroke-width="2"/><path d="M69 55l14-20" stroke="#202a3d" stroke-width="4" stroke-linecap="round"/><path d="M80 34l7-7" stroke="#202a3d" stroke-width="3"/></svg>
+        <div><h3>Teacher</h3><p>প্রশ্ন তৈরি ও পরিচালনা করো</p></div>
+        <span>→</span>
+      </a>
+      <a class="role-card" href="computer.html">
+        <svg class="inline-logo inline-role-logo" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="48" r="45" fill="#eee7ff"/><rect x="21" y="24" width="54" height="38" rx="5" fill="#173c70"/><rect x="26" y="29" width="44" height="28" rx="3" fill="#4dc5ef"/><path d="M39 68h18M31 75h34" stroke="#173c70" stroke-width="5" stroke-linecap="round"/></svg>
+        <div><h3>Computer</h3><p>Computer-based practice ও exam</p></div>
+        <span>→</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="search-wrap">
+    <span>⌕</span>
+    <input id="searchInput" placeholder="Search your class, subject or school...">
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div><p class="eyebrow">EXPLORE</p><h2>Choose your class</h2></div>
+      <div class="home-paper-actions"><span id="resultCount" class="muted"></span></div>
+    </div>
+    <div id="classGrid" class="class-grid"></div>
+  </section>
+</main>
+
+<div id="rolePanel" class="side-overlay hidden"><div class="side-panel"><button class="close" id="closeRolePanel">×</button><p class="eyebrow">SMART EDUCATION</p><h2>Choose a mode</h2><div id="panelRoleGrid"></div></div></div>
+<div id="profilePanel" class="side-overlay hidden"><div class="side-panel profile-panel"><button class="close" id="closeProfilePanel">×</button><div class="profile-avatar">AK</div><h2>Akash Karmakar</h2><p class="muted">Smart Education Profile</p><div id="profileRoleGrid"></div></div></div>
+<div id="pageMenu" class="side-overlay hidden"><div class="side-panel page-menu-panel"><button class="close" id="closePageMenu">×</button><p class="eyebrow">SMART EDUCATION</p><h2>Add Page</h2><p class="muted">আগে যে question-edit buttons আলাদা জায়গায় ছিল, এখন সেগুলো এখান থেকে খুলবে।</p><div class="page-menu-buttons"><button id="addPage1Btn" class="page-menu-btn" type="button"><span class="page-menu-icon">1</span><span><b>ADD PAGE 1</b><small>Computer Question Paper Editor</small></span><strong>→</strong></button><button id="addPage2Btn" class="page-menu-btn" type="button"><span class="page-menu-icon">2</span><span><b>ADD PAGE 2</b><small>Practice Question Paper 2</small></span><strong>→</strong></button></div></div></div>
+<div id="pagePasswordModal" class="side-overlay hidden"><div class="side-panel password-side-panel"><button class="close" id="closePagePassword">×</button><p class="eyebrow" id="pagePasswordEyebrow">SECURE ACCESS</p><h2 id="pagePasswordTitle">Enter Password</h2><p class="muted">Question editing page খুলতে password দিন।</p><label class="paper2-label">Password<input id="pagePassword" type="password" placeholder="Enter password" autocomplete="off"></label><button id="unlockPage" class="primary full">Unlock & Continue →</button><p id="pagePasswordMsg" class="danger"></p></div></div>
+
+<script data-internal-js="js/app.js">
+const THEME_KEY='smartEduTheme';
+
+function applyTheme(){
+  document.body.classList.toggle('dark', localStorage.getItem(THEME_KEY)==='dark');
+  document.querySelectorAll('#themeBtn').forEach(btn=>{
+    btn.textContent=document.body.classList.contains('dark')?'☀':'☾';
+  });
+}
+
+function roleTarget(id){
+  return id==='teacher'?'teacher-save.html':id==='computer'?'computer.html':'student-save.html';
+}
+
+function escapeHtml(s){
+  return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+async function loadJSON(path){
+  const candidates=[path];
+  if(location.pathname.includes('/frontend/')) candidates.push('../'+path);
+  let last;
+  for(const candidate of candidates){try{const r=await fetch(candidate,{cache:'no-store'});if(r.ok)return await r.json();last=new Error('HTTP '+r.status+' '+candidate)}catch(e){last=e}}
+  throw last||new Error('Cannot load '+path);
+}
+
+function params(){ return new URLSearchParams(location.search); }
+
+async function initRoles(){
+  const grid=document.getElementById('roleGrid');
+  if(!grid) return;
+  let roles;
+  try { roles=await loadJSON('data/roles.json'); } catch(e) { return; }
+  const html=roles.map(r=>`
+    <button class="role-card" data-role="${r.id}" type="button">
+      <img src="${r.image}" alt="${escapeHtml(r.name)}">
+      <div><h3>${escapeHtml(r.name)}</h3><p>${escapeHtml(r.description)}</p></div>
+      <span>→</span>
+    </button>`).join('');
+  grid.innerHTML=html;
+  document.querySelectorAll('.role-card').forEach(b=>{
+    b.addEventListener('click',()=>location.href=roleTarget(b.dataset.role));
+  });
+}
+
+function bindGlobal(){
+  applyTheme();
+
+  document.querySelectorAll('#themeBtn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      localStorage.setItem(THEME_KEY, localStorage.getItem(THEME_KEY)==='dark'?'light':'dark');
+      applyTheme();
+    });
+  });
+
+  document.getElementById('profileBtn')?.addEventListener('click',()=>location.href='profile.html');
+
+  // Any avatar that is not already a link works as the profile button.
+  document.querySelectorAll('.avatar:not(a)').forEach(a=>{
+    if(a.id==='profileBtn') return;
+    a.setAttribute('role','button');
+    a.setAttribute('tabindex','0');
+    a.addEventListener('click',()=>location.href='profile.html');
+    a.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')location.href='profile.html';});
+  });
+
+  // The purple logo is now the switch for the two question-edit pages.
+  const pageMenu=document.getElementById('pageMenu');
+  const pagePasswordModal=document.getElementById('pagePasswordModal');
+  const pagePassword=document.getElementById('pagePassword');
+  const pagePasswordMsg=document.getElementById('pagePasswordMsg');
+  let pendingPage='';
+  document.getElementById('pageSwitchBtn')?.addEventListener('click',()=>{
+    pageMenu?.classList.remove('hidden');
+  });
+  document.getElementById('closePageMenu')?.addEventListener('click',()=>pageMenu?.classList.add('hidden'));
+  document.getElementById('closePagePassword')?.addEventListener('click',()=>pagePasswordModal?.classList.add('hidden'));
+  function openPagePassword(page){
+    pendingPage=page;
+    if(pagePassword){pagePassword.value='';pagePassword.focus();}
+    if(pagePasswordMsg)pagePasswordMsg.textContent='';
+    pagePasswordModal?.classList.remove('hidden');
+    pageMenu?.classList.add('hidden');
+  }
+  document.getElementById('addPage1Btn')?.addEventListener('click',()=>openPagePassword('1'));
+  document.getElementById('addPage2Btn')?.addEventListener('click',()=>openPagePassword('2'));
+  function unlockSelectedPage(){
+    if(pagePassword?.value==='AK1234'){
+      if(pendingPage==='1'){
+        sessionStorage.setItem('computerEditorUnlocked','1');
+        location.href='computer-question-paper.html';
+      }else if(pendingPage==='2'){
+        sessionStorage.setItem('practiceEditorUnlocked','1');
+        location.href='practice-question-paper.html?class=5&semester=1&subject=bangla';
+      }
+    }else if(pagePasswordMsg){
+      pagePasswordMsg.textContent='this is wrong password';
+    }
+  }
+  document.getElementById('unlockPage')?.addEventListener('click',unlockSelectedPage);
+  pagePassword?.addEventListener('keydown',e=>{if(e.key==='Enter')unlockSelectedPage()});
+
+  document.getElementById('closeProfilePanel')?.addEventListener('click',()=>{
+    document.getElementById('profilePanel')?.classList.add('hidden');
+  });
+  document.querySelectorAll('.side-overlay').forEach(x=>x.addEventListener('click',e=>{
+    if(e.target===x)x.classList.add('hidden');
+  }));
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  bindGlobal();
+  initRoles().catch(console.error);
+});
+
+</script>
+<script data-internal-js="js/search.js">
+const classGrid=document.getElementById('classGrid');
+const searchInput=document.getElementById('searchInput');
+let classesData=[];
+const icons=['📘','📗','📙','📕','🎓','📚','📒','🧮'];
+const FALLBACK_CLASSES=[
+ {id:'class5',name:'Class 5',subjects:['bangla','english','physics','life-science','mathematics','geography','history']},
+ {id:'class6',name:'Class 6',subjects:['bangla','english','physics','life-science','mathematics','geography','history']},
+ {id:'class7',name:'Class 7',subjects:['bangla','english','physics','life-science','mathematics','geography','history']},
+ {id:'class8',name:'Class 8',subjects:['bangla','english','physics','life-science','mathematics','geography','history']},
+ {id:'class9',name:'Class 9',subjects:['bangla','english','physics','life-science','mathematics','geography','history']},
+ {id:'class10',name:'Class 10',subjects:['bangla','english','physics','life-science','mathematics','geography','history']},
+ {id:'class11-science',name:'Class 11 Science',subjects:['bangla','english','physics','life-science','mathematics','computer-science']},
+ {id:'class12-science',name:'Class 12 Science',subjects:['bangla','english','physics','life-science','mathematics','computer-science']},
+ {id:'class11-commerce',name:'Class 11 Commerce',subjects:['accountancy','commercial-law','cost-tax','business-studies']},
+ {id:'class12-commerce',name:'Class 12 Commerce',subjects:['accountancy','commercial-law','cost-tax','business-studies']},
+ {id:'class11-arts',name:'Class 11 Arts',subjects:['bangla','english','geography','history','political-science','রাষ্ট্রবিজ্ঞান']},
+ {id:'class12-arts',name:'Class 12 Arts',subjects:['bangla','english','geography','history','political-science','রাষ্ট্রবিজ্ঞান']}
+];
+async function initHome(){
+ try { classesData=await loadJSON('data/classes.json'); } catch(e) { classesData=FALLBACK_CLASSES; }
+ render(classesData);
+ searchInput?.addEventListener('input',()=>{const q=searchInput.value.toLowerCase().trim();render(classesData.filter(c=>(c.name+' '+c.id+' '+c.subjects.join(' ')).toLowerCase().includes(q)));});
+}
+function render(items){
+ document.getElementById('resultCount').textContent=items.length+' classes';
+ classGrid.innerHTML=items.map((c,i)=>`<article class="card class-card" onclick="location.href='class.html?class=${encodeURIComponent(c.id)}&semester=1'"><div class="class-icon">${icons[i%icons.length]}</div><h3>${escapeHtml(c.name)}</h3><p>${c.subjects.length} Subjects • 4 Semesters</p><div class="class-subject-preview">${c.subjects.slice(0,4).map(id=>`<span>${escapeHtml(subjectLabel(id))}</span>`).join('')}${c.subjects.length>4?`<span>+${c.subjects.length-4} more</span>`:''}</div><div class="arrow">→</div></article>`).join('');
+}
+function subjectLabel(id){const map={bangla:'Bengali',english:'English',physics:'Physics','life-science':'Life Science',mathematics:'Mathematics',geography:'Geography',history:'History','computer-science':'Computer Science',accountancy:'Accountancy','commercial-law':'Commercial Law','cost-tax':'Cost Tax','business-studies':'Business Studies','political-science':'Political Science','রাষ্ট্রবিজ্ঞান':'রাষ্ট্রবিজ্ঞান'};return map[id]||id;}
+initHome().catch(console.error);
+
+</script>
+</body>
+</html>

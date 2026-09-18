@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Education • Computer</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#f7f8fc;--card:#fff;--text:#111a35;--muted:#687089;--line:#e7e8f0;--primary:#5b22c9;--primary2:#7744e8;--soft:#f1edff;--shadow:0 12px 40px rgba(34,25,75,.08)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,'Noto Sans Bengali',sans-serif;line-height:1.55}
+body.dark{--bg:#10111a;--card:#191b27;--text:#f7f7fb;--muted:#a9aec1;--line:#2d3040;--soft:#28213d;--shadow:0 12px 40px rgba(0,0,0,.25)}
+a{text-decoration:none;color:inherit}
+.topbar{height:70px;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:20}
+.dark .topbar{background:rgba(16,17,26,.94)}
+.brand{font-size:22px;font-weight:800;letter-spacing:-.4px}.top-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--text);width:44px;height:44px;border-radius:14px;cursor:pointer;font-size:19px;display:grid;place-items:center}
+.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#6d35d4,#9c6af1);font-weight:800;cursor:pointer}
+.container{max-width:1260px;margin:auto;padding:28px 22px 70px}.page-head{margin:8px 0 28px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--primary);margin:0}.page-head h1{font-size:34px;margin:5px 0 2px;letter-spacing:-.8px}.page-head p:last-child{margin:0;color:var(--muted)}
+.class-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.class-card{min-height:220px;padding:22px;position:relative;overflow:hidden;cursor:pointer;transition:.2s;border:1px solid var(--line);background:var(--card);border-radius:22px;box-shadow:var(--shadow)}.class-card:hover{transform:translateY(-4px);border-color:#cbbcf6}
+.book{width:34px;height:40px;border:3px solid #111;border-radius:3px 3px 5px 5px;display:block;box-shadow:inset -4px 0 rgba(255,255,255,.28),0 2px 0 rgba(0,0,0,.12);margin-bottom:18px}.blue{background:#27a9ff}.green{background:#11d31b}.orange{background:#ff6d1b}.red{background:#f21938}.yellow{background:#ffbf19}.purple{background:#8b5cf6}
+.stack{font-size:36px;height:40px;line-height:1;margin-bottom:18px}.hat{font-size:38px;height:40px;line-height:1;margin-bottom:18px}.abacus{font-size:34px;height:40px;line-height:1;margin-bottom:18px}
+.class-card h2{font-size:22px;margin:0 0 6px}.class-card .meta{color:var(--muted);margin:0 0 2px;font-size:15px}.subjects{font-size:16px;line-height:1.5;max-width:90%;color:var(--text)}.subjects span{white-space:nowrap}.arrow{position:absolute;right:18px;bottom:18px;width:40px;height:40px;border-radius:50%;background:var(--soft);display:grid;place-items:center;color:var(--primary);font-size:23px;font-weight:900}
+.note{margin-top:22px;color:var(--muted);font-size:13px}.hidden{display:none!important}
+@media(max-width:1000px){.class-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.topbar{padding:0 14px}.brand{font-size:17px}.container{padding:18px 14px 55px}.class-grid{grid-template-columns:1fr}.page-head h1{font-size:28px}.class-card{min-height:190px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="icon-btn" href="index.html" aria-label="Home">⌂</a>
+  <div class="brand">Smart Education</div>
+  <div class="top-actions">
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Theme">☾</button>
+    <button class="icon-btn" id="langBtn" type="button">বাংলা</button>
+    <button class="avatar" id="profileBtn" type="button" aria-label="Profile">AK</button>
+  </div>
+</header>
+<main class="container">
+  <section class="page-head">
+    <p class="eyebrow">COMPUTER MODE • CLASS SELECTION</p>
+    <h1>Choose your class</h1>
+    <p>Class 5 থেকে Class 12 পর্যন্ত Computer practice ও exam-এর জন্য একটি class নির্বাচন করুন।</p>
+  </section>
+  <section id="classGrid" class="class-grid"></section>
+  <p class="note">Class নির্বাচন করলে Computer Room খুলবে। সেখানে subject paper, practice, exam ও result-এর options থাকবে।</p>
+</main>
+<script>
+const THEME_KEY='smartEduTheme';
+function applyTheme(){document.body.classList.toggle('dark',localStorage.getItem(THEME_KEY)==='dark');const b=document.getElementById('themeBtn');if(b)b.textContent=document.body.classList.contains('dark')?'☀':'☾'}
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+const CLASSES=[
+ ['class5','Class 5',7,['Bengali','English','Physics','Life Science','Mathematics','Geography','History']],
+ ['class6','Class 6',7,['Bengali','English','Physics','Life Science','Mathematics','Geography','History']],
+ ['class7','Class 7',7,['Bengali','English','Physics','Life Science','Mathematics','Geography','History']],
+ ['class8','Class 8',7,['Bengali','English','Physics','Life Science','Mathematics','Geography','History']],
+ ['class9','Class 9',7,['Bengali','English','Physics','Life Science','Mathematics','Geography','History']],
+ ['class10','Class 10',7,['Bengali','English','Physics','Life Science','Mathematics','Geography','History']],
+ ['class11-science','Class 11 Science',6,['Bengali','English','Physics','Life Science','Mathematics','Computer Science']],
+ ['class12-science','Class 12 Science',6,['Bengali','English','Physics','Life Science','Mathematics','Computer Science']],
+ ['class11-commerce','Class 11 Commerce',4,['Accountancy','Commercial Law','Cost Tax','Business Studies']],
+ ['class12-commerce','Class 12 Commerce',4,['Accountancy','Commercial Law','Cost Tax','Business Studies']],
+ ['class11-arts','Class 11 Arts',6,['Bengali','English','Geography','History','Political Science','+1 more']],
+ ['class12-arts','Class 12 Arts',6,['Bengali','English','Geography','History','Political Science','+1 more']]
+];
+const icons=['blue','green','orange','red','blue','stack','yellow','abacus','blue','green','orange','red'];
+function icon(i){const c=icons[i%icons.length];if(c==='stack')return '<div class="stack">📚</div>';if(c==='abacus')return '<div class="abacus">🧮</div>';return '<span class="book '+c+'"></span>'}
+function openClass(id){const m=id.match(/class(\d+)/);const n=m?m[1]:'12';localStorage.setItem('computerSelectedClass',id);location.href='computer-room.html?class='+encodeURIComponent(n)+'&semester=1'}
+function render(){document.getElementById('classGrid').innerHTML=CLASSES.map((c,i)=>`<article class="class-card" role="button" tabindex="0" data-class="${c[0]}">${icon(i)}<h2>${escapeHtml(c[1])}</h2><p class="meta">${c[2]} Subjects • 4 Semesters</p><div class="subjects">${c[3].slice(0,4).map(x=>`<span>${escapeHtml(x)}</span>`).join('')}${c[3].length>4?`<span>+${c[3].length-4} more</span>`:''}</div><div class="arrow">→</div></article>`).join('');document.querySelectorAll('.class-card').forEach(x=>{x.onclick=()=>openClass(x.dataset.class);x.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')openClass(x.dataset.class)}})}
+applyTheme();document.getElementById('themeBtn').onclick=()=>{localStorage.setItem(THEME_KEY,localStorage.getItem(THEME_KEY)==='dark'?'light':'dark');applyTheme()};document.getElementById('profileBtn').onclick=()=>location.href='profile.html';render();
+</script>
+</body>
+</html>

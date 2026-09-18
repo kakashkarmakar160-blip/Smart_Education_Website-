@@ -1,0 +1,72 @@
+[
+  {
+    "id": "bangla",
+    "name": "বাংলা",
+    "english": "Bengali"
+  },
+  {
+    "id": "english",
+    "name": "ইংরেজি",
+    "english": "English"
+  },
+  {
+    "id": "physics",
+    "name": "Physics",
+    "english": "Physics"
+  },
+  {
+    "id": "life-science",
+    "name": "Life Science",
+    "english": "Life Science"
+  },
+  {
+    "id": "mathematics",
+    "name": "গণিত",
+    "english": "Mathematics"
+  },
+  {
+    "id": "geography",
+    "name": "ভূগোল",
+    "english": "Geography"
+  },
+  {
+    "id": "history",
+    "name": "ইতিহাস",
+    "english": "History"
+  },
+  {
+    "id": "computer-science",
+    "name": "Computer Science",
+    "english": "Computer Science"
+  },
+  {
+    "id": "accountancy",
+    "name": "Accountancy",
+    "english": "Accountancy"
+  },
+  {
+    "id": "commercial-law",
+    "name": "Commercial Law",
+    "english": "Commercial Law"
+  },
+  {
+    "id": "cost-tax",
+    "name": "Cost Tax",
+    "english": "Cost Tax"
+  },
+  {
+    "id": "business-studies",
+    "name": "Business Studies",
+    "english": "Business Studies"
+  },
+  {
+    "id": "political-science",
+    "name": "Political Science",
+    "english": "Political Science"
+  },
+  {
+    "id": "রাষ্ট্রবিজ্ঞান",
+    "name": "রাষ্ট্রবিজ্ঞান",
+    "english": "রাষ্ট্রবিজ্ঞান"
+  }
+]

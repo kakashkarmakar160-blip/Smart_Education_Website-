@@ -1,0 +1,249 @@
+{
+  "id": "computer-class5-8-set-1",
+  "class": "class5-8",
+  "subject": "computer",
+  "subject_name": "Computer",
+  "title": "Computer Model Question Set-1",
+  "questions": [
+    {
+      "type": "mcq",
+      "question": "কম্পিউটারের মস্তিষ্ক বলা হয় কোন অংশকে?",
+      "options": [
+        "CPU",
+        "Monitor",
+        "Keyboard",
+        "Mouse"
+      ],
+      "answer": "CPU",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কোনটি Input Device?",
+      "options": [
+        "Monitor",
+        "Printer",
+        "Keyboard",
+        "Speaker"
+      ],
+      "answer": "Keyboard",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কোনটি Output Device?",
+      "options": [
+        "Mouse",
+        "Keyboard",
+        "Monitor",
+        "Scanner"
+      ],
+      "answer": "Monitor",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "CPU-এর পূর্ণরূপ কী?",
+      "options": [
+        "Central Processing Unit",
+        "Computer Personal Unit",
+        "Central Program Utility",
+        "Control Processing User"
+      ],
+      "answer": "Central Processing Unit",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কীবোর্ডে Enter key সাধারণত কী কাজে ব্যবহৃত হয়?",
+      "options": [
+        "নতুন লাইন/নির্দেশ নিশ্চিত করতে",
+        "কম্পিউটার বন্ধ করতে",
+        "শব্দ কমাতে",
+        "ছবি তুলতে"
+      ],
+      "answer": "নতুন লাইন/নির্দেশ নিশ্চিত করতে",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "Mouse-এর প্রধান কাজ কী?",
+      "options": [
+        "কার্সর নিয়ন্ত্রণ করা",
+        "শব্দ রেকর্ড করা",
+        "প্রিন্ট করা",
+        "বিদ্যুৎ দেওয়া"
+      ],
+      "answer": "কার্সর নিয়ন্ত্রণ করা",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কোনটি Storage Device?",
+      "options": [
+        "Hard Disk",
+        "Monitor",
+        "Speaker",
+        "Webcam"
+      ],
+      "answer": "Hard Disk",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "১ Kilobyte সাধারণভাবে কত Byte হিসেবে ধরা হয়?",
+      "options": [
+        "100",
+        "512",
+        "1024",
+        "2048"
+      ],
+      "answer": "1024",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "ইন্টারনেট ব্যবহার করতে কোন সফটওয়্যারটি ব্যবহার করা হয়?",
+      "options": [
+        "Web Browser",
+        "Calculator",
+        "Paint",
+        "Notepad"
+      ],
+      "answer": "Web Browser",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কোনটি একটি Web Browser?",
+      "options": [
+        "Chrome",
+        "Excel",
+        "Windows",
+        "PowerPoint"
+      ],
+      "answer": "Chrome",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "WWW-এর পূর্ণরূপ কী?",
+      "options": [
+        "World Wide Web",
+        "World Word Window",
+        "Web World Wide",
+        "Wide Web World"
+      ],
+      "answer": "World Wide Web",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কম্পিউটারে লেখা টাইপ করার জন্য কোন ডিভাইস ব্যবহার করা হয়?",
+      "options": [
+        "Keyboard",
+        "Printer",
+        "Monitor",
+        "Projector"
+      ],
+      "answer": "Keyboard",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "ফাইল মুছে ফেললে Windows-এ সাধারণত কোথায় যায়?",
+      "options": [
+        "Recycle Bin",
+        "Control Panel",
+        "Desktop",
+        "Taskbar"
+      ],
+      "answer": "Recycle Bin",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কোনটি Operating System-এর উদাহরণ?",
+      "options": [
+        "Windows",
+        "Google",
+        "YouTube",
+        "Chrome"
+      ],
+      "answer": "Windows",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কম্পিউটার ভাইরাস কী?",
+      "options": [
+        "ক্ষতিকর প্রোগ্রাম",
+        "একটি Keyboard",
+        "একটি Printer",
+        "একটি ছবি"
+      ],
+      "answer": "ক্ষতিকর প্রোগ্রাম",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কোনটি নিরাপদ Password-এর বৈশিষ্ট্য?",
+      "options": [
+        "শুধু নাম",
+        "123456",
+        "বড়-ছোট অক্ষর, সংখ্যা ও চিহ্নের মিশ্রণ",
+        "শুধু জন্মতারিখ"
+      ],
+      "answer": "বড়-ছোট অক্ষর, সংখ্যা ও চিহ্নের মিশ্রণ",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "Email-এর মাধ্যমে কী পাঠানো যায়?",
+      "options": [
+        "বার্তা ও ফাইল",
+        "শুধু বিদ্যুৎ",
+        "শুধু Keyboard",
+        "শুধু Monitor"
+      ],
+      "answer": "বার্তা ও ফাইল",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "Ctrl + C সাধারণত কী কাজ করে?",
+      "options": [
+        "Copy",
+        "Paste",
+        "Save",
+        "Print"
+      ],
+      "answer": "Copy",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "Ctrl + V সাধারণত কী কাজ করে?",
+      "options": [
+        "Copy",
+        "Paste",
+        "Undo",
+        "Close"
+      ],
+      "answer": "Paste",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "কম্পিউটার চালু করার পর যে প্রধান স্ক্রিন দেখা যায় তাকে কী বলা হয়?",
+      "options": [
+        "Desktop",
+        "Browser",
+        "Folder",
+        "Printer"
+      ],
+      "answer": "Desktop",
+      "marks": 1
+    }
+  ]
+}

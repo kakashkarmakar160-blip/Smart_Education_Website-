@@ -1,0 +1,160 @@
+[
+  {
+    "id": "class5",
+    "name": "Class 5",
+    "display": "Class 5",
+    "subjects": [
+      "bangla",
+      "english",
+      "physics",
+      "life-science",
+      "mathematics",
+      "geography",
+      "history"
+    ]
+  },
+  {
+    "id": "class6",
+    "name": "Class 6",
+    "display": "Class 6",
+    "subjects": [
+      "bangla",
+      "english",
+      "physics",
+      "life-science",
+      "mathematics",
+      "geography",
+      "history"
+    ]
+  },
+  {
+    "id": "class7",
+    "name": "Class 7",
+    "display": "Class 7",
+    "subjects": [
+      "bangla",
+      "english",
+      "physics",
+      "life-science",
+      "mathematics",
+      "geography",
+      "history"
+    ]
+  },
+  {
+    "id": "class8",
+    "name": "Class 8",
+    "display": "Class 8",
+    "subjects": [
+      "bangla",
+      "english",
+      "physics",
+      "life-science",
+      "mathematics",
+      "geography",
+      "history"
+    ]
+  },
+  {
+    "id": "class9",
+    "name": "Class 9",
+    "display": "Class 9",
+    "subjects": [
+      "bangla",
+      "english",
+      "physics",
+      "life-science",
+      "mathematics",
+      "geography",
+      "history"
+    ]
+  },
+  {
+    "id": "class10",
+    "name": "Class 10",
+    "display": "Class 10",
+    "subjects": [
+      "bangla",
+      "english",
+      "physics",
+      "life-science",
+      "mathematics",
+      "geography",
+      "history"
+    ]
+  },
+  {
+    "id": "class11-science",
+    "name": "Class 11 Science",
+    "display": "Class 11 Science",
+    "subjects": [
+      "bangla",
+      "english",
+      "physics",
+      "life-science",
+      "mathematics",
+      "computer-science"
+    ]
+  },
+  {
+    "id": "class12-science",
+    "name": "Class 12 Science",
+    "display": "Class 12 Science",
+    "subjects": [
+      "bangla",
+      "english",
+      "physics",
+      "life-science",
+      "mathematics",
+      "computer-science"
+    ]
+  },
+  {
+    "id": "class11-commerce",
+    "name": "Class 11 Commerce",
+    "display": "Class 11 Commerce",
+    "subjects": [
+      "accountancy",
+      "commercial-law",
+      "cost-tax",
+      "business-studies"
+    ]
+  },
+  {
+    "id": "class12-commerce",
+    "name": "Class 12 Commerce",
+    "display": "Class 12 Commerce",
+    "subjects": [
+      "accountancy",
+      "commercial-law",
+      "cost-tax",
+      "business-studies"
+    ]
+  },
+  {
+    "id": "class11-arts",
+    "name": "Class 11 Arts",
+    "display": "Class 11 Arts",
+    "subjects": [
+      "bangla",
+      "english",
+      "geography",
+      "history",
+      "political-science",
+      "রাষ্ট্রবিজ্ঞান"
+    ]
+  },
+  {
+    "id": "class12-arts",
+    "name": "Class 12 Arts",
+    "display": "Class 12 Arts",
+    "subjects": [
+      "bangla",
+      "english",
+      "geography",
+      "history",
+      "political-science",
+      "রাষ্ট্রবিজ্ঞান"
+    ]
+  }
+]

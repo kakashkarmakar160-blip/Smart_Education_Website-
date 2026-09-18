@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teacher Question</title><style data-internal-css="css/style.css">
+*{box-sizing:border-box} :root{--bg:#f7f8fc;--card:#fff;--text:#111a35;--muted:#687089;--line:#e7e8f0;--primary:#5b22c9;--primary2:#7744e8;--soft:#f1edff;--shadow:0 12px 40px rgba(34,25,75,.08)} body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,'Noto Sans Bengali',sans-serif;line-height:1.55} body.dark{--bg:#10111a;--card:#191b27;--text:#f7f7fb;--muted:#a9aec1;--line:#2d3040;--soft:#28213d;--shadow:0 12px 40px rgba(0,0,0,.25)} a{text-decoration:none;color:inherit}.topbar{height:70px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:20}.dark .topbar{background:rgba(16,17,26,.9)}.brand{font-size:22px;font-weight:800;letter-spacing:-.4px}.top-actions{display:flex;align-items:center;gap:10px}.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--text);width:44px;height:44px;border-radius:14px;cursor:pointer;font-size:19px;display:grid;place-items:center}.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#6d35d4,#9c6af1);font-weight:800}.container{max-width:1180px;margin:auto;padding:28px 22px 70px}.hero{min-height:280px;border:1px solid #eee8ff;border-radius:28px;padding:42px 48px;display:flex;justify-content:space-between;align-items:center;background:radial-gradient(circle at 85% 50%,#eee7ff,transparent 35%),linear-gradient(135deg,#fff,#f4f0ff);box-shadow:var(--shadow);overflow:hidden}.dark .hero{background:linear-gradient(135deg,#1d1d2a,#211c35)}.hero h1{font-size:44px;line-height:1.15;margin:8px 0 14px;letter-spacing:-1.6px}.hero h1 span{color:#5e38d2}.hero p{color:var(--muted);max-width:650px}.hero-art{font-size:78px;text-align:center;transform:rotate(-3deg)}.hero-art div{font-size:90px;margin-top:-18px}.hero-art small{font-size:22px;color:#7142df}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--primary);margin:0}.search-wrap{margin:18px 0 34px;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 28px rgba(35,28,75,.05);display:flex;align-items:center;padding:0 20px}.search-wrap span{font-size:30px;color:var(--muted)}.search-wrap input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:17px;padding:20px 14px}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:15px}.section-head h2,.page-intro h1{margin:4px 0;font-size:30px;letter-spacing:-.7px}.muted{color:var(--muted)}.primary{display:inline-flex;justify-content:center;align-items:center;border:0;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer}.full{width:100%}.page-intro{padding:15px 0 25px}.page-intro p:last-child{color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.result-card{max-width:620px;margin:70px auto;text-align:center;background:var(--card);border:1px solid var(--line);padding:45px;border-radius:28px;box-shadow:var(--shadow)}.score-ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;background:var(--soft);color:var(--primary);font-size:36px;font-weight:900}.hidden{display:none!important}.modal{position:fixed;inset:0;background:rgba(12,12,22,.48);display:grid;place-items:end center;z-index:50}.modal-card{width:min(900px,100%);max-height:88vh;overflow:auto;background:var(--card);border-radius:28px 28px 0 0;padding:30px;position:relative}.close{position:absolute;right:20px;top:18px;border:0;background:var(--soft);font-size:25px;width:42px;height:42px;border-radius:50%;cursor:pointer}@media(max-width:720px){.topbar{padding:0 14px}.brand{font-size:17px}.container{padding:18px 14px 55px}.hero{padding:28px 22px;min-height:240px}.hero h1{font-size:32px}.hero-art{font-size:55px}.hero-art div{font-size:65px}.hero-art small{font-size:16px}}
+</style><style data-internal-css="css/teacher-question.css">
+.teacher-editor{max-width:1180px;margin:auto;padding:26px 22px 70px}.editor-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 0 22px}.editor-heading h1{margin:3px 0;font-size:32px}.type-section{padding:20px;margin-bottom:18px}.type-section h3,.form-card>h3{margin:0 0 16px}.type-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.type-card{min-height:150px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:14px;padding:14px;cursor:pointer;display:flex;flex-direction:column;gap:5px}.type-card.active{border-color:#6c39d5;box-shadow:0 0 0 2px #eadfff;background:#fbf9ff}.type-card>b{font-size:20px;color:var(--primary)}.type-card strong{font-size:14px}.type-card small{color:var(--muted);min-height:34px}.type-card label{font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;margin-top:auto}.type-card select{border:1px solid var(--line);border-radius:7px;padding:5px;background:var(--bg);color:var(--text)}.editor-columns{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px}.form-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}.field.full{grid-column:1/-1}.field label{font-weight:800;font-size:14px}.field label em{color:#d33;font-style:normal}.field input,.field select,.field textarea{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:11px;padding:12px 13px;outline:none;font:inherit}.field textarea{resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary)}.field>small{text-align:right;color:var(--muted);font-size:11px}.option-row{display:grid;grid-template-columns:32px 1fr 42px;gap:9px;align-items:center;margin:9px 0}.option-letter{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--primary);font-weight:900}.option-row input{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--text);padding:10px;border-radius:10px}.option-row input:focus{border-color:var(--primary);outline:none}.option-row input[type=radio]{accent-color:var(--primary);width:20px;height:20px}.tf-choice{display:flex;gap:10px}.tf-choice label{border:1px solid var(--line);padding:12px 18px;border-radius:12px;background:var(--bg);cursor:pointer}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.match-grid input{border:1px solid var(--line);padding:10px;border-radius:10px;background:var(--bg);color:var(--text)}.explanation-field{margin-top:8px}.action-row{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}.preview-panel{position:sticky;top:90px;height:max-content;padding:18px}.preview-head{display:flex;justify-content:space-between;align-items:center;font-weight:800}.tag{padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--primary);font-size:11px;font-weight:800}.summary-list{margin:15px 0;border-top:1px solid var(--line)}.summary-list>div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}.summary-list span{color:var(--muted)}.mini-paper{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg);font-size:13px;line-height:1.7}.mini-paper ol{margin:6px 0 0;padding-left:22px}.mini-paper .correct-mini{color:#168043;font-weight:800}.saved-question{padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--card);margin-top:12px}.saved-question .saved-actions{display:flex;gap:8px;margin-top:10px}.toast{position:fixed;right:22px;bottom:22px;padding:13px 16px;border-radius:12px;background:#16182a;color:#fff;z-index:100;box-shadow:var(--shadow)}@media(max-width:1000px){.type-grid{grid-template-columns:repeat(3,1fr)}.editor-columns{grid-template-columns:1fr}.preview-panel{position:static}}@media(max-width:620px){.teacher-editor{padding:18px 12px 50px}.editor-heading{align-items:flex-start;flex-direction:column}.type-grid{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.match-grid{grid-template-columns:1fr}.preview-panel{margin-top:0}}
+
+</style></head>
+<body>
+<header class="topbar">
+  <a href="teacher-save.html" class="icon-btn" aria-label="Back">←</a>
+  <div class="brand">Create Question</div>
+  <div class="top-actions"><button class="icon-btn" id="themeBtn">☾</button><div class="avatar">AK</div></div>
+</header>
+<main class="teacher-editor">
+  <section class="editor-heading">
+    <div><p class="eyebrow">TEACHER • QUESTION BANK</p><h1>Create Question</h1><p class="muted">Add a new question to your question bank</p></div>
+    <button id="saveQuestion" class="primary">▣ Save Question</button>
+  </section>
+
+  <section class="type-section card">
+    <h3>1. Select Question Type &amp; Marks</h3>
+    <div class="type-grid">
+      <button class="type-card active" data-type="mcq" type="button"><b>◉ ☷</b><strong>MCQ</strong><small>Multiple Choice</small><label>Marks <select class="marks" data-for="mcq"><option>1</option><option selected>5</option><option>10</option></select></label></button>
+      <button class="type-card" data-type="long" type="button"><b>▧</b><strong>Long Question</strong><small>Descriptive Answer</small><label>Marks <select class="marks" data-for="long"><option>5</option><option selected>10</option><option>15</option></select></label></button>
+      <button class="type-card" data-type="fill_blank" type="button"><b>≡</b><strong>Fill in the Blanks</strong><small>Complete the blanks</small><label>Marks <select class="marks" data-for="fill_blank"><option selected>2</option><option>5</option><option>10</option></select></label></button>
+      <button class="type-card" data-type="paragraph" type="button"><b>§</b><strong>Paragraph Writing</strong><small>Write a paragraph</small><label>Marks <select class="marks" data-for="paragraph"><option>5</option><option selected>10</option><option>15</option></select></label></button>
+      <button class="type-card" data-type="true_false" type="button"><b>✓×</b><strong>True / False</strong><small>True or False</small><label>Marks <select class="marks" data-for="true_false"><option selected>2</option><option>5</option></select></label></button>
+      <button class="type-card" data-type="match" type="button"><b>⊕</b><strong>Match the Following</strong><small>Match items</small><label>Marks <select class="marks" data-for="match"><option selected>5</option><option>10</option></select></label></button>
+    </div>
+  </section>
+
+  <div class="editor-columns">
+    <section class="form-card">
+      <h3>2. Enter Question Details</h3>
+      <div class="form-grid">
+        <div class="field"><label>Subject <em>*</em></label><select id="subject"><option value="বাংলা">Bangla</option><option value="English">English</option><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Commercial Law">Commercial Law</option></select></div>
+        <div class="field"><label>Class / Semester <em>*</em></label><select id="classSemester"><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 12 - 1st Semester</option><option>Class 12 - 2nd Semester</option><option>Class 12 - 3rd Semester</option></select></div>
+        <div class="field full"><label>Question <em>*</em></label><textarea id="question" rows="5" maxlength="1000" placeholder="Type your question here..."></textarea><small id="questionCount">0 / 1000</small></div>
+      </div>
+
+      <div id="dynamicFields"></div>
+
+      <div class="field"><label>Correct Answer</label><select id="correctAnswer"></select></div>
+      <div class="field explanation-field"><label>Explanation (Optional)</label><textarea id="explanation" rows="4" maxlength="1000" placeholder="Add explanation for the correct answer (optional)..."></textarea><small id="explanationCount">0 / 1000</small></div>
+
+      <div class="action-row editor-actions"><button id="resetQuestion" class="outline" type="button">↻ Reset</button><button id="saveQuestionBottom" class="primary" type="button">▣ Save Question</button></div>
+    </section>
+
+    <aside class="preview-panel card">
+      <div class="preview-head"><span>▣ Question Summary</span><span id="draftStatus" class="tag">Draft</span></div>
+      <div class="summary-list"><div><span>Type</span><b id="summaryType">MCQ</b></div><div><span>Marks</span><b id="summaryMarks">5</b></div><div><span>Subject</span><b id="summarySubject">Bangla</b></div><div><span>Class / Semester</span><b id="summaryClass">Class 5</b></div></div>
+      <div class="mini-paper"><div id="miniQuestion">1) প্রশ্নটি এখানে দেখা যাবে।</div><div id="miniOptions"></div></div>
+    </aside>
+  </div>
+</main>
+<script data-internal-js="js/app.js">
+const THEME_KEY='smartEduTheme';
+
+function applyTheme(){
+  document.body.classList.toggle('dark', localStorage.getItem(THEME_KEY)==='dark');
+  document.querySelectorAll('#themeBtn').forEach(btn=>{
+    btn.textContent=document.body.classList.contains('dark')?'☀':'☾';
+  });
+}
+
+function roleTarget(id){
+  return id==='teacher'?'teacher-save.html':id==='computer'?'computer-save.html':'student-save.html';
+}
+
+function escapeHtml(s){
+  return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+
+async function loadJSON(path){
+  const candidates=[path];
+  if(location.pathname.includes('/frontend/')) candidates.push('../'+path);
+  let last;
+  for(const candidate of candidates){try{const r=await fetch(candidate,{cache:'no-store'});if(r.ok)return await r.json();last=new Error('HTTP '+r.status+' '+candidate)}catch(e){last=e}}
+  throw last||new Error('Cannot load '+path);
+}
+
+function params(){ return new URLSearchParams(location.search); }
+
+async function initRoles(){
+  const grid=document.getElementById('roleGrid');
+  if(!grid) return;
+  const roles=await loadJSON('data/roles.json');
+  const html=roles.map(r=>`
+    <button class="role-card" data-role="${r.id}" type="button">
+      <img src="${r.image}" alt="${escapeHtml(r.name)}">
+      <div><h3>${escapeHtml(r.name)}</h3><p>${escapeHtml(r.description)}</p></div>
+      <span>→</span>
+    </button>`).join('');
+  grid.innerHTML=html;
+  document.querySelectorAll('.role-card').forEach(b=>{
+    b.addEventListener('click',()=>location.href=roleTarget(b.dataset.role));
+  });
+}
+
+function bindGlobal(){
+  applyTheme();
+
+  document.querySelectorAll('#themeBtn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      localStorage.setItem(THEME_KEY, localStorage.getItem(THEME_KEY)==='dark'?'light':'dark');
+      applyTheme();
+    });
+  });
+
+  document.getElementById('profileBtn')?.addEventListener('click',()=>location.href='profile.html');
+
+  // Any avatar that is not already a link works as the profile button.
+  document.querySelectorAll('.avatar:not(a)').forEach(a=>{
+    if(a.id==='profileBtn') return;
+    a.setAttribute('role','button');
+    a.setAttribute('tabindex','0');
+    a.addEventListener('click',()=>location.href='profile.html');
+    a.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')location.href='profile.html';});
+  });
+
+  // The purple logo is now the switch for the two question-edit pages.
+  const pageMenu=document.getElementById('pageMenu');
+  const pagePasswordModal=document.getElementById('pagePasswordModal');
+  const pagePassword=document.getElementById('pagePassword');
+  const pagePasswordMsg=document.getElementById('pagePasswordMsg');
+  let pendingPage='';
+  document.getElementById('pageSwitchBtn')?.addEventListener('click',()=>{
+    pageMenu?.classList.remove('hidden');
+  });
+  document.getElementById('closePageMenu')?.addEventListener('click',()=>pageMenu?.classList.add('hidden'));
+  document.getElementById('closePagePassword')?.addEventListener('click',()=>pagePasswordModal?.classList.add('hidden'));
+  function openPagePassword(page){
+    pendingPage=page;
+    if(pagePassword){pagePassword.value='';pagePassword.focus();}
+    if(pagePasswordMsg)pagePasswordMsg.textContent='';
+    pagePasswordModal?.classList.remove('hidden');
+    pageMenu?.classList.add('hidden');
+  }
+  document.getElementById('addPage1Btn')?.addEventListener('click',()=>openPagePassword('1'));
+  document.getElementById('addPage2Btn')?.addEventListener('click',()=>openPagePassword('2'));
+  function unlockSelectedPage(){
+    if(pagePassword?.value==='AK1234'){
+      if(pendingPage==='1'){
+        sessionStorage.setItem('computerEditorUnlocked','1');
+        location.href='computer-question-paper.html';
+      }else if(pendingPage==='2'){
+        sessionStorage.setItem('practiceEditorUnlocked','1');
+        location.href='practice-question-paper.html?class=5&semester=1&subject=bangla';
+      }
+    }else if(pagePasswordMsg){
+      pagePasswordMsg.textContent='this is wrong password';
+    }
+  }
+  document.getElementById('unlockPage')?.addEventListener('click',unlockSelectedPage);
+  pagePassword?.addEventListener('keydown',e=>{if(e.key==='Enter')unlockSelectedPage()});
+
+  document.getElementById('closeProfilePanel')?.addEventListener('click',()=>{
+    document.getElementById('profilePanel')?.classList.add('hidden');
+  });
+  document.querySelectorAll('.side-overlay').forEach(x=>x.addEventListener('click',e=>{
+    if(e.target===x)x.classList.add('hidden');
+  }));
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  bindGlobal();
+  initRoles().catch(console.error);
+});
+
+</script><script data-internal-js="js/teacher-question.js">
+let teacherQuestions=JSON.parse(localStorage.getItem('teacherQuestions')||'[]');
+let currentType='mcq';
+
+const typeNames={mcq:'MCQ',long:'Long Question',fill_blank:'Fill in the Blanks',paragraph:'Paragraph Writing',true_false:'True / False',match:'Match the Following'};
+const letters=['A','B','C','D'];
+
+function qval(id){return document.getElementById(id)?.value?.trim()||'';}
+function marksFor(type=currentType){return Number(document.querySelector(`.marks[data-for="${type}"]`)?.value||1);}
+
+function renderDynamicFields(){
+  const box=document.getElementById('dynamicFields');
+  if(currentType==='mcq'){
+    box.innerHTML=`<div class="field"><label>Options <em>*</em></label>${letters.map((l,i)=>`<div class="option-row"><span class="option-letter">${l}</span><input id="opt${i}" placeholder="Enter option ${l}"><input type="radio" name="correctRadio" value="${i}" ${i===0?'checked':''} title="Correct answer"></div>`).join('')}</div>`;
+  }else if(currentType==='true_false'){
+    box.innerHTML=`<div class="field"><label>Answer</label><div class="tf-choice"><label><input type="radio" name="tf" value="সত্য" checked> সত্য</label><label><input type="radio" name="tf" value="মিথ্যা"> মিথ্যা</label></div></div>`;
+  }else if(currentType==='match'){
+    box.innerHTML=`<div class="field"><label>Matching Items</label><div class="match-grid">${[1,2,3,4].map(i=>`<input id="left${i}" placeholder="Left ${i}"><input id="right${i}" placeholder="Right ${i}">`).join('')}</div></div>`;
+  }else{
+    box.innerHTML=`<div class="info-banner">এই ধরনের প্রশ্নের জন্য Question এবং Correct Answer/Model Answer লিখলেই হবে।</div>`;
+  }
+  updateCorrectAnswerOptions();
+  updateMiniPreview();
+}
+
+function getAnswer(){
+  if(currentType==='mcq'){
+    const i=Number(document.querySelector('input[name="correctRadio"]:checked')?.value||0);
+    return qval('opt'+i);
+  }
+  if(currentType==='true_false') return document.querySelector('input[name="tf"]:checked')?.value||'';
+  if(currentType==='match'){
+    const pairs=[]; for(let i=1;i<=4;i++){const l=qval('left'+i),r=qval('right'+i);if(l||r)pairs.push(`${l} — ${r}`);}
+    return pairs.join(' | ');
+  }
+  return qval('correctAnswerText');
+}
+
+function updateCorrectAnswerOptions(){
+  const sel=document.getElementById('correctAnswer');
+  if(!sel)return;
+  if(currentType==='mcq'){
+    sel.innerHTML=letters.map((l,i)=>`<option value="${i}">${l}</option>`).join('');
+    sel.onchange=()=>{const r=document.querySelector(`input[name="correctRadio"][value="${sel.value}"]`);if(r)r.checked=true;updateMiniPreview();};
+  }else{
+    sel.innerHTML=`<option value="">Select / write the answer below</option>`;
+    const field=document.createElement('div');
+    field.className='field';
+    field.innerHTML=`<input id="correctAnswerText" placeholder="Correct / Model Answer">`;
+    sel.parentElement.after(field);
+  }
+}
+
+function collectQuestion(){
+  const question=qval('question');
+  if(!question){alert('প্রথমে প্রশ্ন লিখুন।');document.getElementById('question').focus();return null;}
+  let answer=getAnswer();
+  if(currentType==='mcq'){
+    const opts=letters.map((_,i)=>qval('opt'+i));
+    if(opts.some(x=>!x)){alert('MCQ-এর সব ৪টি option পূরণ করুন।');return null;}
+    answer=opts[Number(document.querySelector('input[name="correctRadio"]:checked')?.value||0)];
+  }else if(!answer){
+    alert('Correct / Model Answer দিন।');return null;
+  }
+  const q={type:currentType,question,answer,marks:marksFor(),subject:document.getElementById('subject').value,class_name:document.getElementById('classSemester').value,solution:{enabled:Boolean(qval('explanation')),steps:qval('explanation')?[qval('explanation')]:[]}};
+  if(currentType==='mcq')q.options=letters.map((_,i)=>qval('opt'+i));
+  if(currentType==='true_false')q.options=['সত্য','মিথ্যা'];
+  if(currentType==='match'){
+    q.pairs=[]; for(let i=1;i<=4;i++){const l=qval('left'+i),r=qval('right'+i);if(l||r)q.pairs.push({left:l,right:r});}
+  }
+  return q;
+}
+
+function saveDraft(){
+  const q=collectQuestion(); if(!q)return;
+  teacherQuestions.push(q);
+  localStorage.setItem('teacherQuestions',JSON.stringify(teacherQuestions));
+  localStorage.setItem('teacherDraftMeta',JSON.stringify({subject:q.subject,className:q.class_name}));
+
+  // Publish the saved teacher question to the same local question bank
+  // used by Student -> Class -> Semester -> Subject -> Practice.
+  const subjectMap={
+    'বাংলা':'bangla','Bangla':'bangla','English':'english','ইংরেজি':'english',
+    'Mathematics':'mathematics','গণিত':'mathematics','Science':'science','Physics':'physics',
+    'Life Science':'life-science','Geography':'geography','History':'history',
+    'Commercial Law':'commercial-law','Accountancy':'accountancy','Business Studies':'business-studies',
+    'Cost Tax':'cost-tax','Costing':'costing','Computer Science':'computer-science',
+    'Political Science':'political-science'
+  };
+  const text=String(q.class_name||'');
+  const cm=text.match(/Class\s*(5|6|7|8|9|10|11|12)/i);
+  const sm=text.match(/(?:Semester\s*|Semester\s*[-:]?\s*)([1-4])/i) || text.match(/(1st|2nd|3rd|4th)\s*Semester/i);
+  const classId=cm?'class'+cm[1]:'';
+  const sem=sm?(sm[1]==='1st'?'1':sm[1]==='2nd'?'2':sm[1]==='3rd'?'3':sm[1]==='4th'?'4':sm[1]):'';
+  const sid=subjectMap[q.subject]||String(q.subject||'').toLowerCase().replace(/\s+/g,'-');
+  if(classId && sem && sid){
+    let banks={};
+    try{banks=JSON.parse(localStorage.getItem('practiceQuestionBanksV1')||'{}')}catch{}
+    const k=`${classId}|${sem}|${sid}`;
+    if(!Array.isArray(banks[k]))banks[k]=[];
+    if(banks[k].length<20)banks[k].push(q);
+    banks[k]=banks[k].slice(-20);
+    localStorage.setItem('practiceQuestionBanksV1',JSON.stringify(banks));
+    localStorage.setItem('lastPublishedQuestion',JSON.stringify({key:k,question:q}));
+  }
+  location.href='teacher-preview.html';
+}
+
+function resetQuestion(){
+  document.getElementById('question').value='';
+  document.getElementById('explanation').value='';
+  renderDynamicFields();
+  document.getElementById('questionCount').textContent='0 / 1000';
+  document.getElementById('explanationCount').textContent='0 / 1000';
+}
+
+function updateMiniPreview(){
+  document.getElementById('summaryType').textContent=typeNames[currentType];
+  document.getElementById('summaryMarks').textContent=marksFor();
+  document.getElementById('summarySubject').textContent=document.getElementById('subject').value;
+  document.getElementById('summaryClass').textContent=document.getElementById('classSemester').value;
+  document.getElementById('miniQuestion').textContent=(qval('question')||'1) প্রশ্নটি এখানে দেখা যাবে।');
+  const opts=document.getElementById('miniOptions');
+  if(currentType==='mcq')opts.innerHTML=letters.map((l,i)=>`<div class="${document.querySelector('input[name="correctRadio"]:checked')?.value==i?'correct-mini':''}">${l}) ${qval('opt'+i)||'Option '+l}</div>`).join('');
+  else if(currentType==='true_false')opts.innerHTML='<div>○ সত্য</div><div>○ মিথ্যা</div>';
+  else if(currentType==='match')opts.innerHTML=[1,2,3,4].map(i=>qval('left'+i)||qval('right'+i)?`<div>${qval('left'+i)} — ${qval('right'+i)}</div>`:'').join('');
+  else opts.innerHTML='<div class="muted">Model answer will be used after the question.</div>';
+}
+
+document.querySelectorAll('.type-card').forEach(btn=>btn.addEventListener('click',()=>{
+  currentType=btn.dataset.type;
+  document.querySelectorAll('.type-card').forEach(x=>x.classList.toggle('active',x===btn));
+  renderDynamicFields();
+}));
+document.querySelectorAll('.marks').forEach(s=>s.addEventListener('change',updateMiniPreview));
+document.getElementById('subject').addEventListener('change',updateMiniPreview);
+document.getElementById('classSemester').addEventListener('change',updateMiniPreview);
+document.getElementById('question').addEventListener('input',e=>{document.getElementById('questionCount').textContent=`${e.target.value.length} / 1000`;updateMiniPreview();});
+document.getElementById('explanation').addEventListener('input',e=>document.getElementById('explanationCount').textContent=`${e.target.value.length} / 1000`);
+document.getElementById('saveQuestion').addEventListener('click',saveDraft);
+document.getElementById('saveQuestionBottom').addEventListener('click',saveDraft);
+document.getElementById('resetQuestion').addEventListener('click',resetQuestion);
+document.addEventListener('input',updateMiniPreview);
+renderDynamicFields();
+
+</script>
+</body></html>

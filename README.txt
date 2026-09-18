@@ -1,0 +1,1 @@
+Role images are replaceable. Keep the same filenames (student.svg, teacher.svg, computer.svg) or edit image paths in data/roles.json. You can also change the image path there to your own JPG/PNG file inside the project.

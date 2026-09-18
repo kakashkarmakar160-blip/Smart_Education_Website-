@@ -1,0 +1,80 @@
+{
+  "id": "class8-science-school-02-set-1",
+  "class": "class8",
+  "class_name": "Class 8",
+  "subject": "science",
+  "subject_name": "বিজ্ঞান",
+  "school_id": "school-02",
+  "school_name": "Smart Academy School",
+  "set_number": 1,
+  "title": "Model Question Set-1",
+  "language": "bn",
+  "questions": [
+    {
+      "type": "mcq",
+      "question": "উদ্ভিদের খাদ্য তৈরির প্রধান প্রক্রিয়া কোনটি?",
+      "options": [
+        "শ্বসন",
+        "সালোকসংশ্লেষ",
+        "পরিপাক",
+        "বাষ্পীভবন"
+      ],
+      "answer": "সালোকসংশ্লেষ",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "জলের স্ফুটনাঙ্ক কত?",
+      "options": [
+        "0°C",
+        "50°C",
+        "100°C",
+        "212°C"
+      ],
+      "answer": "100°C",
+      "marks": 1
+    },
+    {
+      "type": "fill_blank",
+      "question": "মানুষ শ্বাস নেওয়ার সময় প্রধানত ____ গ্রহণ করে।",
+      "answer": "অক্সিজেন",
+      "marks": 1
+    },
+    {
+      "type": "true_false",
+      "question": "সূর্য একটি নক্ষত্র।",
+      "answer": "সত্য",
+      "marks": 1
+    },
+    {
+      "type": "mcq",
+      "question": "পৃথিবীর একমাত্র প্রাকৃতিক উপগ্রহ কোনটি?",
+      "options": [
+        "মঙ্গল",
+        "চাঁদ",
+        "সূর্য",
+        "শুক্র"
+      ],
+      "answer": "চাঁদ",
+      "marks": 1
+    },
+    {
+      "type": "short_answer",
+      "question": "পরিবেশ রক্ষার দুটি উপায় লেখো।",
+      "answer": "গাছ লাগানো এবং প্লাস্টিক ও বর্জ্য সঠিকভাবে ব্যবস্থাপনা করা।",
+      "marks": 2
+    },
+    {
+      "type": "fill_blank",
+      "question": "উদ্ভিদের সবুজ রঞ্জক পদার্থের নাম ____।",
+      "answer": "ক্লোরোফিল",
+      "marks": 1
+    },
+    {
+      "type": "true_false",
+      "question": "জল জমে বরফ হলে তার অবস্থা পরিবর্তিত হয়।",
+      "answer": "সত্য",
+      "marks": 1
+    }
+  ]
+}
