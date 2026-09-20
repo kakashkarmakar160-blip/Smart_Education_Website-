@@ -16,3 +16,15 @@ The current stage intentionally keeps question/exam/result data on the existing 
 
 ### Security
 Only the Publishable key belongs in the browser. Never put an `sb_secret_...` key in GitHub or HTML.
+
+
+## Email OTP Login
+The authentication page now uses Supabase Email OTP instead of Email/Password:
+1. User enters Email/Gmail.
+2. Supabase sends a one-time verification code.
+3. User enters the OTP in `auth.html`.
+4. `supabaseClient.auth.verifyOtp({ email, token, type: "email" })` verifies it.
+5. The existing `profiles` table is reused for Student/Teacher/Computer role data.
+
+### Supabase Dashboard
+Make sure Email authentication and passwordless/Email OTP are enabled in the Supabase project. Configure the email provider/template as required by the project.
