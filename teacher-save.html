@@ -136,7 +136,7 @@ document.getElementById('teacherForm').addEventListener('submit', async e => {
   const user = await smartEduAuth.user();
   if (!user) {
     sessionStorage.setItem('pendingTeacherProfile', JSON.stringify(profile));
-    location.href='auth.html?role=teacher&next=teacher-save.html';
+    location.href='auth.html?next=teacher-save.html';
     return;
   }
   const button=e.submitter;

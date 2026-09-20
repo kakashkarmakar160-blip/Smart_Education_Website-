@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Smart Education — Login</title>
+<title>Smart Education — Enter Your Name</title>
 <style>
 *{box-sizing:border-box}
 :root{--bg:#f7f8fc;--card:#fff;--text:#111a35;--muted:#687089;--line:#e7e8f0;--primary:#5b22c9;--primary2:#7744e8;--soft:#f1edff;--shadow:0 12px 40px rgba(34,25,75,.10)}
@@ -15,238 +15,89 @@ body.dark{--bg:#10111a;--card:#191b27;--text:#f7f7fb;--muted:#a9aec1;--line:#2d3
 .card{width:min(100%,460px);background:var(--card);border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:var(--shadow)}
 .logo{width:62px;height:62px;border-radius:18px;background:linear-gradient(135deg,#6d35d4,#9c6af1);color:#fff;display:grid;place-items:center;font-size:28px;font-weight:900;margin-bottom:18px}
 h1{margin:0 0 7px;font-size:28px}.sub{color:var(--muted);margin:0 0 22px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);padding:4px;border-radius:14px;margin-bottom:20px}
-.tabs button{border:0;background:transparent;color:var(--muted);padding:11px;border-radius:11px;font-weight:700;cursor:pointer}
-.tabs button.active{background:var(--card);color:var(--primary);box-shadow:0 2px 8px rgba(0,0,0,.06)}
 label{display:block;font-weight:700;margin:13px 0 7px}input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:var(--bg);color:var(--text);font-size:15px;outline:none}input:focus{border-color:var(--primary)}
-.primary{width:100%;margin-top:20px;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#5b22c9,#7744e8);color:#fff;font-size:16px;font-weight:800;cursor:pointer}
+.primary{width:100%;margin-top:20px;border:0;border-radius:14px;padding:14px;background:linear-gradient(135deg,#5b22c9,#7744e8);color:#fff;font-size:16px;font-weight:800;cursor:pointer}.primary:disabled{opacity:.7;cursor:wait}
 .secondary{width:100%;margin-top:10px;border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--card);color:var(--text);font-weight:700;cursor:pointer}
-.msg{display:none;margin-top:15px;padding:12px 13px;border-radius:12px;font-size:14px}.msg.show{display:block}.msg.error{background:#fff0f0;color:#a32121}.msg.ok{background:#edf9f0;color:#176b31}
-.role{display:none}.role.show{display:block}.hint{font-size:13px;color:var(--muted);margin-top:10px}
+.msg{display:none;margin-top:15px;padding:12px 13px;border-radius:12px;font-size:14px}.msg.show{display:block}.msg.error{background:#fff0f0;color:#a32121}.msg.ok{background:#edf9f0;color:#176b31}.hint{font-size:13px;color:var(--muted);margin-top:12px}
 </style>
 </head>
 <body>
 <header class="topbar"><a class="brand" href="index.html">Smart Education</a><button class="icon-btn" id="themeBtn" type="button">🌙</button></header>
 <main class="wrap"><section class="card">
 <div class="logo">SE</div>
-<h1 id="title">Login</h1>
-<p class="sub" id="subtitle">Smart Education account দিয়ে প্রবেশ করুন</p>
-<div class="tabs"><button id="loginTab" class="active" type="button">Login</button><button id="signupTab" type="button">Sign Up</button></div>
-<form id="authForm">
-<div id="roleBox" class="role">
-<label for="role">Account type</label>
-<select id="role" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:13px;background:var(--bg);color:var(--text);font-size:15px">
-<option value="student">Student</option><option value="teacher">Teacher</option><option value="computer">Computer</option>
-</select>
-</div>
-<div id="emailStep">
-<label for="email">Email / Gmail</label>
-<input id="email" type="email" autocomplete="email" required placeholder="your@gmail.com">
-<button class="primary" id="sendOtpBtn" type="button">📩 Send OTP</button>
-</div>
-<div id="otpStep" style="display:none">
-<label for="otp">🔐 Enter OTP</label>
-<input id="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" placeholder="৬ সংখ্যার OTP">
-<button class="primary" id="verifyOtpBtn" type="button">✅ Verify OTP</button>
-<button class="secondary" id="resendBtn" type="button">↻ Resend OTP</button>
-<button class="secondary" id="changeEmailBtn" type="button">← Change Email</button>
-</div>
-<button class="secondary" id="backBtn" type="button">← Home</button>
+<h1>Enter Your Name</h1>
+<p class="sub">Smart Education-এ প্রবেশ করতে শুধু আপনার নাম লিখুন।</p>
+<form id="nameForm">
+<label for="name">Your Name</label>
+<input id="name" type="text" autocomplete="name" maxlength="80" required placeholder="Enter your name">
+<button class="primary" id="submitBtn" type="submit">Continue →</button>
 </form>
 <div id="msg" class="msg"></div>
-<p class="hint">আপনার Email / Gmail-এ ৬ সংখ্যার OTP যাবে। OTP সঠিকভাবে দিলে account verify হয়ে Login হবে।</p>
+<p class="hint">কোনো Email, Google বা Phone OTP লাগবে না। আপনার জন্য Supabase একটি আলাদা User ID তৈরি করবে।</p>
 </section></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script>
 const qs=new URLSearchParams(location.search);
-const requestedRole=qs.get('role')||'';
-const next=qs.get('next')||'profile.html';
-
-const loginTab=document.getElementById('loginTab');
-const signupTab=document.getElementById('signupTab');
-const roleBox=document.getElementById('roleBox');
+const next=qs.get('next')||'index.html';
 const msg=document.getElementById('msg');
-const emailStep=document.getElementById('emailStep');
-const otpStep=document.getElementById('otpStep');
-const emailInput=document.getElementById('email');
-const otpInput=document.getElementById('otp');
-const sendOtpBtn=document.getElementById('sendOtpBtn');
-const verifyOtpBtn=document.getElementById('verifyOtpBtn');
-const resendBtn=document.getElementById('resendBtn');
-const changeEmailBtn=document.getElementById('changeEmailBtn');
-const backBtn=document.getElementById('backBtn');
+const form=document.getElementById('nameForm');
+const submitBtn=document.getElementById('submitBtn');
+function showMsg(t,ok=false){msg.textContent=t;msg.className='msg show '+(ok?'ok':'error')}
 
-let mode='login';
-let pendingEmail='';
-
-if(requestedRole && ['student','teacher','computer'].includes(requestedRole)){
-  document.getElementById('role').value=requestedRole;
-}
-
-function showMsg(t,ok=false){
-  msg.textContent=t;
-  msg.className='msg show '+(ok?'ok':'error');
-}
-
-function setBusy(btn,busy){
-  if(!btn) return;
-  if(busy){
-    btn.dataset.oldText=btn.textContent;
-    btn.disabled=true;
-    btn.textContent='Please wait…';
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const name=document.getElementById('name').value.trim();
+ if(name.length<2){showMsg('দয়া করে অন্তত ২ অক্ষরের নাম দিন।');return;}
+ msg.className='msg'; submitBtn.disabled=true; submitBtn.textContent='Creating User…';
+ try{
+  if(!window.supabaseClient) throw new Error('Supabase connection পাওয়া যায়নি।');
+  let user=(await supabaseClient.auth.getUser()).data?.user||null;
+  if(!user){
+    const {data,error}=await supabaseClient.auth.signInAnonymously({options:{data:{display_name:name,name:name}}});
+    if(error) throw error;
+    user=data?.user||null;
   }else{
-    btn.disabled=false;
-    btn.textContent=btn.dataset.oldText||btn.textContent;
-  }
-}
-
-function setMode(m){
-  mode=m;
-  const signup=m==='signup';
-  loginTab.classList.toggle('active',!signup);
-  signupTab.classList.toggle('active',signup);
-  document.getElementById('title').textContent=signup?'Create account':'Login';
-  document.getElementById('subtitle').textContent=signup
-    ?'Email-এ OTP দিয়ে নতুন Smart Education account তৈরি করুন'
-    :'Email / Gmail-এ OTP নিয়ে Smart Education-এ প্রবেশ করুন';
-  roleBox.classList.toggle('show',signup);
-  msg.className='msg';
-  emailStep.style.display='block';
-  otpStep.style.display='none';
-  emailInput.disabled=false;
-  emailInput.value=pendingEmail||'';
-}
-
-loginTab.onclick=()=>{pendingEmail='';setMode('login')};
-signupTab.onclick=()=>{pendingEmail='';setMode('signup')};
-backBtn.onclick=()=>location.href='index.html';
-
-async function sendOtp(){
-  const email=emailInput.value.trim().toLowerCase();
-  if(!email){
-    showMsg('অনুগ্রহ করে আপনার Email / Gmail দিন।');
-    emailInput.focus();
-    return;
-  }
-  if(!window.supabaseClient){
-    showMsg('Supabase connection পাওয়া যায়নি।');
-    return;
-  }
-  pendingEmail=email;
-  try{
-    setBusy(sendOtpBtn,true);
-    const {error}=await supabaseClient.auth.signInWithOtp({
-      email,
-      options:{shouldCreateUser:mode==='signup'}
-    });
+    const {error}=await supabaseClient.auth.updateUser({data:{display_name:name,name:name}});
     if(error) throw error;
-    emailStep.style.display='none';
-    otpStep.style.display='block';
-    otpInput.value='';
-    otpInput.focus();
-    showMsg('OTP আপনার Email / Gmail-এ পাঠানো হয়েছে। OTP লিখুন।',true);
-  }catch(err){
-    showMsg(err.message||'OTP পাঠানো যায়নি।');
-  }finally{
-    setBusy(sendOtpBtn,false);
   }
-}
-
-async function verifyOtp(){
-  const otp=otpInput.value.trim();
-  if(!pendingEmail){
-    showMsg('আগে Email দিয়ে OTP পাঠান।');
-    return;
-  }
-  if(!/^\d{6}$/.test(otp)){
-    showMsg('৬ সংখ্যার সঠিক OTP দিন।');
-    otpInput.focus();
-    return;
-  }
-  try{
-    setBusy(verifyOtpBtn,true);
-    const {data,error}=await supabaseClient.auth.verifyOtp({
-      email:pendingEmail,
-      token:otp,
-      type:'email'
-    });
-    if(error) throw error;
-    if(!data.user) throw new Error('Verification সফল হলেও user পাওয়া যায়নি।');
-
-    const existingProfile=await smartEduAuth.profile();
-    const selectedRole=document.getElementById('role').value;
-
-    if(!existingProfile){
-      await smartEduAuth.saveProfile({
-        name:'',
-        phone:'',
-        role:selectedRole||null,
-        className:'',
-        semester:''
-      });
-    }else if(mode==='signup' && selectedRole && !existingProfile.role){
-      await smartEduAuth.saveProfile({
-        name:existingProfile.name||'',
-        phone:existingProfile.phone||'',
-        role:selectedRole,
-        className:existingProfile.class_name||'',
-        semester:existingProfile.semester||'',
-        avatarUrl:existingProfile.avatar_url||''
-      });
-    }
-
-    showMsg('✅ Email OTP verification সফল। Login হচ্ছে…',true);
-    setTimeout(()=>location.href=next,400);
-  }catch(err){
-    showMsg(err.message||'OTP verification সফল হয়নি।');
-  }finally{
-    setBusy(verifyOtpBtn,false);
-  }
-}
-
-async function resendOtp(){
-  if(!pendingEmail) return;
-  try{
-    setBusy(resendBtn,true);
-    const {error}=await supabaseClient.auth.signInWithOtp({
-      email:pendingEmail,
-      options:{shouldCreateUser:mode==='signup'}
-    });
-    if(error) throw error;
-    otpInput.value='';
-    otpInput.focus();
-    showMsg('নতুন OTP আপনার Email / Gmail-এ পাঠানো হয়েছে।',true);
-  }catch(err){
-    showMsg(err.message||'নতুন OTP পাঠানো যায়নি।');
-  }finally{
-    setBusy(resendBtn,false);
-  }
-}
-
-sendOtpBtn.onclick=sendOtp;
-verifyOtpBtn.onclick=verifyOtp;
-resendBtn.onclick=resendOtp;
-changeEmailBtn.onclick=()=>{
-  otpStep.style.display='none';
-  emailStep.style.display='block';
-  emailInput.disabled=false;
-  emailInput.focus();
-  msg.className='msg';
-};
-
-otpInput.addEventListener('input',()=>{
-  otpInput.value=otpInput.value.replace(/\D/g,'').slice(0,6);
+  if(!user) throw new Error('User তৈরি করা যায়নি।');
+  try{await smartEduAuth.saveProfile({name,phone:'',role:'',className:'',semester:''});}catch(profileError){console.warn('Profile save skipped:',profileError);}
+  localStorage.setItem('smartEduUserName',name);
+  localStorage.setItem('smartEduUserId',user.id);
+  showMsg('স্বাগতম, '+name+'! User ID তৈরি হয়েছে।',true);
+  setTimeout(()=>location.href=next,300);
+ }catch(err){
+  console.error(err);
+  const raw=err?.message||'কাজটি সম্পন্ন করা যায়নি।';
+  if(/anonymous/i.test(raw)) showMsg('Anonymous Sign-ins Supabase-এ চালু করা নেই। Authentication → Sign In / Providers → Anonymous Sign-Ins ON করে Save করুন।');
+  else showMsg(raw);
+ }finally{
+  submitBtn.disabled=false; submitBtn.textContent='Continue →';
+ }
 });
-otpInput.addEventListener('keydown',e=>{if(e.key==='Enter')verifyOtp()});
-emailInput.addEventListener('keydown',e=>{if(e.key==='Enter')sendOtp()});
 
 (async()=>{
-  try{
-    const u=await smartEduAuth.user();
-    if(u && !qs.get('force')) location.href=next;
-  }catch(e){}
+ try{
+  const u=await smartEduAuth.user();
+  if(u && !qs.get('force')){
+   const existingName=u.user_metadata?.display_name||u.user_metadata?.name||localStorage.getItem('smartEduUserName');
+   if(existingName){ document.getElementById('name').value=existingName; location.href=next; }
+  }
+ }catch(e){}
 })();
-(function(){const dark=localStorage.getItem('smartEduDark')==='1';if(dark)document.body.classList.add('dark');document.getElementById('themeBtn').textContent=dark?'☀️':'🌙';document.getElementById('themeBtn').onclick=()=>{document.body.classList.toggle('dark');const d=document.body.classList.contains('dark');localStorage.setItem('smartEduDark',d?'1':'0');document.getElementById('themeBtn').textContent=d?'☀️':'🌙'}})();
+
+(function(){
+ const dark=localStorage.getItem('smartEduDark')==='1' || localStorage.getItem('smartEduTheme')==='dark';
+ if(dark)document.body.classList.add('dark');
+ document.getElementById('themeBtn').textContent=dark?'☀️':'🌙';
+ document.getElementById('themeBtn').onclick=()=>{
+  document.body.classList.toggle('dark');
+  const d=document.body.classList.contains('dark');
+  localStorage.setItem('smartEduDark',d?'1':'0');
+  localStorage.setItem('smartEduTheme',d?'dark':'light');
+  document.getElementById('themeBtn').textContent=d?'☀️':'🌙';
+ };
+})();
 </script>
 </body></html>

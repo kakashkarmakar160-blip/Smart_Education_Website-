@@ -247,5 +247,14 @@ function subjectLabel(id){const map={bangla:'Bengali',english:'English',physics:
 initHome().catch(console.error);
 
 </script>
+<script>
+// Name-only entry: the home screen opens after an anonymous Supabase user is created.
+(async function(){
+  try{
+    if(!window.smartEduAuth) return;
+    const user=await smartEduAuth.user();
+    if(!user) location.replace('auth.html?next=index.html');
+  }catch(e){ console.warn('Name entry check failed:',e); }
+})();
 </body>
 </html>

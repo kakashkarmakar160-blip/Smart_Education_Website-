@@ -136,7 +136,7 @@ document.getElementById('studentForm').addEventListener('submit', async e => {
   const user = await smartEduAuth.user();
   if (!user) {
     sessionStorage.setItem('pendingStudentProfile', JSON.stringify(profile));
-    location.href='auth.html?role=student&next=student-save.html';
+    location.href='auth.html?next=student-save.html';
     return;
   }
   const button=e.submitter;
@@ -155,7 +155,7 @@ document.getElementById('studentForm').addEventListener('submit', async e => {
 (async function restoreStudentProfile(){
   const user=await smartEduAuth.user();
   if(!user){
-    // Direct visits are allowed; clicking Save will take the user to Login.
+    // Direct visits are allowed; clicking Save will take the user to the name entry screen.
     return;
   }
   try{
