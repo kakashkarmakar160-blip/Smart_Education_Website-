@@ -143,18 +143,51 @@ const saved=JSON.parse(localStorage.getItem('publishedSet')||'null');
 if(saved){setName.value=saved.name||setName.value;target.value=saved.target||'';accessCode.value=saved.password||'';}
 function generate(){accessCode.value='AK'+Math.random().toString(36).slice(2,8).toUpperCase();}
 document.getElementById('generateCode').onclick=generate;if(!accessCode.value)generate();
-document.getElementById('publish').onclick=()=>{
+
+async function publishToSupabase(published){
+  if(!window.supabaseClient) throw new Error('Supabase connection পাওয়া যায়নি।');
+  const {data:{user},error:userError}=await window.supabaseClient.auth.getUser();
+  if(userError||!user) throw new Error('User session পাওয়া যায়নি। আগে Enter Your Name দিয়ে website-এ প্রবেশ করুন।');
+  const row={
+    access_code: published.password,
+    name: published.name,
+    target: published.target,
+    teacher_name: published.teacher,
+    teacher_user_id: user.id,
+    questions: published.questions,
+    published_at: published.publishedAt
+  };
+  const {data,error}=await window.supabaseClient.from('teacher_papers').insert(row).select().single();
+  if(error) throw error;
+  return data;
+}
+
+document.getElementById('publish').onclick=async()=>{
  if(!qs.length){alert('Publish করার আগে অন্তত একটি question তৈরি করুন।');return;}
  if(!setName.value.trim()||!accessCode.value.trim()){alert('Question Set Name এবং Password দুটোই দিন।');return;}
- const tp=JSON.parse(localStorage.getItem('teacherProfile')||'{}');
- const teacher=tp.name||'Mr. Arindam Sen',teacherId=tp.id||teacher.toLowerCase().replace(/[^a-z0-9]+/g,'-');
- const papers=JSON.parse(localStorage.getItem('teacherPublishedPapers')||'[]');
- const id='paper-'+Date.now();
- const published={id,name:setName.value.trim(),target:target.value.trim()||teacher,password:accessCode.value.trim(),questions:qs,publishedAt:new Date().toISOString(),teacher,teacherId};
- papers.push(published);localStorage.setItem('teacherPublishedPapers',JSON.stringify(papers));
- localStorage.setItem('teacherSetName',published.name);localStorage.setItem('publishedSet',JSON.stringify(published));
- const code=document.getElementById('publishedCode');code.textContent=published.password;code.classList.remove('hidden');document.getElementById('copyCode').classList.remove('hidden');document.getElementById('msg').textContent='✓ Question paper published successfully.';
-};
-document.getElementById('copyCode').onclick=async()=>{const code=JSON.parse(localStorage.getItem('publishedSet')||'{}').password||'';try{await navigator.clipboard.writeText(code);document.getElementById('msg').textContent='✓ Password copied.';}catch{document.getElementById('msg').textContent='Password: '+code;}};
+ const btn=document.getElementById('publish');btn.disabled=true;btn.textContent='Publishing…';
+ try{
+  const tp=JSON.parse(localStorage.getItem('teacherProfile')||'{}');
+  const teacher=tp.name||localStorage.getItem('smartEduUserName')||'Teacher';
+  const teacherId=tp.id||teacher.toLowerCase().replace(/[^a-z0-9]+/g,'-');
+  const id='paper-'+Date.now();
+  const published={id,name:setName.value.trim(),target:target.value.trim()||teacher,password:accessCode.value.trim().toUpperCase(),questions:qs,publishedAt:new Date().toISOString(),teacher,teacherId};
 
+  // Cloud copy: this is what makes the same Teacher Paper available on other phones.
+  await publishToSupabase(published);
+
+  // Keep the old local copy too, so the existing interface continues to work on the teacher phone.
+  const papers=JSON.parse(localStorage.getItem('teacherPublishedPapers')||'[]');
+  papers.push(published);localStorage.setItem('teacherPublishedPapers',JSON.stringify(papers));
+  localStorage.setItem('teacherSetName',published.name);localStorage.setItem('publishedSet',JSON.stringify(published));
+  const code=document.getElementById('publishedCode');code.textContent=published.password;code.classList.remove('hidden');document.getElementById('copyCode').classList.remove('hidden');document.getElementById('msg').textContent='✓ Question paper published successfully to cloud.';
+ }catch(err){
+  console.error(err);
+  const m=err?.message||String(err);
+  if(/teacher_papers/i.test(m)&&/(relation|table|schema cache|does not exist)/i.test(m)) alert('Supabase-এ teacher_papers table তৈরি করা হয়নি। ZIP-এর SUPABASE_TEACHER_PAPERS_SETUP.sql ফাইলটি Supabase SQL Editor-এ Run করুন।');
+  else if(/anonymous|auth/i.test(m)) alert('Supabase Anonymous Sign-ins ON আছে কিনা দেখুন।');
+  else alert('Paper cloud-এ save করা যায়নি: '+m);
+ }finally{btn.disabled=false;btn.textContent='Publish Question Paper →';}
+};
+document.getElementById('copyCode').onclick=async()=>{const code=document.getElementById('publishedCode').textContent||'';try{await navigator.clipboard.writeText(code);document.getElementById('msg').textContent='✓ Password copied.';}catch{document.getElementById('msg').textContent='Password: '+code;}};
 </script></body></html>

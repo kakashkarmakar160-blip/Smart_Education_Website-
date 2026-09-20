@@ -13,4 +13,4 @@ Project URL: https://adneuympnwijfrudycwu.supabase.co
 ## Important
 - The key in `supabase-config.js` is a Publishable key and is intended for browser use with RLS enabled.
 - Never add an `sb_secret_...` key to this project or GitHub.
-- Existing application data still uses the project's current localStorage/JSON logic. This ZIP only establishes the Supabase client connection; the next stage is migrating profiles, teacher codes, questions, exams and results to Supabase tables.
+- Existing application data still uses the project's current localStorage/JSON logic. This ZIP only establishes the Supabase client connection; Teacher published papers are now stored in `public.teacher_papers` so a paper code can work across different phones. The included SQL setup file creates the table and RLS policies. Other question/exam/result data still uses the existing localStorage/JSON logic.
