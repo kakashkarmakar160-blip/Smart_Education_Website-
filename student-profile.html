@@ -148,7 +148,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   }catch(e){ console.error(e); nameEl.textContent='Profile load failed'; }
 
   let results=[]; try{results=JSON.parse(localStorage.getItem('studentResults')||'[]')}catch{}
-  try{ const cloudResults=await window.smartEduAuth.getStudentResults(); const byId=new Map(cloudResults.map(r=>[r.id,r])); results=[...results.filter(r=>!byId.has(r.id)),...cloudResults]; localStorage.setItem('studentResults',JSON.stringify(results)); }catch(e){ console.warn('Cloud student results load failed:',e); }
   function grade(pct){return pct>=90?'A+':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=40?'D':'F';}
   function gradeClass(g){return g.startsWith('A')?'a':g==='B'?'b':g==='C'?'c':'d';}
   if(!results.length){

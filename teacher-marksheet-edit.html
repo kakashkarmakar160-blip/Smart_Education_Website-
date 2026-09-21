@@ -148,119 +148,51 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 </script><script data-internal-js="js/teacher-marksheet-edit.js">
+(async function(){
 const wanted=new URLSearchParams(location.search).get('resultId');
-let results=[];
 const area=document.getElementById('editArea');
-let r=null;
-
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const typeNames={mcq:'MCQ',long:'Long Question',fill_blank:'Fill in the Blanks',paragraph:'Paragraph Writing',true_false:'True / False',match:'Match the Following'};
 const letters=['A','B','C','D'];
-
-function renderEdit(){
-if(!r){ area.innerHTML='<div class="empty-history"><h3>Result পাওয়া যায়নি</h3><a class="primary" href="teacher-profile.html">Teacher Profile</a></div>'; return; }
-
-  const qs=r.questions||[];
-  const ans=r.answers||{};
-  const awarded=Array.isArray(r.awardedMarks)?r.awardedMarks:qs.map((q,i)=>ans[i]?.correct?Number(q.marks||1):0);
-  const maxMarks=qs.map(q=>Number(q.marks||1));
-
-  area.innerHTML=`
-    <div class="edit-result-card">
-      <div class="result-student-head">
-        <div>
-          <p class="eyebrow">EDIT STUDENT RESULT</p>
-          <h2>${esc(r.student?.name||r.studentName||'Student')}</h2>
-          <p class="muted">${esc(r.student?.id||'')} • ${esc(r.title||'Question Paper')}</p>
-        </div>
-        <a class="outline" href="teacher-student-result.html?resultId=${encodeURIComponent(r.id)}">Preview Answers</a>
-      </div>
-
-      <div class="teacher-edit-summary">
-        <div><span>Total Questions</span><b>${qs.length}</b></div>
-        <div><span>Total Marks</span><b id="totalMarksView">0</b></div>
-        <div><span>Obtained Marks</span><b id="obtainedMarksView">0</b></div>
-        <div><span>Percentage</span><b id="percentageView">0%</b></div>
-      </div>
-
-      <div class="teacher-edit-head">
-        <div><p class="eyebrow">QUESTION REVIEW</p><h3>Student Answers & Marks</h3></div>
-        <span class="muted">প্রত্যেক প্রশ্নের Marks Edit করা যাবে</span>
-      </div>
-      <div id="questionEditList" class="question-edit-list"></div>
-      <div class="edit-save-row">
-        <button id="saveResult" class="primary">Save All Marks</button>
-        <a class="outline" href="teacher-profile.html">Back to Teacher Profile</a>
-        <p id="saveMsg" class="success-text"></p>
-      </div>
-    </div>`;
-
-  const qList=document.getElementById('questionEditList');
-  qList.innerHTML=qs.map((q,i)=>{
-    const a=ans[i];
-    const max=Number(q.marks||1);
-    const current=Math.min(Math.max(Number(awarded[i]??0)||0,0),max);
-    const status=!a?'unattempted':a.correct?'correct':'wrong';
-    let studentAnswer=a?.value||'Not Answered';
-    if(q.type==='mcq'&&a?.chosen!==undefined) studentAnswer=q.options?.[a.chosen]??studentAnswer;
-    let options='';
-    if(q.type==='mcq') options=`<div class="teacher-review-options">${(q.options||[]).map((o,j)=>{let cls='';if(j===a?.chosen)cls=a.correct?'picked-correct':'picked-wrong';if(o===q.answer)cls+=' model-correct';return `<span class="teacher-review-option ${cls}">${letters[j]||''}) ${esc(o)}</span>`}).join('')}</div>`;
-    else if(q.type==='true_false') options=`<div class="teacher-review-options"><span class="teacher-review-option ${a?.value==='সত্য'?(a.correct?'picked-correct':'picked-wrong'):''}">সত্য</span><span class="teacher-review-option ${a?.value==='মিথ্যা'?(a.correct?'picked-correct':'picked-wrong'):''}">মিথ্যা</span></div>`;
-    return `<article class="question-edit-card ${status}" data-index="${i}">
-      <div class="question-edit-main">
-        <div class="question-edit-title"><span class="q-index">${i+1}</span><span class="q-type">${esc(typeNames[q.type]||q.type)}</span><h4>${esc(q.question)}</h4></div>
-        ${options}
-        <div class="teacher-answer-lines"><div><small>Your Answer</small><b>${esc(studentAnswer)}</b></div><div><small>Correct / Model Answer</small><b>${esc(q.answer||'—')}</b></div></div>
-      </div>
-      <div class="question-mark-control">
-        <button type="button" class="question-edit-toggle" data-edit="${i}">Edit</button>
-        <label>Marks</label>
-        <div class="mark-editor"><input class="question-mark-input" data-mark="${i}" type="number" min="0" max="${max}" step="0.5" value="${current}" disabled><span>/ ${max}</span></div>
-        <strong class="question-status ${status}">${status==='correct'?'✓ Correct':status==='wrong'?'✕ Wrong':'— Not Answered'}</strong>
-      </div>
-    </article>`;
-  }).join('');
-
-  qList.querySelectorAll('.question-edit-toggle').forEach(btn=>btn.addEventListener('click',()=>{
-    const i=Number(btn.dataset.edit),input=qList.querySelector(`[data-mark="${i}"]`);
-    if(!input)return;
-    input.disabled=false;input.focus();input.select();btn.textContent='Editing';btn.classList.add('editing');
-  }));
-
-  qList.querySelectorAll('.question-mark-input').forEach(input=>input.addEventListener('input',updateSummary));
-  updateSummary();
-  document.getElementById('saveResult').onclick=save;
-
-  function getMarks(){return qs.map((q,i)=>{const max=Number(q.marks||1);const raw=Number(qList.querySelector(`[data-mark="${i}"]`)?.value);return Math.min(Math.max(Number.isFinite(raw)?raw:0,0),max);});}
-  function updateSummary(){
-    const marks=getMarks(),total=qs.reduce((s,q)=>s+Number(q.marks||1),0),obt=marks.reduce((s,m)=>s+m,0),pct=total?Math.round(obt/total*100):0;
-    document.getElementById('totalMarksView').textContent=total;
-    document.getElementById('obtainedMarksView').textContent=Number.isInteger(obt)?obt:obt.toFixed(1);
-    document.getElementById('percentageView').textContent=pct+'%';
+let r=null;
+try{
+  const {data:{user}}=await window.supabaseClient.auth.getUser();
+  if(!user){area.innerHTML='<div class="empty-history"><h3>Teacher account পাওয়া যায়নি</h3><a class="primary" href="teacher-profile.html">Teacher Profile</a></div>';return;}
+  const {data,error}=await window.supabaseClient.from('teacher_exam_results').select('*').eq('result_id',wanted).eq('teacher_user_id',user.id).maybeSingle();
+  if(error) throw error;
+  if(data){
+    r=data.result&&typeof data.result==='object'?{...data.result}:{};
+    r.id=data.result_id;r.studentName=data.student_name||r.studentName||r.student?.name||'Student';r.student=r.student||{};r.student.name=r.studentName;r.student_user_id=data.student_user_id;r.teacher_user_id=data.teacher_user_id;
   }
-  async function save(){
-    const idx=results.findIndex(x=>x.id===wanted);if(idx<0)return;
-    const rr=results[idx],qs2=rr.questions||[],marks=getMarks();
-    const total=qs2.reduce((s,q)=>s+Number(q.marks||1),0),obt=marks.reduce((s,m)=>s+m,0),pct=total?Math.round(obt/total*100):0;
-    rr.awardedMarks=marks;rr.obtained=obt;rr.totalMarks=total;rr.percentage=pct;
-    rr.grade=pct>=90?'A+':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=40?'D':'F';
-    localStorage.setItem('teacherResults',JSON.stringify(results));
-    try{
-      await window.smartEduAuth.updateExamResult(rr);
-      // Student's phone reads the same cloud row, so the edited marks sync across devices.
-    }catch(e){
-      console.error('Cloud result update failed:',e);
-      document.getElementById('saveMsg').textContent='Cloud save failed: '+(e?.message||e);
-      return;
-    }
-    document.getElementById('saveMsg').textContent='✓ Result saved successfully.';
-    updateSummary();
-  }
+}catch(e){console.error('Cloud result load failed:',e);}
+if(!r){
+  try{const results=JSON.parse(localStorage.getItem('teacherResults')||'[]');r=results.find(x=>x.id===wanted)||null;}catch{}
 }
-(async()=>{
-  try{ results=JSON.parse(localStorage.getItem('teacherResults')||'[]'); }catch{}
-  try{ const cloud=await window.smartEduAuth.getTeacherResults(); results=[...results.filter(x=>!cloud.some(c=>c.id===x.id)),...cloud]; }catch(e){ console.warn('Cloud result load failed:',e); }
-  r=results.find(x=>x.id===wanted); renderEdit();
+if(!r){area.innerHTML='<div class="empty-history"><h3>Result পাওয়া যায়নি</h3><a class="primary" href="teacher-profile.html">Teacher Profile</a></div>';return;}
+const qs=r.questions||[],ans=r.answers||{};
+const awarded=Array.isArray(r.awardedMarks)?r.awardedMarks:qs.map((q,i)=>ans[i]?.correct?Number(q.marks||1):0);
+const maxMarks=qs.map(q=>Number(q.marks||1));
+area.innerHTML=`<div class="edit-result-card"><div class="result-student-head"><div><p class="eyebrow">EDIT STUDENT RESULT</p><h2>${esc(r.student?.name||r.studentName||'Student')}</h2><p class="muted">${esc(r.student?.id||r.student_user_id||'')} • ${esc(r.title||'Question Paper')}</p></div><a class="outline" href="teacher-student-result.html?resultId=${encodeURIComponent(r.id)}">Preview Answers</a></div><div class="teacher-edit-summary"><div><span>Total Questions</span><b>${qs.length}</b></div><div><span>Total Marks</span><b id="totalMarksView">0</b></div><div><span>Obtained Marks</span><b id="obtainedMarksView">0</b></div><div><span>Percentage</span><b id="percentageView">0%</b></div></div><div class="teacher-edit-head"><div><p class="eyebrow">QUESTION REVIEW</p><h3>Student Answers & Marks</h3></div><span class="muted">প্রত্যেক প্রশ্নের Marks Edit করা যাবে</span></div><div id="questionEditList" class="question-edit-list"></div><div class="edit-save-row"><button id="saveResult" class="primary">Save All Marks</button><a class="outline" href="teacher-profile.html">Back to Teacher Profile</a><p id="saveMsg" class="success-text"></p></div></div>`;
+const qList=document.getElementById('questionEditList');
+qList.innerHTML=qs.map((q,i)=>{const a=ans[i],max=Number(q.marks||1),current=Math.min(Math.max(Number(awarded[i]??0)||0,0),max),status=!a?'unattempted':a.correct?'correct':'wrong';let studentAnswer=a?.value||'Not Answered';if(q.type==='mcq'&&a?.chosen!==undefined)studentAnswer=q.options?.[a.chosen]??studentAnswer;let options='';if(q.type==='mcq')options=`<div class="teacher-review-options">${(q.options||[]).map((o,j)=>{let cls='';if(j===a?.chosen)cls=a.correct?'picked-correct':'picked-wrong';if(o===q.answer)cls+=' model-correct';return `<span class="teacher-review-option ${cls}">${letters[j]||''}) ${esc(o)}</span>`}).join('')}</div>`;else if(q.type==='true_false')options=`<div class="teacher-review-options"><span class="teacher-review-option ${a?.value==='সত্য'?(a.correct?'picked-correct':'picked-wrong'):''}">সত্য</span><span class="teacher-review-option ${a?.value==='মিথ্যা'?(a.correct?'picked-correct':'picked-wrong'):''}">মিথ্যা</span></div>`;return `<article class="question-edit-card ${status}" data-index="${i}"><div class="question-edit-main"><div class="question-edit-title"><span class="q-index">${i+1}</span><span class="q-type">${esc(typeNames[q.type]||q.type)}</span><h4>${esc(q.question)}</h4></div>${options}<div class="teacher-answer-lines"><div><small>Your Answer</small><b>${esc(studentAnswer)}</b></div><div><small>Correct / Model Answer</small><b>${esc(q.answer||'—')}</b></div></div></div><div class="question-mark-control"><button type="button" class="question-edit-toggle" data-edit="${i}">Edit</button><label>Marks</label><div class="mark-editor"><input class="question-mark-input" data-mark="${i}" type="number" min="0" max="${max}" step="0.5" value="${current}" disabled><span>/ ${max}</span></div><strong class="question-status ${status}">${status==='correct'?'✓ Correct':status==='wrong'?'✕ Wrong':'— Not Answered'}</strong></div></article>`;}).join('');
+qList.querySelectorAll('.question-edit-toggle').forEach(btn=>btn.addEventListener('click',()=>{const i=Number(btn.dataset.edit),input=qList.querySelector(`[data-mark="${i}"]`);if(input){input.disabled=false;input.focus();input.select();btn.textContent='Editing';btn.classList.add('editing');}}));
+qList.querySelectorAll('.question-mark-input').forEach(input=>input.addEventListener('input',updateSummary));
+updateSummary();document.getElementById('saveResult').onclick=save;
+function getMarks(){return qs.map((q,i)=>{const max=Number(q.marks||1),raw=Number(qList.querySelector(`[data-mark="${i}"]`)?.value);return Math.min(Math.max(Number.isFinite(raw)?raw:0,0),max);});}
+function updateSummary(){const marks=getMarks(),total=qs.reduce((s,q)=>s+Number(q.marks||1),0),obt=marks.reduce((s,m)=>s+m,0),pct=total?Math.round(obt/total*100):0;document.getElementById('totalMarksView').textContent=total;document.getElementById('obtainedMarksView').textContent=Number.isInteger(obt)?obt:obt.toFixed(1);document.getElementById('percentageView').textContent=pct+'%';}
+async function save(){
+  const qs2=r.questions||[],marks=getMarks(),total=qs2.reduce((s,q)=>s+Number(q.marks||1),0),obt=marks.reduce((s,m)=>s+m,0),pct=total?Math.round(obt/total*100):0;
+  const grade=pct>=90?'A+':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=40?'D':'F';
+  r.awardedMarks=marks;r.obtained=obt;r.totalMarks=total;r.percentage=pct;r.grade=grade;
+  try{
+    const {data:{user}}=await window.supabaseClient.auth.getUser();
+    if(!user) throw new Error('Teacher session পাওয়া যায়নি');
+    const {data,error}=await window.supabaseClient.from('teacher_exam_results').update({student_name:r.studentName||r.student?.name||'Student',result:r,updated_at:new Date().toISOString()}).eq('result_id',wanted).eq('teacher_user_id',user.id).select().single();
+    if(error) throw error;
+    const localT=JSON.parse(localStorage.getItem('teacherResults')||'[]');const ti=localT.findIndex(x=>x.id===wanted);if(ti>=0){localT[ti]=r;localStorage.setItem('teacherResults',JSON.stringify(localT));}
+    const localS=JSON.parse(localStorage.getItem('studentResults')||'[]');const si=localS.findIndex(x=>x.id===wanted);if(si>=0){localS[si]={...localS[si],...r};localStorage.setItem('studentResults',JSON.stringify(localS));}
+    document.getElementById('saveMsg').textContent='✓ Result saved to cloud successfully.';updateSummary();
+  }catch(e){console.error(e);document.getElementById('saveMsg').textContent='Save failed: '+(e.message||e);}
+}
 })();
-
 </script></body></html>

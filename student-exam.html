@@ -184,21 +184,55 @@ async function finish(){
   const totalMarks=data.questions.reduce((s,q)=>s+Number(q.marks||1),0);
   const obtained=Object.entries(answers).reduce((s,[i,a])=>s+(a.correct?Number(data.questions[i].marks||1):0),0);
   const percentage=totalMarks?Math.round(obtained/totalMarks*100):0;
-  let student={};
-  try{student=JSON.parse(localStorage.getItem('studentProfile')||'{}')}catch{}
-  try{const p=await window.smartEduAuth?.profile();if(p?.name)student={...student,name:p.name};}catch(e){console.warn('Profile load:',e)}
-  try{const u=await window.smartEduAuth?.user();if(u?.id)student={...student,id:u.id};}catch(e){console.warn('User load:',e)}
-  const teacher= data.teacher || data.teacher_name || data.target || 'Teacher';
-  const result={id:'result-'+Date.now(),paperId:data.id||('paper-'+(data.password||data.access_code||'')),paperPassword:data.password||data.access_code||'',teacher,teacherId:data.teacherId||'',teacherUserId:data.teacher_user_id||data.teacherUserId||'',student:{name:student.name||'Student',id:student.id||''},studentName:student.name||'Student',title:data.name||data.title||'Practice Result',school:data.school_name||data.target||'',subject:data.subject_name||'',correct,total:data.questions.length,attempted,wrong:Math.max(0,attempted-correct),unattempted:Math.max(0,data.questions.length-attempted),obtained,totalMarks,percentage,date:new Date().toISOString(),answers,questions:data.questions};
-  const history=JSON.parse(localStorage.getItem('studentResults')||'[]');history.unshift(result);localStorage.setItem('studentResults',JSON.stringify(history));
-  const teacherResults=JSON.parse(localStorage.getItem('teacherResults')||'[]');teacherResults.unshift(result);localStorage.setItem('teacherResults',JSON.stringify(teacherResults));
-  try{
-    await window.smartEduAuth.saveExamResult(result);
-  }catch(e){
-    console.error('Cloud result save failed:',e);
-    alert('Result local-এ save হয়েছে, কিন্তু cloud-এ পাঠানো যায়নি। Supabase teacher_exam_results table/RLS পরীক্ষা করুন।');
+  const studentLocal=JSON.parse(localStorage.getItem('studentProfile')||'{}');
+  let studentProfile={};
+  try{ studentProfile=await smartEduAuth.profile()||{}; }catch(e){ console.warn('Student profile load failed',e); }
+  const user=await smartEduAuth.user();
+  const studentName=studentProfile.name||studentLocal.name||'Student';
+  const studentId=studentLocal.id||studentProfile.phone||user?.id||'';
+  const teacher=data.teacher_name||data.teacher||data.target||'Teacher';
+  const teacherId=data.teacher_user_id||data.teacherId||'';
+  const paperId=data.id||data.paperId||('paper-'+(data.access_code||data.password||''));
+  const accessCode=(data.access_code||data.password||'').toUpperCase();
+  const resultId='result-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+  const result={
+    id:resultId,paperId,paperPassword:accessCode,access_code:accessCode,
+    teacher,teacherId,teacher_user_id:teacherId,
+    student:{name:studentName,id:studentId},studentName,
+    student_user_id:user?.id||'',title:data.name||data.title||'Practice Result',
+    school:data.school_name||data.target||'',subject:data.subject_name||'',
+    correct,total:data.questions.length,attempted,wrong:Math.max(0,attempted-correct),
+    unattempted:Math.max(0,data.questions.length-attempted),obtained,totalMarks,percentage,
+    date:new Date().toISOString(),answers,questions:data.questions,
+    awardedMarks:data.questions.map((q,i)=>answers[i]?.correct?Number(q.marks||1):0)
+  };
+  const history=JSON.parse(localStorage.getItem('studentResults')||'[]');
+  history.unshift(result);localStorage.setItem('studentResults',JSON.stringify(history));
+  const teacherResults=JSON.parse(localStorage.getItem('teacherResults')||'[]');
+  teacherResults.unshift(result);localStorage.setItem('teacherResults',JSON.stringify(teacherResults));
+
+  // Save the same result to Supabase so the teacher can see it on another device.
+  if(window.supabaseClient && user && teacherId){
+    const row={
+      result_id:resultId,
+      paper_id:(typeof paperId==='string' && /^[0-9a-f]{8}-[0-9a-f-]{27,}$/i.test(paperId))?paperId:null,
+      access_code:accessCode||null,
+      teacher_user_id:teacherId,
+      student_user_id:user.id,
+      student_name:studentName,
+      result:result,
+      updated_at:new Date().toISOString()
+    };
+    const {error}=await window.supabaseClient.from('teacher_exam_results').upsert(row,{onConflict:'result_id'});
+    if(error){
+      console.error('Cloud result save failed:',error);
+      alert('Result তৈরি হয়েছে, কিন্তু Teacher-এর কাছে cloud-এ পাঠানো যায়নি। আবার Submit করুন বা Console error দেখুন।');
+    }
+  }else{
+    console.warn('Cloud result not saved: missing Supabase session or teacher_user_id', {user,teacherId});
   }
-  sessionStorage.setItem('examResult',JSON.stringify(result));sessionStorage.removeItem('teacherExam');location.href='student-result.html?resultId='+encodeURIComponent(result.id);
+  sessionStorage.setItem('examResult',JSON.stringify(result));sessionStorage.removeItem('teacherExam');
+  location.href='student-result.html?resultId='+encodeURIComponent(resultId);
 }
 function normalize(v){return String(v||'').trim().toLowerCase().replace(/\s+/g,' ');}
 function startTimer(){clearInterval(timerId);remaining=300;timerId=setInterval(()=>{remaining--;const m=String(Math.floor(remaining/60)).padStart(2,'0'),s=String(remaining%60).padStart(2,'0');document.getElementById('timer').textContent=`${m}:${s}`;if(remaining<=0){clearInterval(timerId);finish();}},1000);}

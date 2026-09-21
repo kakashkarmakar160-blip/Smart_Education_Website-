@@ -62,59 +62,6 @@
       return data;
     },
 
-
-
-  // Cross-device exam result helpers
-  async saveExamResult(result) {
-    const user = await this.user();
-    if (!user) throw new Error("LOGIN_REQUIRED");
-    const studentProfile = await this.profile() || {};
-    const row = {
-      result_id: result.id,
-      paper_id: result.paperId && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(result.paperId) ? result.paperId : null,
-      access_code: result.paperPassword || null,
-      teacher_user_id: result.teacherUserId || null,
-      student_user_id: user.id,
-      student_name: result.studentName || studentProfile.name || user.user_metadata?.display_name || 'Student',
-      result: result,
-      created_at: result.date || new Date().toISOString(),
-      updated_at: new Date().toISOString()
-    };
-    const { data, error } = await window.supabaseClient
-      .from('teacher_exam_results').upsert(row, { onConflict: 'result_id' }).select().single();
-    if (error) throw error;
-    return data;
-  },
-
-  async getTeacherResults() {
-    const user = await this.user();
-    if (!user) return [];
-    const { data, error } = await window.supabaseClient
-      .from('teacher_exam_results').select('*').eq('teacher_user_id', user.id).order('created_at', {ascending:false});
-    if (error) throw error;
-    return (data || []).map(row => ({ ...(row.result || {}), id: row.result_id || row.result?.id, studentName: row.student_name || row.result?.studentName || row.result?.student?.name || 'Student', student: { ...(row.result?.student || {}), name: row.student_name || row.result?.student?.name || 'Student', id: row.student_user_id || row.result?.student?.id || '' }, teacherUserId: row.teacher_user_id, paperId: row.paper_id || row.result?.paperId, paperPassword: row.access_code || row.result?.paperPassword }));
-  },
-
-  async getStudentResults() {
-    const user = await this.user();
-    if (!user) return [];
-    const { data, error } = await window.supabaseClient
-      .from('teacher_exam_results').select('*').eq('student_user_id', user.id).order('updated_at', {ascending:false});
-    if (error) throw error;
-    return (data || []).map(row => ({ ...(row.result || {}), id: row.result_id || row.result?.id, studentName: row.student_name || row.result?.studentName || row.result?.student?.name || 'Student', student: { ...(row.result?.student || {}), name: row.student_name || row.result?.student?.name || 'Student', id: row.student_user_id || row.result?.student?.id || '' }, teacherUserId: row.teacher_user_id, paperId: row.paper_id || row.result?.paperId, paperPassword: row.access_code || row.result?.paperPassword }));
-  },
-
-  async updateExamResult(result) {
-    const user = await this.user();
-    if (!user) throw new Error("LOGIN_REQUIRED");
-    const { data, error } = await window.supabaseClient
-      .from('teacher_exam_results')
-      .update({ result: result, updated_at: new Date().toISOString(), student_name: result.studentName || result.student?.name || 'Student' })
-      .eq('result_id', result.id).eq('teacher_user_id', user.id).select().single();
-    if (error) throw error;
-    return data;
-  },
-
     async signOut() {
       const { error } = await window.supabaseClient.auth.signOut();
       if (error) throw error;

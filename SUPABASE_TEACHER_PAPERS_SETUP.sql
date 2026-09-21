@@ -1,5 +1,4 @@
--- Smart Education: Cross-device Teacher Papers + Student Results
-
+-- Smart Education: Teacher Papers + Cross-device Student Results
 create table if not exists public.teacher_papers (
   id uuid primary key default gen_random_uuid(),
   access_code text not null unique,
@@ -13,7 +12,7 @@ create table if not exists public.teacher_papers (
 
 alter table public.teacher_papers enable row level security;
 drop policy if exists "teacher_papers_insert_own" on public.teacher_papers;
-create policy "teacher_papers_insert_own" on public.teacher_papers for insert to authenticated with check (teacher_user_id = auth.uid());
+create policy "teacher_papers_insert_own" on public.teacher_papers for insert to authenticated with check (teacher_user_id = (select auth.uid()));
 drop policy if exists "teacher_papers_select_authenticated" on public.teacher_papers;
 create policy "teacher_papers_select_authenticated" on public.teacher_papers for select to authenticated using (true);
 grant select, insert on public.teacher_papers to authenticated;
@@ -31,20 +30,14 @@ create table if not exists public.teacher_exam_results (
   updated_at timestamptz not null default now()
 );
 
--- If the table already existed from an earlier version, add the missing name column.
 alter table public.teacher_exam_results add column if not exists student_name text;
-alter table public.teacher_exam_results add column if not exists updated_at timestamptz not null default now();
-alter table public.teacher_exam_results add column if not exists created_at timestamptz not null default now();
-alter table public.teacher_exam_results add column if not exists result jsonb not null default '{}'::jsonb;
-
 alter table public.teacher_exam_results enable row level security;
 drop policy if exists "teacher_exam_results_student_insert" on public.teacher_exam_results;
-create policy "teacher_exam_results_student_insert" on public.teacher_exam_results for insert to authenticated with check (student_user_id = auth.uid());
-drop policy if exists "teacher_exam_results_teacher_select" on public.teacher_exam_results;
-create policy "teacher_exam_results_teacher_select" on public.teacher_exam_results for select to authenticated using (teacher_user_id = auth.uid() or student_user_id = auth.uid());
+create policy "teacher_exam_results_student_insert" on public.teacher_exam_results for insert to authenticated with check (student_user_id = (select auth.uid()));
+drop policy if exists "teacher_exam_results_select" on public.teacher_exam_results;
+create policy "teacher_exam_results_select" on public.teacher_exam_results for select to authenticated using (teacher_user_id = (select auth.uid()) or student_user_id = (select auth.uid()));
 drop policy if exists "teacher_exam_results_teacher_update" on public.teacher_exam_results;
-create policy "teacher_exam_results_teacher_update" on public.teacher_exam_results for update to authenticated using (teacher_user_id = auth.uid()) with check (teacher_user_id = auth.uid());
-
+create policy "teacher_exam_results_teacher_update" on public.teacher_exam_results for update to authenticated using (teacher_user_id = (select auth.uid())) with check (teacher_user_id = (select auth.uid()));
 grant select, insert, update on public.teacher_exam_results to authenticated;
 create index if not exists teacher_exam_results_teacher_idx on public.teacher_exam_results(teacher_user_id);
 create index if not exists teacher_exam_results_student_idx on public.teacher_exam_results(student_user_id);
