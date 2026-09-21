@@ -154,7 +154,8 @@ document.addEventListener('DOMContentLoaded',()=>{
   const allPapers=[...papers];
   if(legacy && !allPapers.some(x=>x.id===legacy.id || x.password===legacy.password)) allPapers.push({...legacy,id:legacy.id||'legacy-'+legacy.password,teacherId:legacy.teacherId||teacherId,teacher:legacy.teacher||teacherName});
   document.getElementById('created').textContent=qs.length; document.getElementById('published').textContent=allPapers.length;
-  const myResults=results.filter(r=>!r.teacherId || r.teacherId===teacherId || r.teacher===teacherName);
+  try{ const cloudResults=await window.smartEduAuth.getTeacherResults(); const byId=new Map(cloudResults.map(r=>[r.id,r])); results=[...results.filter(r=>!byId.has(r.id)),...cloudResults]; localStorage.setItem('teacherResults',JSON.stringify(results)); }catch(e){ console.warn('Cloud teacher results load failed:',e); }
+  const myResults=results.filter(r=>!r.teacherUserId || r.teacherUserId===p.id || !p.id && (!r.teacherId || r.teacherId===teacherId || r.teacher===teacherName));
   document.getElementById('students').textContent=new Set(myResults.map(r=>r.student?.id||r.student?.name||r.studentName)).size;
   const list=document.getElementById('paperList'), esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   if(!allPapers.length){

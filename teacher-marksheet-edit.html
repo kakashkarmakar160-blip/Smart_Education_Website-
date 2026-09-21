@@ -149,17 +149,17 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 </script><script data-internal-js="js/teacher-marksheet-edit.js">
 const wanted=new URLSearchParams(location.search).get('resultId');
-const results=JSON.parse(localStorage.getItem('teacherResults')||'[]');
+let results=[];
 const area=document.getElementById('editArea');
-const r=results.find(x=>x.id===wanted);
+let r=null;
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const typeNames={mcq:'MCQ',long:'Long Question',fill_blank:'Fill in the Blanks',paragraph:'Paragraph Writing',true_false:'True / False',match:'Match the Following'};
 const letters=['A','B','C','D'];
 
-if(!r){
-  area.innerHTML='<div class="empty-history"><h3>Result পাওয়া যায়নি</h3><a class="primary" href="teacher-profile.html">Teacher Profile</a></div>';
-}else{
+function renderEdit(){
+if(!r){ area.innerHTML='<div class="empty-history"><h3>Result পাওয়া যায়নি</h3><a class="primary" href="teacher-profile.html">Teacher Profile</a></div>'; return; }
+
   const qs=r.questions||[];
   const ans=r.answers||{};
   const awarded=Array.isArray(r.awardedMarks)?r.awardedMarks:qs.map((q,i)=>ans[i]?.correct?Number(q.marks||1):0);
@@ -238,19 +238,29 @@ if(!r){
     document.getElementById('obtainedMarksView').textContent=Number.isInteger(obt)?obt:obt.toFixed(1);
     document.getElementById('percentageView').textContent=pct+'%';
   }
-  function save(){
+  async function save(){
     const idx=results.findIndex(x=>x.id===wanted);if(idx<0)return;
     const rr=results[idx],qs2=rr.questions||[],marks=getMarks();
     const total=qs2.reduce((s,q)=>s+Number(q.marks||1),0),obt=marks.reduce((s,m)=>s+m,0),pct=total?Math.round(obt/total*100):0;
     rr.awardedMarks=marks;rr.obtained=obt;rr.totalMarks=total;rr.percentage=pct;
     rr.grade=pct>=90?'A+':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=40?'D':'F';
     localStorage.setItem('teacherResults',JSON.stringify(results));
-    const sr=JSON.parse(localStorage.getItem('studentResults')||'[]');
-    const si=sr.findIndex(x=>x.id===wanted);
-    if(si>=0){sr[si]={...sr[si],awardedMarks:marks,obtained:obt,totalMarks:total,percentage:pct,grade:rr.grade};localStorage.setItem('studentResults',JSON.stringify(sr));}
+    try{
+      await window.smartEduAuth.updateExamResult(rr);
+      // Student's phone reads the same cloud row, so the edited marks sync across devices.
+    }catch(e){
+      console.error('Cloud result update failed:',e);
+      document.getElementById('saveMsg').textContent='Cloud save failed: '+(e?.message||e);
+      return;
+    }
     document.getElementById('saveMsg').textContent='✓ Result saved successfully.';
     updateSummary();
   }
 }
+(async()=>{
+  try{ results=JSON.parse(localStorage.getItem('teacherResults')||'[]'); }catch{}
+  try{ const cloud=await window.smartEduAuth.getTeacherResults(); results=[...results.filter(x=>!cloud.some(c=>c.id===x.id)),...cloud]; }catch(e){ console.warn('Cloud result load failed:',e); }
+  r=results.find(x=>x.id===wanted); renderEdit();
+})();
 
 </script></body></html>

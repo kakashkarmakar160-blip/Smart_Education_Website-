@@ -126,12 +126,19 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 </script><script data-internal-js="js/student-result.js">
 const id=new URLSearchParams(location.search).get('resultId');
-const all=JSON.parse(localStorage.getItem('studentResults')||'[]');
-let r=(id&&all.find(x=>x.id===id))||JSON.parse(sessionStorage.getItem('examResult')||'{}');
+let all=[]; let r=null;
+(async()=>{
+  try{all=JSON.parse(localStorage.getItem('studentResults')||'[]');}catch{}
+  try{const cloud=await window.smartEduAuth.getStudentResults(); all=[...all.filter(x=>!cloud.some(c=>c.id===x.id)),...cloud]; localStorage.setItem('studentResults',JSON.stringify(all));}catch(e){console.warn('Cloud student results load failed:',e);}
+  r=(id&&all.find(x=>x.id===id))||JSON.parse(sessionStorage.getItem('examResult')||'{}');
+  renderStudentResult(r);
+})();
+function renderStudentResult(r){
 const total=Number(r.total)||0,correct=Number(r.correct)||0,attempted=Number(r.attempted)||0,wrong=Number(r.wrong??Math.max(0,attempted-correct)),unattempted=Number(r.unattempted??Math.max(0,total-attempted));
 const totalMarks=Number(r.totalMarks)||total,obtained=Number(r.obtained)||0,pct=Number(r.percentage??(totalMarks?Math.round(obtained/totalMarks*100):0));
 document.getElementById('resultTitle').textContent=r.title||'Practice Result';document.getElementById('resultMeta').textContent=[r.school,r.subject,r.teacher].filter(Boolean).join(' • ');document.getElementById('ring').textContent=pct+'%';document.getElementById('ring').style.background=`conic-gradient(var(--primary) ${pct*3.6}deg,var(--soft) ${pct*3.6}deg)`;const grade=pct>=90?'A+':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=40?'D':'F';document.getElementById('grade').textContent=grade;document.getElementById('performance').textContent=pct>=80?'Excellent!':pct>=50?'Good Job!':'Keep Practising';document.getElementById('total').textContent=totalMarks;document.getElementById('obtained').textContent=obtained;document.getElementById('percentage').textContent=pct+'%';document.getElementById('correct').textContent=correct;document.getElementById('wrong').textContent=wrong;document.getElementById('unattempted').textContent=unattempted;
 const main=document.querySelector('.role-wrap');let review=document.getElementById('resultReview');if(!review){review=document.createElement('section');review.id='resultReview';review.className='history-card';main.appendChild(review);}const qs=r.questions||[];const ans=r.answers||{};const awarded=Array.isArray(r.awardedMarks)?r.awardedMarks:qs.map((q,i)=>ans[i]?.correct?Number(q.marks||1):0);review.innerHTML=`<div class="section-head"><div><p class="eyebrow">QUESTION REVIEW</p><h2>Answer Review</h2></div><span class="muted">Student view • Read only</span></div>${qs.length?qs.map((q,i)=>{const a=ans[i],ok=a?.correct;let given=a?.value||'Not answered';return `<article class="review-q"><div><b>${i+1}. ${escapeHtml(q.question)}</b><p>Your Answer: <span class="${ok?'review-good':'review-bad'}">${escapeHtml(given)}</span></p>${q.type==='mcq'?`<p>Correct Answer: <span class="review-answer">${escapeHtml(q.answer||'')}</span></p>`:''}</div><div class="review-mark">Marks: ${Number(awarded[i]||0)}/${Number(q.marks||1)}</div><strong class="review-status ${!a?'no':ok?'ok':'no'}">${!a?'— Not Answered':ok?'✓ Correct':'✕ Incorrect'}</strong></article>`}).join(''):'<p class="muted">Detailed review data is not available for this result.</p>'}`;
 function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+}
 
 </script></body></html>

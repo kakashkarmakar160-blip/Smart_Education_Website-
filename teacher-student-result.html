@@ -125,11 +125,13 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 </script><script data-internal-js="js/teacher-student-result.js">
 const wanted=new URLSearchParams(location.search).get('resultId');
-const results=JSON.parse(localStorage.getItem('teacherResults')||'[]');
-const r=results.find(x=>x.id===wanted);
+let results=[]; let r=null;
+try{results=JSON.parse(localStorage.getItem('teacherResults')||'[]');}catch{}
+(async()=>{ try{const cloud=await window.smartEduAuth.getTeacherResults(); results=[...results.filter(x=>!cloud.some(c=>c.id===x.id)),...cloud]; r=results.find(x=>x.id===wanted); if(r){ renderResult(r); } else { renderMissing(); } }catch(e){ console.warn(e); if(!r) renderMissing(); } })();
 const head=document.getElementById('resultHead'),list=document.getElementById('answerList');
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-if(!r){head.innerHTML='<div><p class="eyebrow">RESULT PREVIEW</p><h1>Result পাওয়া যায়নি</h1></div>';list.innerHTML='<div class="card">এই result-এর data পাওয়া যায়নি।</div>';}else{
+function renderMissing(){head.innerHTML='<div><p class="eyebrow">RESULT PREVIEW</p><h1>Result পাওয়া যায়নি</h1></div>';list.innerHTML='<div class="card">এই result-এর data পাওয়া যায়নি।</div>';}
+function renderResult(r){
  const name=esc(r.student?.name||r.studentName||'Student');
  head.innerHTML=`<div><p class="eyebrow">STUDENT ANSWER REVIEW</p><h1>${name}</h1><p class="muted">${esc(r.title||'Question Paper')} • ${esc(r.subject||'')} • ${r.obtained||0}/${r.totalMarks||0} • ${r.percentage||0}%</p></div><div class="preview-actions"><a class="outline" href="teacher-profile.html">Back to Profile</a><a class="primary" href="teacher-marksheet-edit.html?resultId=${encodeURIComponent(r.id)}">Edit Marks</a></div>`;
  const qs=r.questions||[]; const ans=r.answers||{}; const awarded=Array.isArray(r.awardedMarks)?r.awardedMarks:qs.map((q,i)=>ans[i]?.correct?Number(q.marks||1):0);
