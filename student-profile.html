@@ -32,136 +32,30 @@ function escapeHtml(s){
   return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 }
 
-async function loadJSON(path){
-  const candidates=[path];
-  if(location.pathname.includes('/frontend/')) candidates.push('../'+path);
-  let last;
-  for(const candidate of candidates){try{const r=await fetch(candidate,{cache:'no-store'});if(r.ok)return await r.json();last=new Error('HTTP '+r.status+' '+candidate)}catch(e){last=e}}
-  throw last||new Error('Cannot load '+path);
-}
-
-function params(){ return new URLSearchParams(location.search); }
-
-async function initRoles(){
-  const grid=document.getElementById('roleGrid');
-  if(!grid) return;
-  const roles=await loadJSON('data/roles.json');
-  const html=roles.map(r=>`
-    <button class="role-card" data-role="${r.id}" type="button">
-      <img src="${r.image}" alt="${escapeHtml(r.name)}">
-      <div><h3>${escapeHtml(r.name)}</h3><p>${escapeHtml(r.description)}</p></div>
-      <span>→</span>
-    </button>`).join('');
-  grid.innerHTML=html;
-  document.querySelectorAll('.role-card').forEach(b=>{
-    b.addEventListener('click',()=>location.href=roleTarget(b.dataset.role));
-  });
-}
-
-function bindGlobal(){
-  applyTheme();
-
-  document.querySelectorAll('#themeBtn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      localStorage.setItem(THEME_KEY, localStorage.getItem(THEME_KEY)==='dark'?'light':'dark');
-      applyTheme();
-    });
-  });
-
-  document.getElementById('profileBtn')?.addEventListener('click',()=>location.href='profile.html');
-
-  // Any avatar that is not already a link works as the profile button.
-  document.querySelectorAll('.avatar:not(a)').forEach(a=>{
-    if(a.id==='profileBtn') return;
-    a.setAttribute('role','button');
-    a.setAttribute('tabindex','0');
-    a.addEventListener('click',()=>location.href='profile.html');
-    a.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')location.href='profile.html';});
-  });
-
-  // The purple logo is now the switch for the two question-edit pages.
-  const pageMenu=document.getElementById('pageMenu');
-  const pagePasswordModal=document.getElementById('pagePasswordModal');
-  const pagePassword=document.getElementById('pagePassword');
-  const pagePasswordMsg=document.getElementById('pagePasswordMsg');
-  let pendingPage='';
-  document.getElementById('pageSwitchBtn')?.addEventListener('click',()=>{
-    pageMenu?.classList.remove('hidden');
-  });
-  document.getElementById('closePageMenu')?.addEventListener('click',()=>pageMenu?.classList.add('hidden'));
-  document.getElementById('closePagePassword')?.addEventListener('click',()=>pagePasswordModal?.classList.add('hidden'));
-  function openPagePassword(page){
-    pendingPage=page;
-    if(pagePassword){pagePassword.value='';pagePassword.focus();}
-    if(pagePasswordMsg)pagePasswordMsg.textContent='';
-    pagePasswordModal?.classList.remove('hidden');
-    pageMenu?.classList.add('hidden');
-  }
-  document.getElementById('addPage1Btn')?.addEventListener('click',()=>openPagePassword('1'));
-  document.getElementById('addPage2Btn')?.addEventListener('click',()=>openPagePassword('2'));
-  function unlockSelectedPage(){
-    if(pagePassword?.value==='AK1234'){
-      if(pendingPage==='1'){
-        sessionStorage.setItem('computerEditorUnlocked','1');
-        location.href='computer-question-paper.html';
-      }else if(pendingPage==='2'){
-        sessionStorage.setItem('practiceEditorUnlocked','1');
-        location.href='practice-question-paper.html?class=5&semester=1&subject=bangla';
-      }
-    }else if(pagePasswordMsg){
-      pagePasswordMsg.textContent='this is wrong password';
-    }
-  }
-  document.getElementById('unlockPage')?.addEventListener('click',unlockSelectedPage);
-  pagePassword?.addEventListener('keydown',e=>{if(e.key==='Enter')unlockSelectedPage()});
-
-  document.getElementById('closeProfilePanel')?.addEventListener('click',()=>{
-    document.getElementById('profilePanel')?.classList.add('hidden');
-  });
-  document.querySelectorAll('.side-overlay').forEach(x=>x.addEventListener('click',e=>{
-    if(e.target===x)x.classList.add('hidden');
-  }));
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-  bindGlobal();
-  initRoles().catch(console.error);
-});
-
-</script><script data-internal-js="js/student-profile.js">
-
-(async function(){
+async function loadStudentResults(){
   const nameEl=document.getElementById('name'), metaEl=document.getElementById('meta'), list=document.getElementById('resultList');
+  let results=[];
   try{
-    const user=await smartEduAuth.user();
-    if(!user){
-      nameEl.textContent='Login required';
-      metaEl.textContent='Supabase account দিয়ে login করো';
-      list.innerHTML='<div class="empty-history"><div>🔐</div><h3>Student Profile দেখতে Login করো</h3><p>তোমার profile এখন Supabase-এ নিরাপদে সংরক্ষিত থাকবে।</p><a class="primary" href="auth.html?role=student&next=student-profile.html">Login / Sign Up →</a></div>';
-      return;
+    const {data:{user}}=await window.supabaseClient.auth.getUser();
+    if(user){
+      const {data,error}=await window.supabaseClient.from('teacher_exam_results').select('*').eq('student_user_id',user.id).order('created_at',{ascending:false});
+      if(error) throw error;
+      results=(data||[]).map(row=>{const r=row.result&&typeof row.result==='object'?{...row.result}:{};r.id=row.result_id;r.studentName=row.student_name||r.studentName||r.student?.name||'Student';r.student=r.student||{};r.student.name=r.studentName;r.student_user_id=row.student_user_id;r.teacher_user_id=row.teacher_user_id;r.access_code=row.access_code||r.access_code;r.paperId=row.paper_id||r.paperId;return r;});
+      localStorage.setItem('studentResults',JSON.stringify(results));
     }
-    const p=await smartEduAuth.profile() || {};
-    nameEl.textContent=p.name||user.email||'Student';
-    metaEl.textContent=[p.class_name,p.semester].filter(Boolean).join(' • ') || (user.email||'');
-    const initials=String(p.name||user.email||'AK').trim().split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();
-    document.getElementById('studentAvatar').textContent=initials||'AK';
-  }catch(e){ console.error(e); nameEl.textContent='Profile load failed'; }
-
-  let results=[]; try{results=JSON.parse(localStorage.getItem('studentResults')||'[]')}catch{}
-  function grade(pct){return pct>=90?'A+':pct>=80?'A':pct>=70?'B':pct>=60?'C':pct>=40?'D':'F';}
-  function gradeClass(g){return g.startsWith('A')?'a':g==='B'?'b':g==='C'?'c':'d';}
-  if(!results.length){
-    if(list.innerHTML.includes('Login / Sign Up')) return;
-    list.innerHTML='<div class="empty-history"><div>📊</div><h3>No exam result yet</h3><p>কোনো Teacher Paper/Practice শেষ করলে তার Result এখানে দেখা যাবে।</p><a class="primary" href="student-paper.html">Start Practice →</a></div>';
-  }else{
-    list.innerHTML=results.map(r=>{
-      const pct=Number(r.percentage)||0,g=r.grade||grade(pct),date=r.date?new Date(r.date).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
-      const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-      return `<article class="result-row"><div class="result-icon">${esc((r.subject||'EX').slice(0,2).toUpperCase())}</div><div class="result-main"><h3>${esc(r.title||'Exam Result')}</h3><p>${esc(r.subject||'')} ${r.teacher?'• '+esc(r.teacher):''} ${date?'• '+date:''}</p><div class="result-bar"><span style="width:${Math.min(100,Math.max(0,pct))}%"></span></div></div><div class="result-score"><b>${Number(r.obtained)||0}/${Number(r.totalMarks)||Number(r.total)||0}</b><span>${pct}%</span></div><div class="grade-badge ${gradeClass(g)}">${esc(g)}</div><a class="preview-btn" href="student-result.html?resultId=${encodeURIComponent(r.id)}">Preview</a></article>`;
-    }).join('');
-  }
-  const count=results.length,total=results.reduce((s,r)=>s+(Number(r.obtained)||0),0),avg=count?Math.round(results.reduce((s,r)=>s+(Number(r.percentage)||0),0)/count):0;
-  document.getElementById('paperCount').textContent=count; document.getElementById('totalScore').textContent=total; document.getElementById('avgScore').textContent=avg+'%';
-})();
-
-</script></body></html>
+  }catch(e){console.error('Cloud student results load failed:',e);}
+  if(!results.length){try{results=JSON.parse(localStorage.getItem('studentResults')||'[]')}catch{results=[]}}
+  const profile=await smartEduAuth.profile().catch(()=>null);
+  const localProfile=JSON.parse(localStorage.getItem('studentProfile')||'{}');
+  const user=await smartEduAuth.user().catch(()=>null);
+  const nm=profile?.name||localProfile.name||user?.user_metadata?.display_name||localStorage.getItem('smartEduUserName')||'Student';
+  nameEl.textContent=nm;
+  metaEl.textContent=[profile?.class_name||localProfile.className,profile?.semester||localProfile.semester].filter(Boolean).join(' • ')||'Student';
+  document.getElementById('studentAvatar').textContent=nm.trim().split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase()||'ST';
+  if(!results.length){list.innerHTML='<div class="empty-history"><div>📊</div><h3>No exam result yet</h3><p>কোনো Teacher Paper শেষ করলে Result এখানে দেখা যাবে।</p><a class="primary" href="student-paper.html">Open Teacher Paper →</a></div>';document.getElementById('paperCount').textContent='0';document.getElementById('totalScore').textContent='0';document.getElementById('avgScore').textContent='0%';return;}
+  const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  list.innerHTML=results.map(r=>{const pct=Number(r.percentage)||0;const g=String(r.grade||'F');const gc=g.toLowerCase().startsWith('a')?'a':g.toLowerCase().startsWith('b')?'b':g.toLowerCase().startsWith('c')?'c':'d';const date=r.date?new Date(r.date).toLocaleDateString('en-IN'):'';return `<article class="result-row"><div class="result-icon">${esc((r.subject||'EX').slice(0,2).toUpperCase())}</div><div class="result-main"><h3>${esc(r.title||'Exam Result')}</h3><p>${esc(r.subject||'')} ${r.teacher?'• '+esc(r.teacher):''} ${date?'• '+date:''}</p><div class="result-bar"><span style="width:${Math.min(100,Math.max(0,pct))}%"></span></div></div><div class="result-score"><b>${Number(r.obtained)||0}/${Number(r.totalMarks)||Number(r.total)||0}</b><span>${pct}%</span></div><div class="grade-badge ${gc}">${esc(g)}</div><a class="preview-btn" href="student-result.html?resultId=${encodeURIComponent(r.id)}">Preview</a></article>`;}).join('');
+  const count=results.length,total=results.reduce((s,r)=>s+(Number(r.obtained)||0),0),avg=Math.round(results.reduce((s,r)=>s+(Number(r.percentage)||0),0)/count);
+  document.getElementById('paperCount').textContent=count;document.getElementById('totalScore').textContent=total;document.getElementById('avgScore').textContent=avg+'%';
+}
+loadStudentResults().catch(console.error);</script></body></html>

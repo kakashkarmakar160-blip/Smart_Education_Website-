@@ -43,3 +43,18 @@ create index if not exists teacher_exam_results_teacher_idx on public.teacher_ex
 create index if not exists teacher_exam_results_student_idx on public.teacher_exam_results(student_user_id);
 create index if not exists teacher_exam_results_paper_idx on public.teacher_exam_results(paper_id);
 create index if not exists teacher_exam_results_code_idx on public.teacher_exam_results(access_code);
+
+
+-- DELETE POLICIES: teacher can delete only their own papers/results
+drop policy if exists "teacher_papers_delete_own" on public.teacher_papers;
+create policy "teacher_papers_delete_own" on public.teacher_papers
+for delete to authenticated
+using ((select auth.uid()) = teacher_user_id);
+
+drop policy if exists "teacher_exam_results_teacher_delete" on public.teacher_exam_results;
+create policy "teacher_exam_results_teacher_delete" on public.teacher_exam_results
+for delete to authenticated
+using ((select auth.uid()) = teacher_user_id);
+
+grant delete on public.teacher_papers to authenticated;
+grant delete on public.teacher_exam_results to authenticated;

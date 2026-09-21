@@ -199,9 +199,30 @@ document.addEventListener('DOMContentLoaded',()=>{
     return `<article class="teacher-paper"><div class="paper-title"><div class="paper-icon">📚</div><div><h3>${esc(paper.name||'Question Paper')}</h3><p>${esc(paper.target||paper.teacher_name||'')} • ${(paper.questions||[]).length} Questions • Code: <b>${esc(code)}</b></p></div></div><div class="paper-stats"><span><b>${prs.length}</b> Exams</span><span><b>${(paper.questions||[]).length}</b> Questions</span><span><b>${paper.published_at?new Date(paper.published_at).toLocaleDateString('en-IN'):''}</b></span></div><div class="student-results">${prs.length?prs.map(r=>`<div class="student-result-row"><div><b>${esc(r.student?.name||r.studentName||'Student')}</b><small>${esc(r.student?.id||r.student_user_id||'')} • ${esc(r.subject||'')}</small></div><span class="score-pill">${Number(r.obtained)||0}/${Number(r.totalMarks)||0} • ${Number(r.percentage)||0}%</span><a class="preview-btn" href="teacher-student-result.html?resultId=${encodeURIComponent(r.id)}">Preview</a><a class="preview-btn edit-result-btn" href="teacher-marksheet-edit.html?resultId=${encodeURIComponent(r.id)}">Edit</a></div>`).join(''):'<div class="no-students">এখনও কোনো student এই paper-এ exam দেয়নি।</div>'}</div></article>`;
   }).join('');
 
-  document.getElementById('deleteAllQuestions')?.addEventListener('click',()=>{
-    if(!confirm('তুমি কি নিশ্চিত? Teacher-এর তৈরি করা সব প্রশ্ন এবং published paper একেবারে মুছে যাবে। এই কাজটি Undo করা যাবে না.'))return;
-    localStorage.removeItem('teacherQuestions');localStorage.removeItem('teacherPublishedPapers');localStorage.removeItem('publishedSet');localStorage.removeItem('teacherDraftMeta');localStorage.removeItem('teacherSetName');location.reload();
+  document.getElementById('deleteAllQuestions')?.addEventListener('click',async()=>{
+    if(!confirm('তুমি কি নিশ্চিত? Teacher-এর তৈরি করা সব published paper এবং ওই paper-এর result-সহ সব cloud data মুছে যাবে। এই কাজটি Undo করা যাবে না।'))return;
+    const btn=document.getElementById('deleteAllQuestions');
+    if(btn){btn.disabled=true;btn.textContent='Deleting…';}
+    try{
+      const {data:{user}}=await window.supabaseClient.auth.getUser();
+      if(!user) throw new Error('Teacher session পাওয়া যায়নি।');
+      const {data:papers,error:paperError}=await window.supabaseClient.from('teacher_papers').select('id').eq('teacher_user_id',user.id);
+      if(paperError) throw paperError;
+      const ids=(papers||[]).map(p=>p.id).filter(Boolean);
+      if(ids.length){
+        const {error:resultError}=await window.supabaseClient.from('teacher_exam_results').delete().in('paper_id',ids);
+        if(resultError) throw resultError;
+      }
+      const {error:deletePaperError}=await window.supabaseClient.from('teacher_papers').delete().eq('teacher_user_id',user.id);
+      if(deletePaperError) throw deletePaperError;
+      localStorage.removeItem('teacherQuestions');localStorage.removeItem('teacherPublishedPapers');localStorage.removeItem('publishedSet');localStorage.removeItem('teacherDraftMeta');localStorage.removeItem('teacherSetName');localStorage.removeItem('teacherResults');
+      alert('✓ সব created question, published paper এবং সংশ্লিষ্ট result মুছে ফেলা হয়েছে।');
+      location.reload();
+    }catch(e){
+      console.error('Delete all failed:',e);
+      alert('Delete করা যায়নি: '+(e.message||e));
+      if(btn){btn.disabled=false;btn.textContent='Delete All Questions';}
+    }
   });
 })();
 </script></body></html>
