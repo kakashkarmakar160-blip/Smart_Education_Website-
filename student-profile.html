@@ -38,10 +38,19 @@ async function loadStudentResults(){
   try{
     const {data:{user}}=await window.supabaseClient.auth.getUser();
     if(user){
-      const {data,error}=await window.supabaseClient.from('teacher_exam_results').select('*').eq('student_user_id',user.id).order('created_at',{ascending:false});
+      let data,error;
+      ({data,error}=await window.supabaseClient.from('student_results').select('*').eq('student_user_id',user.id).order('created_at',{ascending:false}));
       if(error) throw error;
-      results=(data||[]).map(row=>{const r=row.result&&typeof row.result==='object'?{...row.result}:{};r.id=row.result_id;r.studentName=row.student_name||r.studentName||r.student?.name||'Student';r.student=r.student||{};r.student.name=r.studentName;r.student_user_id=row.student_user_id;r.teacher_user_id=row.teacher_user_id;r.access_code=row.access_code||r.access_code;r.paperId=row.paper_id||r.paperId;return r;});
+      results=(data||[]).map(row=>{const r=row.result&&typeof row.result==='object'?{...row.result}:{};r.id=row.result_id||r.id;r.studentName=row.student_name||r.studentName||r.student?.name||'Student';r.student=r.student||{};r.student.name=r.studentName;r.student_user_id=row.student_user_id;r.teacher_user_id=row.teacher_user_id;r.access_code=row.access_code||r.access_code;r.paperId=row.paper_id||r.paperId;return r;});
       localStorage.setItem('studentResults',JSON.stringify(results));
+      // Backward compatibility: if the mirror table has no rows yet, read the source table.
+      if(!results.length){
+        const fallback=await window.supabaseClient.from('teacher_exam_results').select('*').eq('student_user_id',user.id).order('created_at',{ascending:false});
+        if(!fallback.error){
+          results=(fallback.data||[]).map(row=>{const r=row.result&&typeof row.result==='object'?{...row.result}:{};r.id=row.result_id||r.id;r.studentName=row.student_name||r.studentName||r.student?.name||'Student';r.student=r.student||{};r.student.name=r.studentName;r.student_user_id=row.student_user_id;r.teacher_user_id=row.teacher_user_id;r.access_code=row.access_code||r.access_code;r.paperId=row.paper_id||r.paperId;return r;});
+          localStorage.setItem('studentResults',JSON.stringify(results));
+        }
+      }
     }
   }catch(e){console.error('Cloud student results load failed:',e);}
   if(!results.length){try{results=JSON.parse(localStorage.getItem('studentResults')||'[]')}catch{results=[]}}
