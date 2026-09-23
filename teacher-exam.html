@@ -202,19 +202,100 @@ function next(){
   if(index<data.questions.length-1){index++;render();}else finish();
 }
 function prev(){if(index>0){index--;render();}}
-function finish(){
+async function finish(){
   const correct=Object.values(answers).filter(x=>x.correct).length;
   const attempted=Object.keys(answers).length;
   const totalMarks=data.questions.reduce((s,q)=>s+Number(q.marks||1),0);
   const obtained=Object.entries(answers).reduce((s,[i,a])=>s+(a.correct?Number(data.questions[i].marks||1):0),0);
   const percentage=totalMarks?Math.round(obtained/totalMarks*100):0;
-  const student=JSON.parse(localStorage.getItem('studentProfile')||'{}');
-  const teacher= data.teacher || data.target || 'Teacher';
-  const teacherId=data.teacherId || String(teacher).toLowerCase().replace(/[^a-z0-9]+/g,'-');
-  const result={id:'result-'+Date.now(),paperId:data.id||('paper-'+(data.password||'')),paperPassword:data.password||'',teacher,teacherId,student:{name:student.name||'Student',id:student.id||''},studentName:student.name||'Student',title:data.name||data.title||'Practice Result',school:data.school_name||data.target||'',subject:data.subject_name||'',correct,total:data.questions.length,attempted,wrong:Math.max(0,attempted-correct),unattempted:Math.max(0,data.questions.length-attempted),obtained,totalMarks,percentage,date:new Date().toISOString(),answers,questions:data.questions};
-  const history=JSON.parse(localStorage.getItem('studentResults')||'[]');history.unshift(result);localStorage.setItem('studentResults',JSON.stringify(history));
-  const teacherResults=JSON.parse(localStorage.getItem('teacherResults')||'[]');teacherResults.unshift(result);localStorage.setItem('teacherResults',JSON.stringify(teacherResults));
-  sessionStorage.setItem('examResult',JSON.stringify(result));sessionStorage.removeItem('teacherExam');location.href='student-result.html?resultId='+encodeURIComponent(result.id);
+
+  const studentLocal=JSON.parse(localStorage.getItem('studentProfile')||'{}');
+  let studentProfile={};
+  try{ studentProfile=await smartEduAuth.profile()||{}; }catch(e){ console.warn('Student profile load failed',e); }
+  const user=await smartEduAuth.user();
+
+  const studentName=studentProfile.name||studentLocal.name||'Student';
+  const teacher=data.teacher_name||data.teacher||data.target||'Teacher';
+  const teacherId=data.teacher_user_id||data.teacherId||'';
+  const paperId=data.id||data.paperId||null;
+  const accessCode=(data.access_code||data.password||'').toUpperCase();
+  const resultId='result-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+
+  const result={
+    id:resultId,
+    paperId,
+    paperPassword:accessCode,
+    access_code:accessCode,
+    teacher,
+    teacherId,
+    teacher_user_id:teacherId,
+    student:{name:studentName,id:user?.id||studentLocal.id||''},
+    studentName,
+    student_user_id:user?.id||'',
+    title:data.name||data.title||'Practice Result',
+    school:data.school_name||data.target||'',
+    subject:data.subject_name||'',
+    correct,
+    total:data.questions.length,
+    attempted,
+    wrong:Math.max(0,attempted-correct),
+    unattempted:Math.max(0,data.questions.length-attempted),
+    obtained,
+    totalMarks,
+    percentage,
+    date:new Date().toISOString(),
+    answers,
+    questions:data.questions,
+    awardedMarks:data.questions.map((q,i)=>answers[i]?.correct?Number(q.marks||1):0)
+  };
+
+  const history=JSON.parse(localStorage.getItem('studentResults')||'[]');
+  history.unshift(result);
+  localStorage.setItem('studentResults',JSON.stringify(history));
+  const teacherResults=JSON.parse(localStorage.getItem('teacherResults')||'[]');
+  teacherResults.unshift(result);
+  localStorage.setItem('teacherResults',JSON.stringify(teacherResults));
+
+  // Cloud save: teacher-exam.html is the actual exam page opened by student-paper.html.
+  if(window.supabaseClient && user?.id && teacherId && paperId){
+    const row={
+      result_id:resultId,
+      paper_id:paperId,
+      access_code:accessCode||null,
+      teacher_user_id:teacherId,
+      student_user_id:user.id,
+      student_name:studentName,
+      result:result,
+      updated_at:new Date().toISOString()
+    };
+
+    const {error:teacherSaveError}=await window.supabaseClient
+      .from('teacher_exam_results')
+      .insert(row);
+
+    if(teacherSaveError){
+      console.error('Cloud teacher_exam_results INSERT failed:',teacherSaveError,row);
+      alert('Result তৈরি হয়েছে, কিন্তু database-এ save হয়নি।\nSupabase error: '+(teacherSaveError.message||'Unknown error'));
+    }else{
+      const {error:studentSaveError}=await window.supabaseClient
+        .from('student_results')
+        .upsert(row,{onConflict:'result_id'});
+      if(studentSaveError) console.error('Cloud student_results sync failed:',studentSaveError);
+    }
+  }else{
+    console.warn('Cloud result not saved: missing Supabase client/session/teacher/paper information',{
+      hasSupabase:!!window.supabaseClient,
+      userId:user?.id||null,
+      teacherId:teacherId||null,
+      paperId:paperId||null,
+      accessCode
+    });
+    alert('Result তৈরি হয়েছে, কিন্তু database-এ save হয়নি। Student session বা paper information পাওয়া যায়নি।');
+  }
+
+  sessionStorage.setItem('examResult',JSON.stringify(result));
+  sessionStorage.removeItem('teacherExam');
+  location.href='student-result.html?resultId='+encodeURIComponent(resultId);
 }
 function normalize(v){return String(v||'').trim().toLowerCase().replace(/\s+/g,' ');}
 function startTimer(){clearInterval(timerId);remaining=300;timerId=setInterval(()=>{remaining--;const m=String(Math.floor(remaining/60)).padStart(2,'0'),s=String(remaining%60).padStart(2,'0');document.getElementById('timer').textContent=`${m}:${s}`;if(remaining<=0){clearInterval(timerId);finish();}},1000);}
