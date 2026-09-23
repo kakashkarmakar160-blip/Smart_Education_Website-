@@ -211,11 +211,20 @@ async function finish(){
   const teacherResults=JSON.parse(localStorage.getItem('teacherResults')||'[]');
   teacherResults.unshift(result);localStorage.setItem('teacherResults',JSON.stringify(teacherResults));
 
-  // Save the same result to Supabase so the teacher can see it on another device.
-  if(window.supabaseClient && user && teacherId){
+  // Save the result to Supabase. Use INSERT first (not upsert) so a
+  // first-time student submission only needs the INSERT RLS policy.
+  // The database trigger then mirrors teacher_exam_results -> student_results.
+  if(window.supabaseClient && user?.id && teacherId){
+    const isUuid = v => typeof v === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
+    const cloudPaperId = isUuid(paperId) ? paperId : null;
+
+    if(!cloudPaperId){
+      console.warn('Cloud result: paper_id is not a UUID; result will still be saved with paper_id = null.', {paperId, accessCode});
+    }
+
     const row={
       result_id:resultId,
-      paper_id:(typeof paperId==='string' && /^[0-9a-f]{8}-[0-9a-f-]{27,}$/i.test(paperId))?paperId:null,
+      paper_id:cloudPaperId,
       access_code:accessCode||null,
       teacher_user_id:teacherId,
       student_user_id:user.id,
@@ -223,13 +232,35 @@ async function finish(){
       result:result,
       updated_at:new Date().toISOString()
     };
-    const {error}=await window.supabaseClient.from('teacher_exam_results').upsert(row,{onConflict:'result_id'});
-    if(error){
-      console.error('Cloud result save failed:',error);
-      alert('Result তৈরি হয়েছে, কিন্তু Teacher-এর কাছে cloud-এ পাঠানো যায়নি। আবার Submit করুন বা Console error দেখুন।');
+
+    const {error:teacherSaveError}=await window.supabaseClient
+      .from('teacher_exam_results')
+      .insert(row);
+
+    if(teacherSaveError){
+      console.error('Cloud teacher_exam_results INSERT failed:',teacherSaveError, row);
+      alert('Result তৈরি হয়েছে, কিন্তু cloud-এ save হয়নি। Supabase error: '+(teacherSaveError.message||'Unknown error'));
+    }else{
+      // Normally the database trigger creates this row automatically.
+      // This upsert is a safety-net for existing databases where the trigger
+      // is not yet active.
+      const {error:studentSaveError}=await window.supabaseClient
+        .from('student_results')
+        .upsert(row,{onConflict:'result_id'});
+
+      if(studentSaveError){
+        console.error('Cloud student_results sync failed:',studentSaveError);
+      }
     }
   }else{
-    console.warn('Cloud result not saved: missing Supabase session or teacher_user_id', {user,teacherId});
+    console.warn('Cloud result not saved: missing Supabase client, user.id, or teacher_user_id', {
+      hasSupabase:!!window.supabaseClient,
+      userId:user?.id||null,
+      teacherId:teacherId||null,
+      paperId,
+      accessCode
+    });
+    alert('Result তৈরি হয়েছে, কিন্তু cloud save করা যায়নি কারণ Student/Teacher session information পাওয়া যায়নি।');
   }
   sessionStorage.setItem('examResult',JSON.stringify(result));sessionStorage.removeItem('teacherExam');
   location.href='student-result.html?resultId='+encodeURIComponent(resultId);

@@ -1,0 +1,11 @@
+RESULT SAVE FIX
+
+Only the result-save logic was changed. The existing UI/design was not intentionally changed.
+
+student-exam.html now:
+1. Inserts the submitted result into teacher_exam_results instead of using upsert for the first save.
+2. Uses the UUID paper_id when available.
+3. Shows the real Supabase error message if the cloud insert fails.
+4. Upserts the same row into student_results as a safety-net; the database trigger can also mirror it automatically.
+
+The Supabase SQL/RLS changes already applied in the SQL Editor are still required.
