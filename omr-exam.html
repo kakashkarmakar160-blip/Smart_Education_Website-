@@ -28,16 +28,16 @@
       <div class="fieldbox"><label>OMR ANSWER SHEET NO.</label><input id="omrNo" placeholder="Answer sheet no."></div>
     </div>
     <div class="mid-fields">
-      <div class="fieldbox"><label>2. REGISTRATION NO.</label><div class="digit-box" id="regDigits"></div></div>
-      <div class="fieldbox"><label>3. ROLL NO.</label><div class="digit-box" id="rollDigits"></div></div>
-      <div class="fieldbox"><label>4. QUESTION BOOKLET SL. NO.</label><div class="digit-box" id="bookletDigits"></div></div>
-      <div class="fieldbox"><label>5. QUESTION BOOKLET SET</label><div class="set-list"><label><input type="radio" disabled id="setW">W</label><label><input type="radio" disabled id="setX">X</label><label><input type="radio" disabled id="setY">Y</label><label><input type="radio" disabled id="setZ">Z</label></div></div>
-      <div class="fieldbox"><label>6. SUBJECT CODE</label><div class="digit-box" id="subjectCodeDigits"></div></div>
+      <div class="fieldbox"><label>2. REGISTRATION NO.</label><input id="registrationNoBox" inputmode="numeric" autocomplete="off" placeholder="Registration No."></div>
+      <div class="fieldbox"><label>3. ROLL NO.</label><input id="rollNoBox" inputmode="numeric" autocomplete="off" placeholder="Roll No."></div>
+      <div class="fieldbox"><label>4. QUESTION BOOKLET SL. NO.</label><input id="bookletNoBox" autocomplete="off" placeholder="Booklet Sl. No."></div>
+      <div class="fieldbox"><label>5. QUESTION BOOKLET SET</label><div class="set-list"><label><input type="radio" name="bookletSet" id="setW" value="W" disabled>W</label><label><input type="radio" name="bookletSet" id="setX" value="X" disabled>X</label><label><input type="radio" name="bookletSet" id="setY" value="Y" disabled>Y</label><label><input type="radio" name="bookletSet" id="setZ" value="Z" disabled>Z</label></div></div>
+      <div class="fieldbox"><label>6. SUBJECT CODE</label><input id="subjectCodeBox" autocomplete="off" placeholder="Subject Code"></div>
     </div>
     <div class="bottom-fields">
-      <div class="fieldbox"><label>7. NAME OF THE STUDENT</label><input id="studentNameBox"></div>
-      <div class="fieldbox"><label>11. SUBJECT</label><input id="subjectBox"></div>
-      <div class="fieldbox"><label>10. CENTRE CODE : <span style="font-weight:600;font-size:11px">(To be filled by the Invigilator)</span></label><div class="centre-grid" id="centreDigits"></div></div>
+      <div class="fieldbox"><label>7. NAME OF THE STUDENT</label><input id="studentNameBox" autocomplete="name" placeholder="Student Name"></div>
+      <div class="fieldbox"><label>11. SUBJECT</label><input id="subjectBox" autocomplete="off" placeholder="Subject"></div>
+      <div class="fieldbox"><label>10. CENTRE CODE : <span style="font-weight:600;font-size:11px">(To be filled by the Invigilator)</span></label><input id="centreCodeBox" inputmode="numeric" autocomplete="off" placeholder="Centre Code"></div>
     </div>
   </section>
   <section class="question-card" id="qcard"></section>
@@ -50,9 +50,27 @@ const all=Array.isArray(data?.questions)?data.questions:[];const setName=String(
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
 function parseQ(text){const lines=String(text||'').split(/\r?\n/);const opts={};const base=[];for(const line of lines){const m=line.match(/^\s*([ABCD])\s*[\)\.\:\-]\s*(.+)\s*$/i);if(m)opts[m[1].toUpperCase()]=m[2].trim();else base.push(line);}return {base:base.join('\n').trim(),opts};}
 function subjectOf(){return data?.subject||data?.targetSubject||data?.questions?.find(q=>q.type==='omr')?.subject||'—';}
-function setMeta(){const name=info?.name||'Student';document.getElementById('profileName').textContent=name;document.getElementById('infoName').textContent=name;document.getElementById('infoReg').textContent=info?.registrationNo||'—';document.getElementById('infoSet').textContent=setName;document.getElementById('studentNameBox').value=name;document.getElementById('subjectBox').value=subjectOf();document.getElementById('classMeta').textContent=data?.class_name||data?.className||data?.target||'OMR Examination';document.getElementById('avatar').textContent=name.split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();document.getElementById('set'+setName).checked=true;}
-function makeDigitGrid(id,value,cols=10){const root=document.getElementById(id);if(!root)return;const v=String(value||'');root.innerHTML=Array.from({length:Math.min(cols,10)},(_,pos)=>{const selected=v[pos]||'';return `<div class=\"digit-col\">${Array.from({length:10},(_,d)=>`<span style=\"${selected===String(d)?'background:#d9ecff;font-weight:900;color:#075a9f':''}\">${d}</span>`).join('')}</div>`;}).join('');}
-function makeOMRFields(){makeDigitGrid('regDigits',info?.registrationNo);makeDigitGrid('rollDigits',info?.rollNo||'');makeDigitGrid('bookletDigits',info?.bookletNo||'');makeDigitGrid('subjectCodeDigits',data?.subjectCode||'');const c=document.getElementById('centreDigits');if(c)c.innerHTML=Array.from({length:5},()=>'<span></span>').join('');}
+function setMeta(){const name=info?.name||'Student';document.getElementById('profileName').textContent=name;document.getElementById('infoName').textContent=name;document.getElementById('infoReg').textContent=info?.registrationNo||'—';document.getElementById('infoRoll').textContent=info?.rollNo||'—';document.getElementById('infoSubject').textContent=info?.subject||subjectOf();document.getElementById('infoSet').textContent=setName;document.getElementById('studentNameBox').value=name;document.getElementById('subjectBox').value=info?.subject||subjectOf();document.getElementById('classMeta').textContent=data?.class_name||data?.className||data?.target||'OMR Examination';document.getElementById('avatar').textContent=name.split(/\s+/).map(x=>x[0]).join('').slice(0,2).toUpperCase();document.getElementById('set'+setName).checked=true;}
+function makeOMRFields(){
+  document.getElementById('registrationNoBox').value=info?.registrationNo||'';
+  document.getElementById('rollNoBox').value=info?.rollNo||'';
+  document.getElementById('bookletNoBox').value=info?.bookletNo||'';
+  document.getElementById('subjectCodeBox').value=info?.subjectCode||data?.subjectCode||'';
+  document.getElementById('centreCodeBox').value=info?.centreCode||'';
+}
+function saveOMRFields(){
+  info=info||{};
+  info.registrationNo=document.getElementById('registrationNoBox').value.trim();
+  info.rollNo=document.getElementById('rollNoBox').value.trim();
+  info.bookletNo=document.getElementById('bookletNoBox').value.trim();
+  info.subjectCode=document.getElementById('subjectCodeBox').value.trim();
+  info.centreCode=document.getElementById('centreCodeBox').value.trim();
+  info.name=document.getElementById('studentNameBox').value.trim()||info.name||'Student';
+  info.subject=document.getElementById('subjectBox').value.trim()||subjectOf();
+  const picked=document.querySelector('input[name="bookletSet"]:checked');
+  if(picked) info.set=picked.value;
+  sessionStorage.setItem('omrStudentInfo',JSON.stringify(info));
+}
 function render(){const q=questions[index];if(!q)return;document.getElementById('pageNo').textContent=`Pg-${Math.floor(index/40)+1}`;const parsed=parseQ(q.question);const chosen=answers[index]?.value||'';const opts=['A','B','C','D'].map(l=>`<button class="opt ${chosen===l?'selected locked':''}" data-a="${l}" ${chosen?'disabled':''}><span class="radio"></span><span class="letter">${l}</span><span>${esc(parsed.opts[l]||'Option '+l)}</span></button>`).join('');document.getElementById('qcard').innerHTML=`<div class="qtop"><span class="qno">Q. ${index+1}</span><span style="font-weight:800">${Number(q.marks||1)} Mark${Number(q.marks||1)===1?'':'s'}</span></div><div class="qtext">${esc(parsed.base||q.question)}</div><div class="options">${opts}</div>${chosen?'<div style="margin-top:8px;color:#0a7b45;font-weight:800">✓ Answer selected. এই প্রশ্নের উত্তর আর পরিবর্তন করা যাবে না।</div>':''}<div class="nav"><button class="back" id="qback">← Back Question</button><button class="next" id="qnext">${index===questions.length-1?'SUBMIT EXAM →':'Next Question →'}</button></div>`;document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>choose(b.dataset.a));document.getElementById('qback').onclick=prev;document.getElementById('qnext').onclick=next;renderSheet();document.getElementById('back').disabled=index===0;document.getElementById('next').textContent=index===questions.length-1?'SUBMIT EXAM →':'NEXT QUESTION →';}
 function choose(letter){if(answers[index])return;const q=questions[index];answers[index]={value:letter,correct:String(letter).toUpperCase()===String(q.answer||'').toUpperCase()};render();}
 function bubbleClick(i,l){if(answers[i]){index=i;render();return;}index=i;choose(l);}
@@ -61,6 +79,6 @@ function next(){if(!answers[index]){alert('এই প্রশ্নের এ�
 function prev(){if(index>0){index--;render();}}
 async function finish(){const correct=Object.values(answers).filter(a=>a.correct).length;const attempted=Object.keys(answers).length;const total=questions.length;const totalMarks=questions.reduce((s,q)=>s+Number(q.marks||1),0);const obtained=Object.entries(answers).reduce((s,[i,a])=>s+(a.correct?Number(questions[i].marks||1):0),0);const percentage=totalMarks?Math.round(obtained/totalMarks*100):0;let profile={};try{profile=await smartEduAuth.profile()||{};}catch{}const user=await smartEduAuth.user();const studentName=info.name||profile.name||'Student';const teacher=data.teacher_name||data.teacher||data.target||'Teacher';const teacherId=data.teacher_user_id||data.teacherId||'';const paperId=data.id||data.paperId||null;const accessCode=(data.access_code||data.password||'').toUpperCase();const resultId='result-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);const result={id:resultId,paperId,paperPassword:accessCode,access_code:accessCode,teacher,teacherId,teacher_user_id:teacherId,student:{name:studentName,id:user?.id||''},studentName,student_user_id:user?.id||'',registrationNo:info.registrationNo,omrSet:setName,examType:'OMR',title:data.name||'OMR Examination',school:data.target||'',subject:subjectOf(),correct,total,attempted,wrong:attempted-correct,unattempted:Math.max(0,total-attempted),obtained,totalMarks,percentage,date:new Date().toISOString(),answers,questions,awardedMarks:questions.map((q,i)=>answers[i]?.correct?Number(q.marks||1):0)};const history=JSON.parse(localStorage.getItem('studentResults')||'[]');history.unshift(result);localStorage.setItem('studentResults',JSON.stringify(history));const tr=JSON.parse(localStorage.getItem('teacherResults')||'[]');tr.unshift(result);localStorage.setItem('teacherResults',JSON.stringify(tr));if(window.supabaseClient&&user?.id&&teacherId&&paperId){const row={result_id:resultId,paper_id:paperId,access_code:accessCode||null,teacher_user_id:teacherId,student_user_id:user.id,student_name:studentName,result,updated_at:new Date().toISOString()};const a=await window.supabaseClient.from('teacher_exam_results').insert(row);if(a.error){alert('Result তৈরি হয়েছে, কিন্তু database-এ save হয়নি।\nSupabase error: '+a.error.message);}else{const b=await window.supabaseClient.from('student_results').upsert(row,{onConflict:'result_id'});if(b.error)console.error('student_results sync',b.error);}}else{alert('Result তৈরি হয়েছে, কিন্তু database-এ save হয়নি। Student session বা paper information পাওয়া যায়নি।');}sessionStorage.setItem('examResult',JSON.stringify(result));sessionStorage.removeItem('teacherExam');sessionStorage.removeItem('omrStudentInfo');location.href='student-result.html?resultId='+encodeURIComponent(resultId);}
 function startTimer(){const draw=()=>{const m=String(Math.floor(remaining/60)).padStart(2,'0'),s=String(remaining%60).padStart(2,'0');document.getElementById('timer').textContent=`${m}:${s}`;};draw();timerId=setInterval(()=>{remaining--;draw();if(remaining<=0){clearInterval(timerId);finish();}},1000);}
-document.getElementById('next').onclick=next;document.getElementById('back').onclick=prev;if(!questions.length){alert(`Set ${setName}-এ কোনো OMR question নেই।`);location.href='omr-start.html';}else{setMeta();makeOMRFields();render();startTimer();}
+document.getElementById('next').onclick=()=>{saveOMRFields();next();};document.getElementById('back').onclick=()=>{saveOMRFields();prev();};['registrationNoBox','rollNoBox','bookletNoBox','subjectCodeBox','centreCodeBox','studentNameBox','subjectBox'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{saveOMRFields();setMeta();}));if(!questions.length){alert(`Set ${setName}-এ কোনো OMR question নেই।`);location.href='omr-start.html';}else{setMeta();makeOMRFields();render();startTimer();}
 </script>
 </body></html>
