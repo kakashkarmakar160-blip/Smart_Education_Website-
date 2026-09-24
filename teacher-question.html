@@ -355,6 +355,16 @@ const symbolGroups={
     ['a/b','Fraction — numerator / denominator'],['½','One-half'],['⅓','One-third'],['¼','One-quarter'],['¾','Three-quarters'],['⅔','Two-thirds']
   ]
 };
+// Remove duplicate keyboard buttons inside each category while keeping the first label.
+Object.keys(symbolGroups).forEach(group=>{
+  const seen=new Set();
+  symbolGroups[group]=symbolGroups[group].filter(item=>{
+    const key=item[0];
+    if(seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+});
 let symbolGroup='Math';
 function insertAtCursor(text){const el=document.getElementById('question');if(!el)return;const start=el.selectionStart??el.value.length,end=el.selectionEnd??start;el.value=el.value.slice(0,start)+text+el.value.slice(end);el.focus();const pos=start+text.length;el.setSelectionRange(pos,pos);el.dispatchEvent(new Event('input',{bubbles:true}));}
 function renderKeyboard(){const tabs=document.getElementById('symbolTabs'),grid=document.getElementById('symbolGrid');if(!tabs||!grid)return;tabs.innerHTML=Object.keys(symbolGroups).map(k=>`<button type="button" class="symbol-tab ${k===symbolGroup?'active':''}" data-group="${k}">${k}</button>`).join('');grid.innerHTML=symbolGroups[symbolGroup].map(([sym,name],i)=>`<button type="button" class="symbol-key" data-index="${i}">${sym}<small>${name}</small></button>`).join('');tabs.querySelectorAll('[data-group]').forEach(b=>b.onclick=()=>{symbolGroup=b.dataset.group;renderKeyboard();});grid.querySelectorAll('[data-index]').forEach(b=>b.onclick=()=>{let sym=symbolGroups[symbolGroup][Number(b.dataset.index)][0];if(sym==='a/b'){const n=prompt('Numerator / উপরের সংখ্যা','10');if(n===null)return;const d=prompt('Denominator / নিচের সংখ্যা','5');if(d===null)return;sym=`${n}/${d}`;}insertAtCursor(sym);});}
