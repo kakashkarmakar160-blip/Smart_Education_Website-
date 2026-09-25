@@ -3,7 +3,8 @@
 <title>Teacher Question</title><style data-internal-css="css/style.css">
 *{box-sizing:border-box} :root{--bg:#f7f8fc;--card:#fff;--text:#111a35;--muted:#687089;--line:#e7e8f0;--primary:#5b22c9;--primary2:#7744e8;--soft:#f1edff;--shadow:0 12px 40px rgba(34,25,75,.08)} body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,'Noto Sans Bengali',sans-serif;line-height:1.55} body.dark{--bg:#10111a;--card:#191b27;--text:#f7f7fb;--muted:#a9aec1;--line:#2d3040;--soft:#28213d;--shadow:0 12px 40px rgba(0,0,0,.25)} a{text-decoration:none;color:inherit}.topbar{height:70px;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:20}.dark .topbar{background:rgba(16,17,26,.9)}.brand{font-size:22px;font-weight:800;letter-spacing:-.4px}.top-actions{display:flex;align-items:center;gap:10px}.icon-btn{border:1px solid var(--line);background:var(--card);color:var(--text);width:44px;height:44px;border-radius:14px;cursor:pointer;font-size:19px;display:grid;place-items:center}.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#6d35d4,#9c6af1);font-weight:800}.container{max-width:1180px;margin:auto;padding:28px 22px 70px}.hero{min-height:280px;border:1px solid #eee8ff;border-radius:28px;padding:42px 48px;display:flex;justify-content:space-between;align-items:center;background:radial-gradient(circle at 85% 50%,#eee7ff,transparent 35%),linear-gradient(135deg,#fff,#f4f0ff);box-shadow:var(--shadow);overflow:hidden}.dark .hero{background:linear-gradient(135deg,#1d1d2a,#211c35)}.hero h1{font-size:44px;line-height:1.15;margin:8px 0 14px;letter-spacing:-1.6px}.hero h1 span{color:#5e38d2}.hero p{color:var(--muted);max-width:650px}.hero-art{font-size:78px;text-align:center;transform:rotate(-3deg)}.hero-art div{font-size:90px;margin-top:-18px}.hero-art small{font-size:22px;color:#7142df}.eyebrow{font-size:12px;font-weight:800;letter-spacing:1.6px;color:var(--primary);margin:0}.search-wrap{margin:18px 0 34px;background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 8px 28px rgba(35,28,75,.05);display:flex;align-items:center;padding:0 20px}.search-wrap span{font-size:30px;color:var(--muted)}.search-wrap input{width:100%;border:0;outline:0;background:transparent;color:var(--text);font-size:17px;padding:20px 14px}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:15px}.section-head h2,.page-intro h1{margin:4px 0;font-size:30px;letter-spacing:-.7px}.muted{color:var(--muted)}.primary{display:inline-flex;justify-content:center;align-items:center;border:0;background:linear-gradient(135deg,var(--primary),var(--primary2));color:white;padding:12px 18px;border-radius:12px;font-weight:800;cursor:pointer}.full{width:100%}.page-intro{padding:15px 0 25px}.page-intro p:last-child{color:var(--muted)}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}.result-card{max-width:620px;margin:70px auto;text-align:center;background:var(--card);border:1px solid var(--line);padding:45px;border-radius:28px;box-shadow:var(--shadow)}.score-ring{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;background:var(--soft);color:var(--primary);font-size:36px;font-weight:900}.hidden{display:none!important}.modal{position:fixed;inset:0;background:rgba(12,12,22,.48);display:grid;place-items:end center;z-index:50}.modal-card{width:min(900px,100%);max-height:88vh;overflow:auto;background:var(--card);border-radius:28px 28px 0 0;padding:30px;position:relative}.close{position:absolute;right:20px;top:18px;border:0;background:var(--soft);font-size:25px;width:42px;height:42px;border-radius:50%;cursor:pointer}@media(max-width:720px){.topbar{padding:0 14px}.brand{font-size:17px}.container{padding:18px 14px 55px}.hero{padding:28px 22px;min-height:240px}.hero h1{font-size:32px}.hero-art{font-size:55px}.hero-art div{font-size:65px}.hero-art small{font-size:16px}}
 </style><style data-internal-css="css/teacher-question.css">
-.teacher-editor{max-width:1180px;margin:auto;padding:26px 22px 70px}.editor-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 0 22px}.editor-heading h1{margin:3px 0;font-size:32px}.type-section{padding:20px;margin-bottom:18px}.type-section h3,.form-card>h3{margin:0 0 16px}.type-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}.type-card{min-height:150px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:14px;padding:14px;cursor:pointer;display:flex;flex-direction:column;gap:5px}.type-card.active{border-color:#6c39d5;box-shadow:0 0 0 2px #eadfff;background:#fbf9ff}.type-card>b{font-size:20px;color:var(--primary)}.type-card strong{font-size:14px}.type-card small{color:var(--muted);min-height:34px}.type-card label{font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;margin-top:auto}.type-card select{border:1px solid var(--line);border-radius:7px;padding:5px;background:var(--bg);color:var(--text)}.editor-columns{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px}.form-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}.field.full{grid-column:1/-1}.field label{font-weight:800;font-size:14px}.field label em{color:#d33;font-style:normal}.field input,.field select,.field textarea{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:11px;padding:12px 13px;outline:none;font:inherit}.field textarea{resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary)}.field>small{text-align:right;color:var(--muted);font-size:11px}.option-row{display:grid;grid-template-columns:32px 1fr 42px;gap:9px;align-items:center;margin:9px 0}.option-letter{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--primary);font-weight:900}.option-row input{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--text);padding:10px;border-radius:10px}.option-row input:focus{border-color:var(--primary);outline:none}.option-row input[type=radio]{accent-color:var(--primary);width:20px;height:20px}.tf-choice{display:flex;gap:10px}.tf-choice label{border:1px solid var(--line);padding:12px 18px;border-radius:12px;background:var(--bg);cursor:pointer}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.match-grid input{border:1px solid var(--line);padding:10px;border-radius:10px;background:var(--bg);color:var(--text)}.explanation-field{margin-top:8px}.action-row{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}.preview-panel{position:sticky;top:90px;height:max-content;padding:18px}.preview-head{display:flex;justify-content:space-between;align-items:center;font-weight:800}.tag{padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--primary);font-size:11px;font-weight:800}.summary-list{margin:15px 0;border-top:1px solid var(--line)}.summary-list>div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}.summary-list span{color:var(--muted)}.mini-paper{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg);font-size:13px;line-height:1.7}.mini-paper ol{margin:6px 0 0;padding-left:22px}.mini-paper .correct-mini{color:#168043;font-weight:800}.saved-question{padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--card);margin-top:12px}.saved-question .saved-actions{display:flex;gap:8px;margin-top:10px}.toast{position:fixed;right:22px;bottom:22px;padding:13px 16px;border-radius:12px;background:#16182a;color:#fff;z-index:100;box-shadow:var(--shadow)}@media(max-width:1000px){.type-grid{grid-template-columns:repeat(3,1fr)}.editor-columns{grid-template-columns:1fr}.preview-panel{position:static}}@media(max-width:620px){.teacher-editor{padding:18px 12px 50px}.editor-heading{align-items:flex-start;flex-direction:column}.type-grid{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.match-grid{grid-template-columns:1fr}.preview-panel{margin-top:0}}
+.teacher-editor{max-width:1180px;margin:auto;padding:26px 22px 70px}.editor-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:10px 0 22px}.editor-heading h1{margin:3px 0;font-size:32px}.type-section{padding:20px;margin-bottom:18px}.type-section h3,.form-card>h3{margin:0 0 16px}.type-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px}.type-card{min-height:150px;text-align:left;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:14px;padding:14px;cursor:pointer;display:flex;flex-direction:column;gap:5px}.type-card.active{border-color:#6c39d5;box-shadow:0 0 0 2px #eadfff;background:#fbf9ff}.type-card>b{font-size:20px;color:var(--primary)}.type-card strong{font-size:14px}.type-card small{color:var(--muted);min-height:34px}.type-card label{font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;margin-top:auto}.type-card select{border:1px solid var(--line);border-radius:7px;padding:5px;background:var(--bg);color:var(--text)}.editor-columns{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px}.form-card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}.field.full{grid-column:1/-1}.field label{font-weight:800;font-size:14px}.field label em{color:#d33;font-style:normal}.field input,.field select,.field textarea{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:11px;padding:12px 13px;outline:none;font:inherit}.field textarea{resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary)}.field>small{text-align:right;color:var(--muted);font-size:11px}.option-row{display:grid;grid-template-columns:32px 1fr 42px;gap:9px;align-items:center;margin:9px 0}.option-letter{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--soft);color:var(--primary);font-weight:900}.option-row input{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--text);padding:10px;border-radius:10px}.option-row input:focus{border-color:var(--primary);outline:none}.option-row input[type=radio]{accent-color:var(--primary);width:20px;height:20px}.tf-choice{display:flex;gap:10px}.tf-choice label{border:1px solid var(--line);padding:12px 18px;border-radius:12px;background:var(--bg);cursor:pointer}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.match-grid input{border:1px solid var(--line);padding:10px;border-radius:10px;background:var(--bg);color:var(--text)}.explanation-field{margin-top:8px}.action-row{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:18px}.preview-panel{position:sticky;top:90px;height:max-content;padding:18px}.preview-head{display:flex;justify-content:space-between;align-items:center;font-weight:800}.tag{padding:5px 9px;border-radius:999px;background:var(--soft);color:var(--primary);font-size:11px;font-weight:800}.summary-list{margin:15px 0;border-top:1px solid var(--line)}.summary-list>div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}.summary-list span{color:var(--muted)}.mini-paper{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--bg);font-size:13px;line-height:1.7}.mini-paper ol{margin:6px 0 0;padding-left:22px}.mini-paper .correct-mini{color:#168043;font-weight:800}.omr-set-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.omr-set-btn{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:11px;padding:12px;font-weight:900;cursor:pointer}.omr-set-btn.active{background:var(--soft);border-color:var(--primary);color:var(--primary)}.omr-correct-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.omr-correct{border:1px solid var(--line);background:var(--bg);border-radius:11px;padding:12px;text-align:center;font-weight:900;cursor:pointer}.omr-correct input{accent-color:var(--primary);margin-right:6px}.info-banner{padding:13px 14px;border-radius:12px;background:var(--soft);color:var(--text);border:1px solid var(--line);font-size:13px;margin:12px 0}.omr-nav{margin-top:14px;border-top:1px solid var(--line);padding-top:14px}.omr-nav-head{display:flex;justify-content:space-between;gap:10px;margin-bottom:10px;color:var(--muted);font-size:13px}.omr-nav-head b{color:var(--primary)}.omr-nav-actions{display:flex;justify-content:space-between;gap:10px}.omr-nav-actions button{flex:1}.omr-nav-actions button:disabled{opacity:.5;cursor:not-allowed}
+.saved-question{padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--card);margin-top:12px}.saved-question .saved-actions{display:flex;gap:8px;margin-top:10px}.toast{position:fixed;right:22px;bottom:22px;padding:13px 16px;border-radius:12px;background:#16182a;color:#fff;z-index:100;box-shadow:var(--shadow)}@media(max-width:1000px){.type-grid{grid-template-columns:repeat(3,1fr)}.editor-columns{grid-template-columns:1fr}.preview-panel{position:static}}@media(max-width:620px){.teacher-editor{padding:18px 12px 50px}.editor-heading{align-items:flex-start;flex-direction:column}.type-grid{grid-template-columns:repeat(2,1fr)}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.match-grid{grid-template-columns:1fr}.preview-panel{margin-top:0}}
 
 </style><!-- Smart Education Supabase connection -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -31,6 +32,7 @@
       <button class="type-card" data-type="paragraph" type="button"><b>§</b><strong>Paragraph Writing</strong><small>Write a paragraph</small><label>Marks <select class="marks" data-for="paragraph"><option>5</option><option selected>10</option><option>15</option></select></label></button>
       <button class="type-card" data-type="true_false" type="button"><b>✓×</b><strong>True / False</strong><small>True or False</small><label>Marks <select class="marks" data-for="true_false"><option selected>2</option><option>5</option></select></label></button>
       <button class="type-card" data-type="match" type="button"><b>⊕</b><strong>Match the Following</strong><small>Match items</small><label>Marks <select class="marks" data-for="match"><option selected>5</option><option>10</option></select></label></button>
+      <button class="type-card" data-type="omr" type="button"><b>▤</b><strong>OMR</strong><small>OMR question paper</small><label>Marks <select class="marks" data-for="omr"><option>1</option><option selected>5</option><option>10</option></select></label></button>
     </div>
   </section>
 
@@ -40,7 +42,7 @@
       <div class="form-grid">
         <div class="field"><label>Subject <em>*</em></label><select id="subject"><option value="বাংলা">Bangla</option><option value="English">English</option><option value="Mathematics">Mathematics</option><option value="Science">Science</option><option value="Commercial Law">Commercial Law</option></select></div>
         <div class="field"><label>Class / Semester <em>*</em></label><select id="classSemester"><option>Class 5</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 12 - 1st Semester</option><option>Class 12 - 2nd Semester</option><option>Class 12 - 3rd Semester</option></select></div>
-        <div class="field full"><label>Question <em>*</em></label><textarea id="question" rows="5" maxlength="1000" placeholder="Type your question here..."></textarea><small id="questionCount">0 / 1000</small></div>
+        <div class="field full"><label>Question <em>*</em></label><div class="question-tools"><button type="button" id="keyboardBtn" class="outline keyboard-btn">⌨ Keyboard</button></div><textarea id="question" rows="5" maxlength="1000" placeholder="Type your question here..."></textarea><small id="questionCount">0 / 1000</small></div>
       </div>
 
       <div id="dynamicFields"></div>
@@ -58,6 +60,10 @@
     </aside>
   </div>
 </main>
+<div id="symbolKeyboard" class="symbol-keyboard hidden" aria-hidden="true"><div class="symbol-head"><b>⌨ Math • Science • Symbol Keyboard</b><button type="button" id="closeKeyboard" class="outline">✕</button></div><div class="symbol-tabs" id="symbolTabs"></div><div class="symbol-grid" id="symbolGrid"></div></div>
+<style>
+.question-tools{display:flex;justify-content:flex-end;margin-bottom:7px}.keyboard-btn{padding:8px 12px}.symbol-keyboard{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(960px,94vw);max-height:82vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,.28);z-index:9999;padding:16px}.symbol-keyboard.hidden{display:none}.symbol-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.symbol-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.symbol-tab{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:9px;padding:8px 11px;font-weight:800;cursor:pointer}.symbol-tab.active{background:var(--soft);border-color:var(--primary);color:var(--primary)}.symbol-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.symbol-key{min-height:58px;border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:10px;padding:6px;cursor:pointer;font-weight:900}.symbol-key:hover{border-color:var(--primary);background:var(--soft)}.symbol-key .sym{font-size:20px;display:block}.symbol-key small{display:block;font-size:9px;color:var(--muted);margin-top:3px;font-weight:700}@media(max-width:650px){.symbol-grid{grid-template-columns:repeat(4,1fr)}.symbol-key{min-height:52px}}
+</style>
 <script data-internal-js="js/app.js">
 const THEME_KEY='smartEduTheme';
 
@@ -175,15 +181,116 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script><script data-internal-js="js/teacher-question.js">
 let teacherQuestions=JSON.parse(localStorage.getItem('teacherQuestions')||'[]');
 let currentType='mcq';
+let omrSet=localStorage.getItem('omrCurrentSet')||'W';
+let omrIndex=Number(localStorage.getItem('omrCurrentIndex')||0);
 
-const typeNames={mcq:'MCQ',long:'Long Question',fill_blank:'Fill in the Blanks',paragraph:'Paragraph Writing',true_false:'True / False',match:'Match the Following'};
+const typeNames={mcq:'MCQ',long:'Long Question',fill_blank:'Fill in the Blanks',paragraph:'Paragraph Writing',true_false:'True / False',match:'Match the Following',omr:'OMR'};
 const letters=['A','B','C','D'];
+const omrSets=['W','X','Y','Z'];
+const OMR_TOTAL=40;
 
 function qval(id){return document.getElementById(id)?.value?.trim()||'';}
 function marksFor(type=currentType){return Number(document.querySelector(`.marks[data-for="${type}"]`)?.value||1);}
-
+function getOMRBank(){try{return JSON.parse(localStorage.getItem('teacherOMRBankV1')||'{"W":[],"X":[],"Y":[],"Z":[]}')}catch{return {W:[],X:[],Y:[],Z:[]};}}
+function setOMRBank(bank){localStorage.setItem('teacherOMRBankV1',JSON.stringify(bank));}
+function getOMRSlot(set=omrSet,index=omrIndex){const b=getOMRBank();return b?.[set]?.[index]||null;}
+function rebuildTeacherQuestions(){
+  const normal=teacherQuestions.filter(q=>q.type!=='omr');
+  const b=getOMRBank();
+  const omr=[];
+  omrSets.forEach(set=>{
+    (b[set]||[]).forEach((q,i)=>{if(q&&q.question)omr.push({...q,type:'omr',omrSet:set,omrQuestionNo:i+1});});
+  });
+  teacherQuestions=[...normal,...omr];
+  localStorage.setItem('teacherQuestions',JSON.stringify(teacherQuestions));
+}
+function saveCurrentOMRSlot(requireAnswer=true){
+  const question=qval('question');
+  if(!question){return false;}
+  const correct=document.querySelector('input[name="omrCorrect"]:checked')?.value||'';
+  if(requireAnswer&&!correct){alert('Correct Answer নির্বাচন করুন।');return false;}
+  const bank=getOMRBank();
+  if(!Array.isArray(bank[omrSet]))bank[omrSet]=[];
+  bank[omrSet][omrIndex]={
+    type:'omr',question,answer:correct,marks:marksFor('omr'),
+    subject:document.getElementById('subject').value,
+    class_name:document.getElementById('classSemester').value,
+    omrSet,omrQuestionNo:omrIndex+1,
+    omrTimerSeconds:Number(document.getElementById('omrTimer')?.value||localStorage.getItem('teacherOMRTimerSeconds')||300),
+    solution:{enabled:Boolean(qval('explanation')),steps:qval('explanation')?[qval('explanation')]:[]}
+  };
+  setOMRBank(bank);rebuildTeacherQuestions();
+  return true;
+}
+function loadOMRSlot(){
+  const q=getOMRSlot();
+  const qEl=document.getElementById('question');
+  if(qEl)qEl.value=q?.question||'';
+  const subject=document.getElementById('subject');
+  const cls=document.getElementById('classSemester');
+  if(q?.subject)subject.value=q.subject;
+  if(q?.class_name)cls.value=q.class_name;
+  const exp=document.getElementById('explanation'); if(exp)exp.value=q?.solution?.steps?.[0]||'';
+  renderDynamicFields();
+  const timer=document.getElementById('omrTimer'); if(timer){timer.value=String(q?.omrTimerSeconds||localStorage.getItem('teacherOMRTimerSeconds')||300);localStorage.setItem('teacherOMRTimerSeconds',timer.value);}
+  const r=document.querySelector(`input[name="omrCorrect"][value="${q?.answer||''}"]`); if(r)r.checked=true;
+  updateOMRNav();updateMiniPreview();
+  if(qEl)qEl.focus();
+}
+function updateOMRNav(){
+  const nav=document.getElementById('omrNav');
+  if(!nav)return;
+  nav.querySelector('.omr-set-label').textContent=`Set ${omrSet}`;
+  nav.querySelector('.omr-q-label').textContent=`Question ${omrIndex+1} / ${OMR_TOTAL}`;
+  nav.querySelector('.omr-prev').disabled=omrIndex===0;
+  nav.querySelector('.omr-next').textContent=omrIndex===OMR_TOTAL-1?'40th Question':'Next Question →';
+  nav.querySelectorAll('[data-omr-set]').forEach(b=>b.classList.toggle('active',b.dataset.omrSet===omrSet));
+}
 function renderDynamicFields(){
   const box=document.getElementById('dynamicFields');
+  const qEl=document.getElementById('question');
+  if(currentType!=='omr' && qEl) qEl.placeholder='Type your question here...';
+  if(currentType==='omr'){
+    box.innerHTML=`
+      <div class="field">
+        <label>Question Booklet Set <em>*</em></label>
+        <div class="omr-set-grid">${omrSets.map(s=>`<button type="button" class="omr-set-btn ${s===omrSet?'active':''}" data-omr-set="${s}">${s}</button>`).join('')}</div>
+        <small>W, X, Y, Z প্রতিটি সেটের প্রশ্ন আলাদাভাবে তৈরি হবে।</small>
+      </div>
+      <div class="field">
+        <label>Correct Answer <em>*</em></label>
+        <div class="omr-correct-grid">${letters.map(l=>`<label class="omr-correct"><input type="radio" name="omrCorrect" value="${l}">${l}</label>`).join('')}</div>
+      </div>
+      <div class="field"><label>OMR Exam Timer <em>*</em></label><select id="omrTimer"><option value="30">00:30</option><option value="60">01:00</option><option value="90">01:30</option><option value="120">02:00</option><option value="180">03:00</option><option value="300" selected>05:00</option><option value="600">10:00</option><option value="900">15:00</option><option value="1800">30:00</option><option value="3600">60:00</option></select><small>এই Timer পুরো 40-question OMR পরীক্ষার জন্য একটাই মোট Timer হবে।</small></div>
+      <div class="info-banner">Question box-এর মধ্যেই প্রশ্নের সঙ্গে A), B), C), D) option লিখুন। আলাদা option input থাকবে না। নিচের Correct Answer-এ শুধু সঠিক option নির্বাচন করুন।</div>
+      <div id="omrNav" class="omr-nav">
+        <div class="omr-nav-head"><b class="omr-set-label">Set ${omrSet}</b><span class="omr-q-label">Question ${omrIndex+1} / ${OMR_TOTAL}</span></div>
+        <div class="omr-nav-actions"><button type="button" class="outline omr-prev">← Back Question</button><button type="button" class="primary omr-next">Next Question →</button></div>
+      </div>`;
+    box.querySelectorAll('[data-omr-set]').forEach(btn=>btn.addEventListener('click',()=>{
+      if(btn.dataset.omrSet===omrSet)return;
+      const oldQ=qval('question');
+      if(oldQ)saveCurrentOMRSlot(false);
+      omrSet=btn.dataset.omrSet;omrIndex=0;
+      localStorage.setItem('omrCurrentSet',omrSet);localStorage.setItem('omrCurrentIndex',String(omrIndex));
+      loadOMRSlot();
+    }));
+    box.querySelector('.omr-prev').addEventListener('click',()=>{
+      if(omrIndex<=0)return;
+      if(qval('question')&&!saveCurrentOMRSlot(true))return;
+      omrIndex--;localStorage.setItem('omrCurrentIndex',String(omrIndex));loadOMRSlot();
+    });
+    box.querySelector('.omr-next').addEventListener('click',()=>{
+      if(!saveCurrentOMRSlot(true))return;
+      if(omrIndex<OMR_TOTAL-1){omrIndex++;localStorage.setItem('omrCurrentIndex',String(omrIndex));loadOMRSlot();}
+      else alert(`Set ${omrSet}-এর 40টি question সম্পূর্ণ হয়েছে। অন্য set তৈরি করতে W/X/Y/Z নির্বাচন করুন, অথবা Save Question চাপুন।`);
+    });
+    const qEl=document.getElementById('question'); if(qEl) qEl.placeholder='প্রশ্নটি লিখুন\nA) প্রথম option\nB) দ্বিতীয় option\nC) তৃতীয় option\nD) চতুর্থ option';
+    box.querySelectorAll('input[name="omrCorrect"]').forEach(r=>r.addEventListener('change',updateMiniPreview));
+    box.querySelector('#omrTimer')?.addEventListener('change',e=>{localStorage.setItem('teacherOMRTimerSeconds',e.target.value);saveCurrentOMRSlot(false);updateMiniPreview();});
+    updateOMRNav();
+    return;
+  }
   if(currentType==='mcq'){
     box.innerHTML=`<div class="field"><label>Options <em>*</em></label>${letters.map((l,i)=>`<div class="option-row"><span class="option-letter">${l}</span><input id="opt${i}" placeholder="Enter option ${l}"><input type="radio" name="correctRadio" value="${i}" ${i===0?'checked':''} title="Correct answer"></div>`).join('')}</div>`;
   }else if(currentType==='true_false'){
@@ -193,129 +300,88 @@ function renderDynamicFields(){
   }else{
     box.innerHTML=`<div class="info-banner">এই ধরনের প্রশ্নের জন্য Question এবং Correct Answer/Model Answer লিখলেই হবে।</div>`;
   }
-  updateCorrectAnswerOptions();
-  updateMiniPreview();
+  updateCorrectAnswerOptions();updateMiniPreview();
 }
-
 function getAnswer(){
-  if(currentType==='mcq'){
-    const i=Number(document.querySelector('input[name="correctRadio"]:checked')?.value||0);
-    return qval('opt'+i);
-  }
-  if(currentType==='true_false') return document.querySelector('input[name="tf"]:checked')?.value||'';
-  if(currentType==='match'){
-    const pairs=[]; for(let i=1;i<=4;i++){const l=qval('left'+i),r=qval('right'+i);if(l||r)pairs.push(`${l} — ${r}`);}
-    return pairs.join(' | ');
-  }
+  if(currentType==='omr')return document.querySelector('input[name="omrCorrect"]:checked')?.value||'';
+  if(currentType==='mcq'){const i=Number(document.querySelector('input[name="correctRadio"]:checked')?.value||0);return qval('opt'+i);}
+  if(currentType==='true_false')return document.querySelector('input[name="tf"]:checked')?.value||'';
+  if(currentType==='match'){const pairs=[];for(let i=1;i<=4;i++){const l=qval('left'+i),r=qval('right'+i);if(l||r)pairs.push(`${l} — ${r}`);}return pairs.join(' | ');}
   return qval('correctAnswerText');
 }
-
 function updateCorrectAnswerOptions(){
-  const sel=document.getElementById('correctAnswer');
-  if(!sel)return;
+  const sel=document.getElementById('correctAnswer');if(!sel)return;
   if(currentType==='mcq'){
     sel.innerHTML=letters.map((l,i)=>`<option value="${i}">${l}</option>`).join('');
     sel.onchange=()=>{const r=document.querySelector(`input[name="correctRadio"][value="${sel.value}"]`);if(r)r.checked=true;updateMiniPreview();};
-  }else{
+  }else if(currentType!=='omr'){
     sel.innerHTML=`<option value="">Select / write the answer below</option>`;
-    const field=document.createElement('div');
-    field.className='field';
-    field.innerHTML=`<input id="correctAnswerText" placeholder="Correct / Model Answer">`;
-    sel.parentElement.after(field);
+    const field=document.createElement('div');field.className='field';field.innerHTML=`<input id="correctAnswerText" placeholder="Correct / Model Answer">`;sel.parentElement.after(field);
   }
 }
-
 function collectQuestion(){
-  const question=qval('question');
-  if(!question){alert('প্রথমে প্রশ্ন লিখুন।');document.getElementById('question').focus();return null;}
+  const question=qval('question');if(!question){alert('প্রথমে প্রশ্ন লিখুন।');document.getElementById('question').focus();return null;}
+  if(currentType==='omr'){if(!saveCurrentOMRSlot(true))return null;return getOMRSlot();}
   let answer=getAnswer();
-  if(currentType==='mcq'){
-    const opts=letters.map((_,i)=>qval('opt'+i));
-    if(opts.some(x=>!x)){alert('MCQ-এর সব ৪টি option পূরণ করুন।');return null;}
-    answer=opts[Number(document.querySelector('input[name="correctRadio"]:checked')?.value||0)];
-  }else if(!answer){
-    alert('Correct / Model Answer দিন।');return null;
-  }
+  if(currentType==='mcq'){const opts=letters.map((_,i)=>qval('opt'+i));if(opts.some(x=>!x)){alert('MCQ-এর সব ৪টি option পূরণ করুন।');return null;}answer=opts[Number(document.querySelector('input[name="correctRadio"]:checked')?.value||0)];}
+  else if(!answer){alert('Correct / Model Answer দিন।');return null;}
   const q={type:currentType,question,answer,marks:marksFor(),subject:document.getElementById('subject').value,class_name:document.getElementById('classSemester').value,solution:{enabled:Boolean(qval('explanation')),steps:qval('explanation')?[qval('explanation')]:[]}};
   if(currentType==='mcq')q.options=letters.map((_,i)=>qval('opt'+i));
   if(currentType==='true_false')q.options=['সত্য','মিথ্যা'];
-  if(currentType==='match'){
-    q.pairs=[]; for(let i=1;i<=4;i++){const l=qval('left'+i),r=qval('right'+i);if(l||r)q.pairs.push({left:l,right:r});}
-  }
+  if(currentType==='match'){q.pairs=[];for(let i=1;i<=4;i++){const l=qval('left'+i),r=qval('right'+i);if(l||r)q.pairs.push({left:l,right:r});}}
   return q;
 }
-
 function saveDraft(){
-  const q=collectQuestion(); if(!q)return;
-  teacherQuestions.push(q);
-  localStorage.setItem('teacherQuestions',JSON.stringify(teacherQuestions));
-  localStorage.setItem('teacherDraftMeta',JSON.stringify({subject:q.subject,className:q.class_name}));
-
-  // Publish the saved teacher question to the same local question bank
-  // used by Student -> Class -> Semester -> Subject -> Practice.
-  const subjectMap={
-    'বাংলা':'bangla','Bangla':'bangla','English':'english','ইংরেজি':'english',
-    'Mathematics':'mathematics','গণিত':'mathematics','Science':'science','Physics':'physics',
-    'Life Science':'life-science','Geography':'geography','History':'history',
-    'Commercial Law':'commercial-law','Accountancy':'accountancy','Business Studies':'business-studies',
-    'Cost Tax':'cost-tax','Costing':'costing','Computer Science':'computer-science',
-    'Political Science':'political-science'
-  };
-  const text=String(q.class_name||'');
-  const cm=text.match(/Class\s*(5|6|7|8|9|10|11|12)/i);
-  const sm=text.match(/(?:Semester\s*|Semester\s*[-:]?\s*)([1-4])/i) || text.match(/(1st|2nd|3rd|4th)\s*Semester/i);
-  const classId=cm?'class'+cm[1]:'';
-  const sem=sm?(sm[1]==='1st'?'1':sm[1]==='2nd'?'2':sm[1]==='3rd'?'3':sm[1]==='4th'?'4':sm[1]):'';
-  const sid=subjectMap[q.subject]||String(q.subject||'').toLowerCase().replace(/\s+/g,'-');
-  if(classId && sem && sid){
-    let banks={};
-    try{banks=JSON.parse(localStorage.getItem('practiceQuestionBanksV1')||'{}')}catch{}
-    const k=`${classId}|${sem}|${sid}`;
-    if(!Array.isArray(banks[k]))banks[k]=[];
-    if(banks[k].length<20)banks[k].push(q);
-    banks[k]=banks[k].slice(-20);
-    localStorage.setItem('practiceQuestionBanksV1',JSON.stringify(banks));
-    localStorage.setItem('lastPublishedQuestion',JSON.stringify({key:k,question:q}));
+  if(currentType==='omr'){
+    if(!saveCurrentOMRSlot(true))return;
+    rebuildTeacherQuestions();
+  }else{
+    const q=collectQuestion();if(!q)return;teacherQuestions.push(q);localStorage.setItem('teacherQuestions',JSON.stringify(teacherQuestions));
+    localStorage.setItem('teacherDraftMeta',JSON.stringify({subject:q.subject,className:q.class_name}));
+    publishPracticeCopy(q);
   }
+  const qs=JSON.parse(localStorage.getItem('teacherQuestions')||'[]');
+  if(currentType==='omr'){localStorage.setItem('teacherDraftMeta',JSON.stringify({subject:document.getElementById('subject').value,className:document.getElementById('classSemester').value,type:'omr'}));}
   location.href='teacher-preview.html';
 }
-
-function resetQuestion(){
-  document.getElementById('question').value='';
-  document.getElementById('explanation').value='';
-  renderDynamicFields();
-  document.getElementById('questionCount').textContent='0 / 1000';
-  document.getElementById('explanationCount').textContent='0 / 1000';
+function publishPracticeCopy(q){
+  const subjectMap={'বাংলা':'bangla','Bangla':'bangla','English':'english','ইংরেজি':'english','Mathematics':'mathematics','গণিত':'mathematics','Science':'science','Physics':'physics','Life Science':'life-science','Geography':'geography','History':'history','Commercial Law':'commercial-law','Accountancy':'accountancy','Business Studies':'business-studies','Cost Tax':'cost-tax','Costing':'costing','Computer Science':'computer-science','Political Science':'political-science'};
+  const text=String(q.class_name||'');const cm=text.match(/Class\s*(5|6|7|8|9|10|11|12)/i);const sm=text.match(/(?:Semester\s*|Semester\s*[-:]?\s*)([1-4])/i)||text.match(/(1st|2nd|3rd|4th)\s*Semester/i);const classId=cm?'class'+cm[1]:'';const sem=sm?(sm[1]==='1st'?'1':sm[1]==='2nd'?'2':sm[1]==='3rd'?'3':sm[1]==='4th'?'4':sm[1]):'';const sid=subjectMap[q.subject]||String(q.subject||'').toLowerCase().replace(/\s+/g,'-');
+  if(classId&&sem&&sid){let banks={};try{banks=JSON.parse(localStorage.getItem('practiceQuestionBanksV1')||'{}')}catch{}const k=`${classId}|${sem}|${sid}`;if(!Array.isArray(banks[k]))banks[k]=[];if(banks[k].length<20)banks[k].push(q);banks[k]=banks[k].slice(-20);localStorage.setItem('practiceQuestionBanksV1',JSON.stringify(banks));localStorage.setItem('lastPublishedQuestion',JSON.stringify({key:k,question:q}));}
 }
-
+function resetQuestion(){
+  if(currentType==='omr'){const bank=getOMRBank();if(bank[omrSet])bank[omrSet][omrIndex]=null;setOMRBank(bank);rebuildTeacherQuestions();loadOMRSlot();return;}
+  document.getElementById('question').value='';document.getElementById('explanation').value='';renderDynamicFields();document.getElementById('questionCount').textContent='0 / 1000';document.getElementById('explanationCount').textContent='0 / 1000';
+}
 function updateMiniPreview(){
-  document.getElementById('summaryType').textContent=typeNames[currentType];
-  document.getElementById('summaryMarks').textContent=marksFor();
-  document.getElementById('summarySubject').textContent=document.getElementById('subject').value;
-  document.getElementById('summaryClass').textContent=document.getElementById('classSemester').value;
-  document.getElementById('miniQuestion').textContent=(qval('question')||'1) প্রশ্নটি এখানে দেখা যাবে।');
+  document.getElementById('summaryType').textContent=typeNames[currentType];document.getElementById('summaryMarks').textContent=marksFor();document.getElementById('summarySubject').textContent=document.getElementById('subject').value;document.getElementById('summaryClass').textContent=document.getElementById('classSemester').value;document.getElementById('miniQuestion').textContent=(qval('question')||'1) প্রশ্নটি এখানে দেখা যাবে।');
   const opts=document.getElementById('miniOptions');
-  if(currentType==='mcq')opts.innerHTML=letters.map((l,i)=>`<div class="${document.querySelector('input[name="correctRadio"]:checked')?.value==i?'correct-mini':''}">${l}) ${qval('opt'+i)||'Option '+l}</div>`).join('');
+  if(currentType==='omr'){const a=document.querySelector('input[name="omrCorrect"]:checked')?.value||'';const timer=document.getElementById('omrTimer')?.value||localStorage.getItem('teacherOMRTimerSeconds')||300;const mm=String(Math.floor(Number(timer)/60)).padStart(2,'0');const ss=String(Number(timer)%60).padStart(2,'0');opts.innerHTML=`<div>Booklet Set: <b>${omrSet}</b></div><div>Correct Answer: <b>${a||'—'}</b></div><div>Exam Timer: <b>${mm}:${ss}</b> (পুরো 40 questions)</div><div class="muted">Question-এর মধ্যেই A), B), C), D) option লিখুন।</div>`;}
+  else if(currentType==='mcq')opts.innerHTML=letters.map((l,i)=>`<div class="${document.querySelector('input[name="correctRadio"]:checked')?.value==i?'correct-mini':''}">${l}) ${qval('opt'+i)||'Option '+l}</div>`).join('');
   else if(currentType==='true_false')opts.innerHTML='<div>○ সত্য</div><div>○ মিথ্যা</div>';
   else if(currentType==='match')opts.innerHTML=[1,2,3,4].map(i=>qval('left'+i)||qval('right'+i)?`<div>${qval('left'+i)} — ${qval('right'+i)}</div>`:'').join('');
   else opts.innerHTML='<div class="muted">Model answer will be used after the question.</div>';
 }
-
 document.querySelectorAll('.type-card').forEach(btn=>btn.addEventListener('click',()=>{
-  currentType=btn.dataset.type;
-  document.querySelectorAll('.type-card').forEach(x=>x.classList.toggle('active',x===btn));
-  renderDynamicFields();
+  currentType=btn.dataset.type;document.querySelectorAll('.type-card').forEach(x=>x.classList.toggle('active',x===btn));
+  if(currentType==='omr')loadOMRSlot();else renderDynamicFields();
 }));
-document.querySelectorAll('.marks').forEach(s=>s.addEventListener('change',updateMiniPreview));
-document.getElementById('subject').addEventListener('change',updateMiniPreview);
-document.getElementById('classSemester').addEventListener('change',updateMiniPreview);
+document.querySelectorAll('.marks').forEach(s=>s.addEventListener('change',()=>{if(currentType==='omr'&&s.dataset.for==='omr')saveCurrentOMRSlot(false);updateMiniPreview();}));
+document.getElementById('subject').addEventListener('change',updateMiniPreview);document.getElementById('classSemester').addEventListener('change',updateMiniPreview);
 document.getElementById('question').addEventListener('input',e=>{document.getElementById('questionCount').textContent=`${e.target.value.length} / 1000`;updateMiniPreview();});
 document.getElementById('explanation').addEventListener('input',e=>document.getElementById('explanationCount').textContent=`${e.target.value.length} / 1000`);
-document.getElementById('saveQuestion').addEventListener('click',saveDraft);
-document.getElementById('saveQuestionBottom').addEventListener('click',saveDraft);
-document.getElementById('resetQuestion').addEventListener('click',resetQuestion);
-document.addEventListener('input',updateMiniPreview);
+document.getElementById('saveQuestion').addEventListener('click',saveDraft);document.getElementById('saveQuestionBottom').addEventListener('click',saveDraft);document.getElementById('resetQuestion').addEventListener('click',resetQuestion);document.addEventListener('input',updateMiniPreview);
+const symbolSets={
+  'Math':[ ['+','Plus / যোগ'],['−','Minus / বিয়োগ'],['×','Multiplication / গুণ'],['÷','Division / ভাগ'],['=','Equal to / সমান'],['≠','Not equal to / অসমান'],['<','Less than / ছোট'],['>','Greater than / বড়'],['≤','Less than or equal to'],['≥','Greater than or equal to'],['±','Plus-minus'],['%','Percentage / শতকরা'],[':','Ratio / অনুপাত'],['::','Proportion / সমানুপাত'],['∴','Therefore / অতএব'],['∵','Because / কারণ'],['≈','Approximately equal'],['∝','Proportional to'],['∞','Infinity / অসীম'],['√','Square root / বর্গমূল'],['∛','Cube root / ঘনমূল'],['∜','Fourth root / চতুর্থ মূল'],['^','Power / ঘাত'],['π','Pi / পাই'],['°','Degree / ডিগ্রি'],['′','Prime / মিনিট'],['″','Double prime / সেকেন্ড'],['∠','Angle / কোণ'],['⟂','Perpendicular / লম্ব'],['∥','Parallel / সমান্তরাল'],['△','Triangle / ত্রিভুজ'],['≅','Congruent / সর্বসম'],['∼','Similar / সদৃশ'],['∈','Belongs to / অন্তর্ভুক্ত'],['∉','Does not belong to'],['⊂','Subset / উপসেট'],['∪','Union / সংযোগ'],['∩','Intersection / ছেদ'],['∅','Empty set / শূন্য সেট'],['Σ','Sigma / যোগফল'],['Δ','Delta / পরিবর্তন'],['×10ⁿ','Scientific notation'],['!','Factorial'],['x²','Square'],['x³','Cube'],['xʸ','Power'],['1/x','Reciprocal'],['10ˣ','Ten to power x'],['eˣ','Exponential'],['log','Common logarithm'],['ln','Natural logarithm'],['e','Euler number'],['i','Imaginary unit'],['Ans','Previous answer'],['⌊x⌋','Floor'],['⌈x⌉','Ceiling'],['□⁄□','Fraction / ভগ্নাংশ']],
+  'Greek':[ ['α','Alpha / আলফা'],['β','Beta / বিটা'],['γ','Gamma / গামা'],['θ','Theta / থিটা'],['φ','Phi / ফাই'],['π','Pi / পাই'],['λ','Lambda / ল্যাম্বডা'],['μ','Mu / মিউ'],['ρ','Rho / রো'],['σ','Sigma / সিগমা'],['ε','Epsilon / এপসিলন'],['η','Eta / ইটা'],['Ω','Omega / ওমেগা'],['ω','Small omega / ছোট ওমেগা'],['τ','Tau / টাও'],['ψ','Psi / সাই'],['χ','Chi / কাই'],['ζ','Zeta / জিটা']],
+  'Physics':[ ['v','Velocity / বেগ'],['u','Initial velocity / প্রাথমিক বেগ'],['a','Acceleration / ত্বরণ'],['s','Displacement / সরণ'],['t','Time / সময়'],['m','Mass / ভর'],['F','Force / বল'],['W','Work / কার্য'],['P','Power / ক্ষমতা'],['E','Energy / শক্তি'],['p','Momentum / ভরবেগ'],['g','Acceleration due to gravity'],['h','Height / উচ্চতা'],['r','Radius / ব্যাসার্ধ'],['d','Distance / দূরত্ব'],['A','Area / ক্ষেত্রফল'],['V','Voltage / বিভব'],['I','Current / তড়িৎপ্রবাহ'],['R','Resistance / রোধ'],['Q','Charge / আধান'],['C','Capacitance / ধারকত্ব'],['B','Magnetic field / চৌম্বক ক্ষেত্র'],['E','Electric field / তড়িৎ ক্ষেত্র'],['Φ','Magnetic flux / চৌম্বক ফ্লাক্স'],['L','Inductance / আবেশাঙ্ক'],['M','Mutual inductance / পারস্পরিক আবেশ'],['f','Frequency / কম্পাঙ্ক'],['T','Time period / পর্যায়কাল'],['λ','Wavelength / তরঙ্গদৈর্ঘ্য'],['c','Speed of light / আলোর বেগ'],['μ','Permeability / ভেদ্যতা'],['ε','Permittivity / তড়িৎভেদনযোগ্যতা'],['ρ','Resistivity / রোধকতা'],['î','Unit vector X'],['ĵ','Unit vector Y'],['k̂','Unit vector Z']],
+  'Trigonometry':[ ['sin','Sine / সাইন'],['cos','Cosine / কোসাইন'],['tan','Tangent / ট্যানজেন্ট'],['sin⁻¹','Inverse sine'],['cos⁻¹','Inverse cosine'],['tan⁻¹','Inverse tangent'],['sinh','Hyperbolic sine'],['cosh','Hyperbolic cosine'],['tanh','Hyperbolic tangent']],
+  'Symbols':[ ['@','At sign'],['#','Hash / Number'],['$','Dollar'],['%','Percent'],['&','Ampersand'],['*','Asterisk'],['_','Underscore'],['-','Hyphen'],['+','Plus'],['=','Equal'],['/','Slash'],['\\','Backslash'],['<','Less than'],['>','Greater than'],['~','Tilde'],['`','Backtick'],['^','Caret'],['|','Vertical bar / Pipe'],['{ }','Braces'],['[ ]','Brackets'],['( )','Parentheses'],['→','Right direction / ডানদিকে'],['←','Left direction / বাঁদিকে'],['↑','Upward / ঊর্ধ্বমুখী'],['↓','Downward / নিম্নমুখী'],['↗','উত্তর-পূর্ব/উর্ধ্ব-ডান'],['↘','নিম্ন-ডান'],['↙','নিম্ন-বাম'],['↖','উর্ধ্ব-বাম']]
+};
+const kb=document.getElementById('symbolKeyboard'),tabs=document.getElementById('symbolTabs'),grid=document.getElementById('symbolGrid');let activeSymbolTab='Math';
+function renderSymbolKeyboard(){tabs.innerHTML=Object.keys(symbolSets).map(k=>`<button type="button" class="symbol-tab ${k===activeSymbolTab?'active':''}" data-tab="${k}">${k}</button>`).join('');grid.innerHTML=symbolSets[activeSymbolTab].map(([sym,name])=>`<button type="button" class="symbol-key" data-symbol="${escapeHtml(sym)}"><span class="sym">${escapeHtml(sym)}</span><small>${escapeHtml(name)}</small></button>`).join('');tabs.querySelectorAll('.symbol-tab').forEach(b=>b.onclick=()=>{activeSymbolTab=b.dataset.tab;renderSymbolKeyboard();});grid.querySelectorAll('.symbol-key').forEach(b=>b.onclick=()=>insertSymbol(b.dataset.symbol));}
+function insertSymbol(symbol){const ta=document.getElementById('question');if(!ta)return;const start=ta.selectionStart??ta.value.length,end=ta.selectionEnd??start;const value=ta.value;ta.value=value.slice(0,start)+symbol+value.slice(end);const pos=start+symbol.length;ta.focus();ta.setSelectionRange(pos,pos);ta.dispatchEvent(new Event('input',{bubbles:true}));}
+document.getElementById('keyboardBtn')?.addEventListener('click',()=>{renderSymbolKeyboard();kb.classList.remove('hidden');kb.setAttribute('aria-hidden','false');});document.getElementById('closeKeyboard')?.addEventListener('click',()=>{kb.classList.add('hidden');kb.setAttribute('aria-hidden','true');});kb?.addEventListener('click',e=>{if(e.target===kb){kb.classList.add('hidden');kb.setAttribute('aria-hidden','true');}});
 renderDynamicFields();
-
 </script>
 </body></html>
