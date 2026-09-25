@@ -1,311 +1,287 @@
 {
-  "class_id": "class12-commerce",
-  "class": "Class 12 Commerce",
+  "class_id": "class11-commerce",
   "semester": "4",
-  "subject": "Accountancy",
-  "chapter": "Partnership Accounts",
-  "title": "Semester 4 – Partnership Accounts",
-  "questionCount": 20,
+  "subject": "accountancy",
   "questions": [
     {
-      "id": 61,
+      "id": 1,
       "type": "mcq",
-      "question": "X প্রতি মাসের শুরুতে প্রথম ৬ মাস ₹1,000 করে এবং পরের ৬ মাসের শেষে ₹1,500 করে Drawing করেন। Interest on Drawings-এর হার 10% p.a. হলে মোট Interest কত?",
+      "question": "Accountancy Practice Question 1 — Class 11 Commerce Semester 4",
       "options": [
-        "₹600",
-        "₹662.50",
-        "₹700",
-        "₹750"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹662.50",
+      "answer": "Accountancy Option A",
       "marks": 1,
-      "solution": "প্রথম ৬ মাসের beginning drawings-এর weights 12+11+10+9+8+7=57। Interest ₹475। পরের ৬ মাসের ending drawings-এর weights 5+4+3+2+1+0=15। Interest ₹187.50। মোট ₹662.50।",
-      "label": "IMP QUES"
+      "solution": "Solution: Accountancy Option A is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 62,
+      "id": 2,
       "type": "mcq",
-      "question": "1 April 2024-এ X-এর Capital ₹50,000 এবং Y-এর Capital ₹60,000। X 1 October-এ আরও ₹10,000 Capital আনলেন। Y 31 December-এ আরও ₹20,000 আনলেন। Interest on Capital 12% p.a. হলে X-এর Interest কত?",
+      "question": "Accountancy Practice Question 2 — Class 11 Commerce Semester 4",
       "options": [
-        "₹5,750",
-        "₹6,000",
-        "₹6,600",
-        "₹7,200"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹6,600",
+      "answer": "Accountancy Option B",
       "marks": 1,
-      "solution": "X-এর ₹50,000-এর ওপর পুরো বছরের interest = ₹6,000। 1 October-এ অতিরিক্ত ₹10,000 আনা হয়েছে, তাই 6 মাসের interest = ₹600। মোট ₹6,600।",
-      "label": ""
+      "solution": "Solution: Accountancy Option B is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 63,
+      "id": 3,
       "type": "mcq",
-      "question": "1 April 2023-এ Abhi-এর Capital ₹50,000। 1 October-এ আরও ₹10,000 Capital আনলেন। Interest on Capital 10% p.a. হলে Abhi-এর Interest কত?",
+      "question": "Accountancy Practice Question 3 — Class 11 Commerce Semester 4",
       "options": [
-        "₹5,000",
-        "₹5,500",
-        "₹6,000",
-        "₹6,500"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹5,500",
+      "answer": "Accountancy Option C",
       "marks": 1,
-      "solution": "₹50,000-এর 10% = ₹5,000। অতিরিক্ত ₹10,000-এর 6 মাসের interest = ₹500। মোট ₹5,500।",
-      "label": ""
+      "solution": "Solution: Accountancy Option C is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 64,
+      "id": 4,
       "type": "mcq",
-      "question": "M এবং S প্রত্যেকে Net Profit-এর ওপর 5% Commission পান, after charging such commission। Net Profit ₹8,40,000 হলে প্রত্যেকের Commission কত?",
+      "question": "Accountancy Practice Question 4 — Class 11 Commerce Semester 4",
       "options": [
-        "₹35,000",
-        "₹38,181.82",
-        "₹40,000",
-        "₹45,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹38,181.82",
+      "answer": "Accountancy Option D",
       "marks": 1,
-      "solution": "দুজনের commission-ই একই profit after charging commission-এর ওপর 5%। তাই মোট commission = 10% of profit after commission। মোট commission = 8,40,000 × 10/110 = ₹76,363.64। প্রত্যেকের commission = ₹38,181.82 (প্রায়)।",
-      "label": ""
+      "solution": "Solution: Accountancy Option D is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 65,
+      "id": 5,
       "type": "mcq",
-      "question": "X ও Y-এর Capital যথাক্রমে ₹50,000 ও ₹30,000। Interest on Capital 10%। Firm-এর Net Profit ₹4,800। Interest-এর পরে বণ্টনের জন্য কত Profit থাকবে?",
+      "question": "Accountancy Practice Question 5 — Class 11 Commerce Semester 4",
       "options": [
-        "₹3,000",
-        "₹1,800",
-        "₹4,800",
-        "₹0"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹0",
+      "answer": "Accountancy Option A",
       "marks": 1,
-      "solution": "Interest on Capital-এর হিসাবি পরিমাণ ₹5,000 + ₹3,000 = ₹8,000, যা available profit ₹4,800-এর চেয়ে বেশি। তাই profit-এর বাইরে অতিরিক্ত কিছু অবশিষ্ট থাকে না; available profit-এর পরে balance ₹0।",
-      "label": ""
+      "solution": "Solution: Accountancy Option A is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 66,
+      "id": 6,
       "type": "mcq",
-      "question": "A, B ও C-এর Profit-sharing Ratio 5 : 3 : 2। C-কে minimum ₹30,000 Profit-এর Guarantee দেওয়া হয়েছে। Firm-এর Profit ₹1,00,000। Deficiency A ও B সমানভাবে বহন করবে। C-এর Guarantee-এর জন্য মোট deficiency কত?",
+      "question": "Accountancy Practice Question 6 — Class 11 Commerce Semester 4",
       "options": [
-        "₹5,000",
-        "₹8,000",
-        "₹10,000",
-        "₹12,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹10,000",
+      "answer": "Accountancy Option B",
       "marks": 1,
-      "solution": "C-এর normal share = ₹1,00,000 × 2/10 = ₹20,000। Guarantee ₹30,000 হওয়ায় deficiency = ₹10,000।",
-      "label": ""
+      "solution": "Solution: Accountancy Option B is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 67,
+      "id": 7,
       "type": "mcq",
-      "question": "L, M ও N-এর Profit-sharing Ratio 3 : 2 : 1। L-এর Salary ₹36,000 এবং N-এর Salary ₹48,000 দেওয়া হয়নি। পরে Rectification করতে হবে। L ও N-এর salary omission-এর কারণে M-এর ওপর মোট adjustment-এর প্রভাব কত?",
+      "question": "Accountancy Practice Question 7 — Class 11 Commerce Semester 4",
       "options": [
-        "₹8,000",
-        "₹14,000",
-        "₹28,000",
-        "₹42,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹28,000",
+      "answer": "Accountancy Option C",
       "marks": 1,
-      "solution": "Omitted salary মোট ₹84,000। Salary দেওয়া হলে divisible profit ₹84,000 কমত। M-এর 2/6 share অনুযায়ী M-এর profit share ₹28,000 কমবে। M নিজে salary পান না, তাই net adjustment = ₹28,000।",
-      "label": ""
+      "solution": "Solution: Accountancy Option C is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 68,
+      "id": 8,
       "type": "mcq",
-      "question": "একজন Partner 1 April এবং 1 October-এ ₹6,000 করে Drawing করেন। Interest on Drawings-এর হার 8% p.a. হলে মোট Interest কত?",
+      "question": "Accountancy Practice Question 8 — Class 11 Commerce Semester 4",
       "options": [
-        "₹720",
-        "₹760",
-        "₹800",
-        "₹960"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹720",
+      "answer": "Accountancy Option D",
       "marks": 1,
-      "solution": "1 April-এর ₹6,000-এর 12 মাসের interest = ₹480। 1 October-এর ₹6,000-এর 6 মাসের interest = ₹240। মোট ₹720।",
-      "label": ""
+      "solution": "Solution: Accountancy Option D is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 69,
+      "id": 9,
       "type": "mcq",
-      "question": "N ও T 1 January 2024-এ যথাক্রমে ₹20,000 ও ₹15,000 Capital আনলেন। N 1 April-এ ₹10,000 এবং T 1 October-এ ₹5,000 অতিরিক্ত Capital আনলেন। Weighted Capital নির্ণয় করলে N-এর Weighted Capital কত?",
+      "question": "Accountancy Practice Question 9 — Class 11 Commerce Semester 4",
       "options": [
-        "₹2,40,000",
-        "₹3,00,000",
-        "₹3,30,000",
-        "₹3,60,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹3,30,000",
+      "answer": "Accountancy Option A",
       "marks": 1,
-      "solution": "N-এর প্রথম ₹20,000 × 12 = ₹2,40,000। 1 April-এর অতিরিক্ত ₹10,000 × 9 = ₹90,000। মোট weighted capital = ₹3,30,000।",
-      "label": ""
+      "solution": "Solution: Accountancy Option A is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 70,
+      "id": 10,
       "type": "mcq",
-      "question": "A, B ও C-এর Profit-sharing Ratio 5 : 3 : 2। B-কে ₹95,000 minimum profit guaranteed করা হয়েছে। Firm-এর total profit ₹2,00,000। Deficiency A ও C সমানভাবে বহন করবে। A কত Profit পাবে?",
+      "question": "Accountancy Practice Question 10 — Class 11 Commerce Semester 4",
       "options": [
-        "₹42,500",
-        "₹82,500",
-        "₹50,000",
-        "₹55,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹82,500",
+      "answer": "Accountancy Option B",
       "marks": 1,
-      "solution": "B-এর normal share = ₹2,00,000 × 3/10 = ₹60,000। Deficiency = ₹35,000। A ও C সমানভাবে বহন করলে A-এর burden ₹17,500। A-এর normal share ₹1,00,000; adjusted A = ₹82,500।",
-      "label": ""
+      "solution": "Solution: Accountancy Option B is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 71,
+      "id": 11,
       "type": "mcq",
-      "question": "A ও B-এর Profit-sharing Ratio 3 : 2। কিন্তু ₹30,000 Profit ভুল করে সমানভাবে ভাগ করা হয়েছে। Rectification-এর জন্য কোন entry হবে?",
+      "question": "Accountancy Practice Question 11 — Class 11 Commerce Semester 4",
       "options": [
-        "A's Capital A/c Dr ₹3,000; To B's Capital A/c ₹3,000",
-        "B's Capital A/c Dr ₹3,000; To A's Capital A/c ₹3,000",
-        "Cash A/c Dr ₹3,000; To A's Capital A/c ₹3,000",
-        "A's Capital A/c Dr ₹6,000; To B's Capital A/c ₹6,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "A's Capital A/c Dr ₹3,000; To B's Capital A/c ₹3,000",
+      "answer": "Accountancy Option C",
       "marks": 1,
-      "solution": "সঠিক share: A ₹18,000, B ₹12,000। ভুলে দুজনেই ₹15,000 পেয়েছে। A-এর কাছ থেকে ₹3,000 কম নেওয়া হয়েছে এবং B ₹3,000 বেশি পেয়েছে। তাই A Capital Dr ₹3,000, To B Capital ₹3,000।",
-      "label": ""
+      "solution": "Solution: Accountancy Option C is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 72,
+      "id": 12,
       "type": "mcq",
-      "question": "Kubul-এর Capital ₹5,00,000 এবং Radha-এর Capital ₹4,00,000। Interest on Capital 10%। Firm-এর Profit ₹72,000। Profit যথেষ্ট না হলে available profit-এর মধ্যে Interest on Capital ratio অনুযায়ী বণ্টন করা হবে। Kubul-এর Interest কত?",
+      "question": "Accountancy Practice Question 12 — Class 11 Commerce Semester 4",
       "options": [
-        "₹36,000",
-        "₹40,000",
-        "₹50,000",
-        "₹72,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹40,000",
+      "answer": "Accountancy Option D",
       "marks": 1,
-      "solution": "Capital ratio 5:4। Available profit ₹72,000-কে 5:4 অনুপাতে ভাগ করলে Kubul-এর অংশ = ₹72,000 × 5/9 = ₹40,000।",
-      "label": ""
+      "solution": "Solution: Accountancy Option D is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 73,
+      "id": 13,
       "type": "mcq",
-      "question": "একজন Partner প্রতি মাসের শেষে ₹10,000 করে Drawing করেন। Interest on Drawings ₹8,250। Interest rate কত?",
+      "question": "Accountancy Practice Question 13 — Class 11 Commerce Semester 4",
       "options": [
-        "10%",
-        "12%",
-        "15%",
-        "18%"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "15%",
+      "answer": "Accountancy Option A",
       "marks": 1,
-      "solution": "মোট drawing ₹1,20,000। Ending drawings-এর average period 5.5 months। 8,250 = 1,20,000 × R × 5.5/12; R = 15%।",
-      "label": ""
+      "solution": "Solution: Accountancy Option A is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 74,
+      "id": 14,
       "type": "mcq",
-      "question": "Jayanti প্রতি Quarter-এর শুরুতে ₹12,000 করে Drawing করেন। Interest rate 9% p.a. হলে Interest on Drawings কত?",
+      "question": "Accountancy Practice Question 14 — Class 11 Commerce Semester 4",
       "options": [
-        "₹2,400",
-        "₹2,500",
-        "₹2,700",
-        "₹3,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹2,700",
+      "answer": "Accountancy Option B",
       "marks": 1,
-      "solution": "Quarter-এর শুরুতে চারটি সমান drawing-এর conventional average period 7.5 months (12, 9, 6, 3 মাস)। তাই Interest = ₹48,000 × 9% × 7.5/12 = ₹2,700।",
-      "label": ""
+      "solution": "Solution: Accountancy Option B is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 75,
+      "id": 15,
       "type": "mcq",
-      "question": "Debalu প্রতি মাসের শেষে ₹3,000 করে Drawing করেন। Interest rate 8% p.a. হলে Interest on Drawings কত?",
+      "question": "Accountancy Practice Question 15 — Class 11 Commerce Semester 4",
       "options": [
-        "₹1,320",
-        "₹1,440",
-        "₹1,500",
-        "₹1,620"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹1,320",
+      "answer": "Accountancy Option C",
       "marks": 1,
-      "solution": "মোট drawing ₹36,000। Ending monthly drawings-এর average period 5.5 months। Interest = ₹36,000 × 8% × 5.5/12 = ₹1,320।",
-      "label": ""
+      "solution": "Solution: Accountancy Option C is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 76,
+      "id": 16,
       "type": "mcq",
-      "question": "একজন Partner প্রতি মাসের শুরুতে ₹500 করে Drawing করেন। Interest rate 6% p.a. হলে Interest on Drawings কত?",
+      "question": "Accountancy Practice Question 16 — Class 11 Commerce Semester 4",
       "options": [
-        "₹180",
-        "₹195",
-        "₹210",
-        "₹225"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹195",
+      "answer": "Accountancy Option D",
       "marks": 1,
-      "solution": "মোট drawing ₹6,000। Beginning monthly drawings-এর average period 6.5 months। Interest = ₹6,000 × 6% × 6.5/12 = ₹195।",
-      "label": ""
+      "solution": "Solution: Accountancy Option D is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 77,
+      "id": 17,
       "type": "mcq",
-      "question": "Goodwill-এর মূল্য নির্ণয় করতে গত ৫ বছরের Profit যথাক্রমে ₹25,000, ₹28,000, ₹22,000, ₹27,000 ও ₹28,000। Goodwill = 3 years' purchase of Average Profit। Goodwill কত?",
+      "question": "Accountancy Practice Question 17 — Class 11 Commerce Semester 4",
       "options": [
-        "₹72,000",
-        "₹75,000",
-        "₹78,000",
-        "₹81,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹78,000",
+      "answer": "Accountancy Option A",
       "marks": 1,
-      "solution": "Total profit ₹1,30,000; average profit ₹26,000; goodwill = ₹26,000 × 3 = ₹78,000।",
-      "label": ""
+      "solution": "Solution: Accountancy Option A is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 78,
+      "id": 18,
       "type": "mcq",
-      "question": "Mr. X-এর গত তিন বছরের Profit ছিল ₹56,000, ₹68,000 ও ₹63,000। প্রথম বছরের Profit-এ ₹6,000 abnormal gain, দ্বিতীয় বছরে ₹2,000 abnormal loss এবং তৃতীয় বছরে ₹3,000 abnormal gain অন্তর্ভুক্ত আছে। Goodwill = 2 years' purchase of Average Normal Profit। Goodwill কত?",
+      "question": "Accountancy Practice Question 18 — Class 11 Commerce Semester 4",
       "options": [
-        "₹1,00,000",
-        "₹1,10,000",
-        "₹1,20,000",
-        "₹1,30,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹1,20,000",
+      "answer": "Accountancy Option B",
       "marks": 1,
-      "solution": "Normal profits: ₹56,000−₹6,000=₹50,000; ₹68,000+₹2,000=₹70,000; ₹63,000−₹3,000=₹60,000। Average = ₹60,000। Goodwill = ₹60,000 × 2 = ₹1,20,000।",
-      "label": ""
+      "solution": "Solution: Accountancy Option B is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 79,
+      "id": 19,
       "type": "mcq",
-      "question": "Raja ও Rumki-এর Capital যথাক্রমে ₹60,000 ও ₹40,000। Rumki-এর Salary ₹800 প্রতি মাসে। Interest on Capital 5%। অবশিষ্ট Profit 7 : 3 অনুপাতে ভাগ হবে। Firm-এর Profit ₹32,000। Raja-এর Profit Share কত?",
+      "question": "Accountancy Practice Question 19 — Class 11 Commerce Semester 4",
       "options": [
-        "₹10,000",
-        "₹12,180",
-        "₹14,000",
-        "₹15,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹12,180",
+      "answer": "Accountancy Option C",
       "marks": 1,
-      "solution": "Interest on Capital মোট ₹5,000। Rumki salary ₹9,600। Remaining profit ₹17,400। Raja-এর 7/10 share = ₹12,180।",
-      "label": ""
+      "solution": "Solution: Accountancy Option C is the sample correct answer for this Accountancy practice question."
     },
     {
-      "id": 80,
+      "id": 20,
       "type": "mcq",
-      "question": "He, She ও We-এর Profit-sharing Ratio 16 : 12 : 7। We-এর minimum guaranteed profit ₹10,000। Firm-এর Profit ₹39,500। Deficiency He ও She 16 : 12 অনুপাতে বহন করবে। He-এর Profit কত?",
+      "question": "Accountancy Practice Question 20 — Class 11 Commerce Semester 4",
       "options": [
-        "₹16,857.14",
-        "₹18,000",
-        "₹20,000",
-        "₹21,000"
+        "Accountancy Option A",
+        "Accountancy Option B",
+        "Accountancy Option C",
+        "Accountancy Option D"
       ],
-      "answer": "₹16,857.14",
+      "answer": "Accountancy Option D",
       "marks": 1,
-      "solution": "We-এর normal share ₹7,900; deficiency ₹2,100। He ও She 16:12 অনুপাতে deficiency বহন করবে। He-এর burden = ₹2,100 × 16/28 = ₹1,200। He-এর normal share = ₹39,500 × 16/35 = ₹18,057.14। Adjusted share = ₹16,857.14।",
-      "label": ""
+      "solution": "Solution: Accountancy Option D is the sample correct answer for this Accountancy practice question."
     }
   ]
 }
