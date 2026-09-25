@@ -1,0 +1,311 @@
+{
+  "class_id": "class12-commerce",
+  "class": "Class 12 Commerce",
+  "semester": "3",
+  "subject": "Accountancy",
+  "chapter": "Partnership Accounts",
+  "title": "Semester 3 – Partnership Accounts",
+  "questionCount": 20,
+  "questions": [
+    {
+      "id": 41,
+      "type": "mcq",
+      "question": "Partnership Deed না থাকলে Interest on Drawings সম্পর্কে কোনটি সঠিক?",
+      "options": [
+        "6% হারে নেওয়া হবে",
+        "5% হারে নেওয়া হবে",
+        "10% হারে নেওয়া হবে",
+        "Interest on Drawings নেওয়া হবে না"
+      ],
+      "answer": "Interest on Drawings নেওয়া হবে না",
+      "marks": 1,
+      "solution": "Partnership Deed-এ Drawings-এর ওপর সুদের ব্যবস্থা না থাকলে partner-এর drawings-এর ওপর interest charge করা হয় না।",
+      "label": ""
+    },
+    {
+      "id": 42,
+      "type": "mcq",
+      "question": "Profit & Loss Appropriation Account-এ কোন কোন বিষয় দেখানো হয়?",
+      "options": [
+        "Interest on Capital",
+        "Interest on Drawings",
+        "Partner's Salary/Commission",
+        "উপরের সবকটি"
+      ],
+      "answer": "উপরের সবকটি",
+      "marks": 1,
+      "solution": "P&L Appropriation Account-এ Interest on Capital, Partner Salary/Commission, Interest on Drawings এবং profit/loss appropriation-এর বিষয়গুলি দেখানো হয়।",
+      "label": ""
+    },
+    {
+      "id": 43,
+      "type": "mcq",
+      "question": "Profit & Loss Appropriation Account-এর Credit side-এ কোনটি থাকবে?",
+      "options": [
+        "Interest on Capital",
+        "Partner's Salary",
+        "Partner's Commission",
+        "Interest on Drawings এবং Profit transferred from P&L A/c"
+      ],
+      "answer": "Interest on Drawings এবং Profit transferred from P&L A/c",
+      "marks": 1,
+      "solution": "Credit side-এ P&L Account থেকে transferred profit এবং Interest on Drawings থাকে।",
+      "label": ""
+    },
+    {
+      "id": 44,
+      "type": "mcq",
+      "question": "Partner-এর Loan-এর Interest কোন Account-এ charge করা হয়?",
+      "options": [
+        "Profit & Loss Account",
+        "Profit & Loss Appropriation Account",
+        "Capital Account",
+        "Trading Account"
+      ],
+      "answer": "Profit & Loss Account",
+      "marks": 1,
+      "solution": "Partner-এর loan-এর interest firm-এর charge against profit; তাই Profit & Loss Account-এ debit করা হয়।",
+      "label": ""
+    },
+    {
+      "id": 45,
+      "type": "mcq",
+      "question": "Interest on Capital সাধারণত কোন Account-এ দেখানো হয়?",
+      "options": [
+        "Trading Account",
+        "Profit & Loss Appropriation Account",
+        "Cash Account",
+        "Balance Sheet-এর Asset side"
+      ],
+      "answer": "Profit & Loss Appropriation Account",
+      "marks": 1,
+      "solution": "Interest on Capital profit-এর appropriation; তাই P&L Appropriation Account-এর debit side-এ দেখানো হয়।",
+      "label": ""
+    },
+    {
+      "id": 46,
+      "type": "mcq",
+      "question": "Active Partner-এর Salary কোথায় দেখানো হয়?",
+      "options": [
+        "Trading A/c",
+        "Profit & Loss A/c",
+        "Profit & Loss Appropriation A/c",
+        "Balance Sheet"
+      ],
+      "answer": "Profit & Loss Appropriation A/c",
+      "marks": 1,
+      "solution": "Partner's Salary profit appropriation; তাই P&L Appropriation Account-এ দেখানো হয়।",
+      "label": ""
+    },
+    {
+      "id": 47,
+      "type": "mcq",
+      "question": "Partnership Deed-এ Drawing-এর তারিখ উল্লেখ না থাকলে Interest on Drawings-এর জন্য গড় সময় কত ধরা হয়?",
+      "options": [
+        "3 মাস",
+        "4 মাস",
+        "6 মাস",
+        "12 মাস"
+      ],
+      "answer": "6 মাস",
+      "marks": 1,
+      "solution": "Drawing-এর নির্দিষ্ট তারিখ জানা না থাকলে সাধারণভাবে সারা বছর জুড়ে সমানভাবে drawing হয়েছে ধরে average period 6 months নেওয়া হয়।",
+      "label": ""
+    },
+    {
+      "id": 48,
+      "type": "mcq",
+      "question": "একজন Partner প্রতি মাসের শুরুতে সমান অঙ্কের Drawing করলে এক বছরের জন্য Average Period হবে—",
+      "options": [
+        "5.5 months",
+        "6 months",
+        "6.5 months",
+        "7.5 months"
+      ],
+      "answer": "6.5 months",
+      "marks": 1,
+      "solution": "মাসের শুরুতে 12, 11, ..., 1 মাসের সময় পাওয়া যায়। গড় = 78/12 = 6.5 months।",
+      "label": ""
+    },
+    {
+      "id": 49,
+      "type": "mcq",
+      "question": "একজন Partner প্রতি মাসের মাঝামাঝি সময়ে সমান Drawing করলে এক বছরের Average Period হবে—",
+      "options": [
+        "5.5 months",
+        "6 months",
+        "6.5 months",
+        "7 months"
+      ],
+      "answer": "6 months",
+      "marks": 1,
+      "solution": "প্রতি মাসের মাঝামাঝি drawing হলে average period 6 months।",
+      "label": ""
+    },
+    {
+      "id": 50,
+      "type": "mcq",
+      "question": "একজন Partner প্রতি মাসের শেষে সমান Drawing করলে এক বছরের Average Period হবে—",
+      "options": [
+        "4.5 months",
+        "5 months",
+        "6 months",
+        "5.5 months"
+      ],
+      "answer": "5.5 months",
+      "marks": 1,
+      "solution": "মাসের শেষে 11, 10, ..., 0 মাসের সময় পাওয়া যায়। গড় = 66/12 = 5.5 months।",
+      "label": ""
+    },
+    {
+      "id": 51,
+      "type": "mcq",
+      "question": "চারটি সমান Quarterly Drawing যদি প্রতি Quarter-এর শুরুতে করা হয়, Average Period হবে—",
+      "options": [
+        "4.5 months",
+        "6 months",
+        "6.5 months",
+        "7.5 months"
+      ],
+      "answer": "6 months",
+      "marks": 1,
+      "solution": "Quarter-এর শুরুতে সময়গুলো 10.5, 7.5, 4.5 ও 1.5 মাস। গড় = 24/4 = 6 months।",
+      "label": ""
+    },
+    {
+      "id": 52,
+      "type": "mcq",
+      "question": "চারটি Quarterly Drawing যদি Quarter-এর শেষে করা হয়, Average Period হবে—",
+      "options": [
+        "3 months",
+        "4.5 months",
+        "6 months",
+        "7.5 months"
+      ],
+      "answer": "4.5 months",
+      "marks": 1,
+      "solution": "Quarter-এর শেষে সময়গুলো 9, 6, 3 ও 0 মাস। গড় = 18/4 = 4.5 months।",
+      "label": ""
+    },
+    {
+      "id": 53,
+      "type": "mcq",
+      "question": "X একজন Partner। তিনি 9 মাসের জন্য firm-কে ₹1,00,000 loan দিলেন। Interest rate 6% p.a. হলে Interest কত?",
+      "options": [
+        "₹3,000",
+        "₹4,000",
+        "₹4,500",
+        "₹6,000"
+      ],
+      "answer": "₹4,500",
+      "marks": 1,
+      "solution": "Interest = 1,00,000 × 6% × 9/12 = ₹4,500।",
+      "label": ""
+    },
+    {
+      "id": 54,
+      "type": "mcq",
+      "question": "Firm-এর Net Profit ₹2,10,000। Partner-কে 5% Commission দিতে হবে after charging such commission। Commission কত? [HS 2018]",
+      "options": [
+        "₹9,500",
+        "₹10,000",
+        "₹10,500",
+        "₹12,000"
+      ],
+      "answer": "₹10,000",
+      "marks": 1,
+      "solution": "After charging commission হলে Commission = 2,10,000 × 5/105 = ₹10,000।",
+      "label": "HS 2018"
+    },
+    {
+      "id": 55,
+      "type": "mcq",
+      "question": "E প্রতি মাসের শুরুতে ₹5,000 করে Drawing করেন। Interest on Drawings-এর হার 8% p.a. হলে এক বছরে মোট Interest কত?",
+      "options": [
+        "₹2,400",
+        "₹2,500",
+        "₹2,600",
+        "₹2,800"
+      ],
+      "answer": "₹2,600",
+      "marks": 1,
+      "solution": "মোট drawing ₹60,000 এবং average period 6.5 months। Interest = 60,000 × 8% × 6.5/12 = ₹2,600।",
+      "label": "MODEL QUES"
+    },
+    {
+      "id": 56,
+      "type": "mcq",
+      "question": "X প্রতি মাসের শুরুতে ₹1,000 করে প্রথম 6 মাস Drawing করেন এবং পরের 6 মাসের শেষে প্রতি মাসে ₹1,500 করে Drawing করেন। Interest rate 10% p.a. হলে Interest on Drawings কত?",
+      "options": [
+        "₹600",
+        "₹662.50",
+        "₹700",
+        "₹750"
+      ],
+      "answer": "₹662.50",
+      "marks": 1,
+      "solution": "প্রথম 6 মাসের beginning drawings-এর month weights 12+11+10+9+8+7=57; interest ₹475। পরের 6 মাসের ending drawings-এর weights 5+4+3+2+1+0=15; interest ₹187.50। মোট ₹662.50।",
+      "label": "IMP QUES"
+    },
+    {
+      "id": 57,
+      "type": "mcq",
+      "question": "A, B ও C-এর Profit-sharing Ratio 5 : 3 : 2। C-কে ন্যূনতম ₹30,000 Profit-এর Guarantee দেওয়া হয়েছে। Firm-এর মোট Profit ₹1,00,000। C-এর deficiency A ও B সমানভাবে বহন করবে। A-এর Profit কত?",
+      "options": [
+        "₹40,000",
+        "₹45,000",
+        "₹50,000",
+        "₹55,000"
+      ],
+      "answer": "₹45,000",
+      "marks": 1,
+      "solution": "C-এর normal share ₹20,000; deficiency ₹10,000। A ও B সমানভাবে বহন করায় A-এর burden ₹5,000। A = ₹50,000 − ₹5,000 = ₹45,000।",
+      "label": ""
+    },
+    {
+      "id": 58,
+      "type": "mcq",
+      "question": "A, B ও C-এর Profit-sharing Ratio 5 : 3 : 2। C-এর minimum guaranteed profit ₹30,000। Firm-এর profit ₹1,00,000 এবং C-এর deficiency A ও B সমানভাবে বহন করবে। B-এর Profit কত?",
+      "options": [
+        "₹25,000",
+        "₹30,000",
+        "₹35,000",
+        "₹40,000"
+      ],
+      "answer": "₹25,000",
+      "marks": 1,
+      "solution": "B-এর normal share ₹30,000। C-এর deficiency ₹10,000; B-এর burden ₹5,000। তাই B = ₹25,000।",
+      "label": ""
+    },
+    {
+      "id": 59,
+      "type": "mcq",
+      "question": "He, She ও We-এর Profit-sharing Ratio 16 : 12 : 7। We-কে minimum ₹10,000 Profit-এর Guarantee দেওয়া হয়েছে। Firm-এর Profit ₹39,500। Deficiency He ও She তাদের profit-sharing ratio-তে বহন করবে। We-এর Profit কত?",
+      "options": [
+        "₹7,900",
+        "₹8,500",
+        "₹10,000",
+        "₹12,000"
+      ],
+      "answer": "₹10,000",
+      "marks": 1,
+      "solution": "We-এর normal share = 39,500 × 7/35 = ₹7,900। Guarantee অনুযায়ী deficiency ₹2,100 পূরণ করে We-কে ₹10,000 দিতে হবে।",
+      "label": ""
+    },
+    {
+      "id": 60,
+      "type": "mcq",
+      "question": "P, Q ও R-এর Profit-sharing Ratio 2 : 2 : 1। P-এর Salary ₹1,000 প্রতি মাসে, R-এর Commission ₹5,000 এবং Capital-এর ওপর Interest 5%। P, Q ও R-এর Capital যথাক্রমে ₹40,000, ₹50,000 ও ₹30,000। Firm-এর Profit ₹51,000। Q-এর Profit Share কত?",
+      "options": [
+        "₹10,000",
+        "₹11,200",
+        "₹12,000",
+        "₹14,000"
+      ],
+      "answer": "₹11,200",
+      "marks": 1,
+      "solution": "Interest on Capital = ₹2,000 + ₹2,500 + ₹1,500 = ₹6,000। P salary = ₹12,000; R commission = ₹5,000। Remaining profit = ₹28,000। Q-এর 2/5 share = ₹11,200।",
+      "label": ""
+    }
+  ]
+}

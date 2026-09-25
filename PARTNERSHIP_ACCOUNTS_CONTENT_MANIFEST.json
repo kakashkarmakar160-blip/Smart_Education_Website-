@@ -1,0 +1,29 @@
+{
+  "title": "Class 12 Commerce Accountancy – Partnership Accounts",
+  "subject": "accountancy",
+  "class": "class12-commerce",
+  "semesters": {
+    "1": {
+      "questions": 20,
+      "ids": "1-20"
+    },
+    "2": {
+      "questions": 20,
+      "ids": "21-40"
+    },
+    "3": {
+      "questions": 20,
+      "ids": "41-60"
+    },
+    "4": {
+      "questions": 20,
+      "ids": "61-80"
+    }
+  },
+  "notes": [
+    "Semester 4 calculations were independently checked and corrected.",
+    "Q64 uses the interpretation that both 5% commissions are calculated after charging total commission.",
+    "Q70 options were corrected to include ₹82,500.",
+    "Q74 was corrected to the mathematically consistent answer ₹2,160 because quarterly beginning drawings have a 6-month average period."
+  ]
+}

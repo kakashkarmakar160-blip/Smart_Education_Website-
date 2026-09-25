@@ -1,0 +1,370 @@
+{
+  "class": "Class 12 Commerce",
+  "subject": "Accountancy",
+  "semester": 2,
+  "chapter": "Partnership Accounts",
+  "title": "Semester 2 – Partnership Accounts",
+  "questionCount": 20,
+  "questions": [
+    {
+      "id": 21,
+      "question": "Partnership Firm-এর Registration সম্পর্কে কোনটি সঠিক?",
+      "options": [
+        "Registration সবসময় বাধ্যতামূলক",
+        "Registration কখনো করা যায় না",
+        "Registration আইনত বাধ্যতামূলক নয়, তবে না করলে কিছু আইনি অসুবিধা হতে পারে",
+        "শুধু সরকারি প্রতিষ্ঠানের Registration প্রয়োজন"
+      ],
+      "correctAnswer": "C",
+      "correctOption": "Registration আইনত বাধ্যতামূলক নয়, তবে না করলে কিছু আইনি অসুবিধা হতে পারে",
+      "solution": "Partnership firm-এর registration সাধারণভাবে compulsory নয়। তবে firm registered না হলে কিছু ক্ষেত্রে আদালতে অধিকার প্রয়োগের ক্ষেত্রে আইনি বাধা দেখা দিতে পারে।",
+      "label": "",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Registration আইনত বাধ্যতামূলক নয়, তবে না করলে কিছু আইনি অসুবিধা হতে পারে",
+      "explanation": "Partnership firm-এর registration সাধারণভাবে compulsory নয়। তবে firm registered না হলে কিছু ক্ষেত্রে আদালতে অধিকার প্রয়োগের ক্ষেত্রে আইনি বাধা দেখা দিতে পারে।"
+    },
+    {
+      "id": 22,
+      "question": "Indian Partnership Act, 1932-এর Section 4 অনুযায়ী ‘Partnership’ বলতে বোঝায়—",
+      "options": [
+        "শুধুমাত্র দুই ব্যক্তির মধ্যে চুক্তি",
+        "এমন সম্পর্ক যেখানে ব্যক্তিরা কারবারের লাভ ভাগ করে নেওয়ার বিষয়ে সম্মত এবং কারবারটি সকলের দ্বারা বা যেকোনো একজনের দ্বারা সকলের হয়ে পরিচালিত হয়",
+        "কোম্পানির Shareholders-এর সম্পর্ক",
+        "Employer ও Employee-এর সম্পর্ক"
+      ],
+      "correctAnswer": "B",
+      "correctOption": "এমন সম্পর্ক যেখানে ব্যক্তিরা কারবারের লাভ ভাগ করে নেওয়ার বিষয়ে সম্মত এবং কারবারটি সকলের দ্বারা বা যেকোনো একজনের দ্বারা সকলের হয়ে পরিচালিত হয়",
+      "solution": "Partnership-এর মূল ভিত্তি হল Agreement/Contract, Business, Profit Sharing এবং Mutual Agency।",
+      "label": "IMP",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "এমন সম্পর্ক যেখানে ব্যক্তিরা কারবারের লাভ ভাগ করে নেওয়ার বিষয়ে সম্মত এবং কারবারটি সকলের দ্বারা বা যেকোনো একজনের দ্বারা সকলের হয়ে পরিচালিত হয়",
+      "explanation": "Partnership-এর মূল ভিত্তি হল Agreement/Contract, Business, Profit Sharing এবং Mutual Agency।"
+    },
+    {
+      "id": 23,
+      "question": "Partnership-এর ভিত্তি হল—",
+      "options": [
+        "Contract",
+        "Birth",
+        "Inheritance",
+        "Government order"
+      ],
+      "correctAnswer": "A",
+      "correctOption": "Contract",
+      "solution": "Partnership জন্মসূত্রে বা উত্তরাধিকারসূত্রে তৈরি হয় না। এটি অংশীদারদের মধ্যে চুক্তি (Agreement/Contract) থেকে সৃষ্টি হয়।",
+      "label": "MODEL QUES",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Contract",
+      "explanation": "Partnership জন্মসূত্রে বা উত্তরাধিকারসূত্রে তৈরি হয় না। এটি অংশীদারদের মধ্যে চুক্তি (Agreement/Contract) থেকে সৃষ্টি হয়।"
+    },
+    {
+      "id": 24,
+      "question": "নিচের কোনটি Partnership-এর সুবিধা নয়?",
+      "options": [
+        "সহজে গঠন করা যায়",
+        "বিভিন্ন অংশীদারের জ্ঞান ও দক্ষতা পাওয়া যায়",
+        "Separate Legal Entity থাকা",
+        "ব্যবসায় বিভিন্ন ব্যক্তির সহযোগিতা পাওয়া যায়"
+      ],
+      "correctAnswer": "C",
+      "correctOption": "Separate Legal Entity থাকা",
+      "solution": "Partnership firm এবং তার partners সাধারণভাবে company-এর মতো পৃথক legal personality-সম্পন্ন Separate Legal Entity নয়। তাই এটি Partnership-এর সুবিধা নয়।",
+      "label": "",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Separate Legal Entity থাকা",
+      "explanation": "Partnership firm এবং তার partners সাধারণভাবে company-এর মতো পৃথক legal personality-সম্পন্ন Separate Legal Entity নয়। তাই এটি Partnership-এর সুবিধা নয়।"
+    },
+    {
+      "id": 25,
+      "question": "নিচের কোনটি Partnership-এর বৈশিষ্ট্য নয়?",
+      "options": [
+        "Agreement",
+        "Profit Sharing",
+        "Mutual Agency",
+        "Separate Legal Entity"
+      ],
+      "correctAnswer": "D",
+      "correctOption": "Separate Legal Entity",
+      "solution": "Partnership-এর গুরুত্বপূর্ণ বৈশিষ্ট্যের মধ্যে Agreement, Business, Profit Sharing, Mutual Agency এবং Unlimited Liability রয়েছে। Separate Legal Entity partnership-এর সাধারণ বৈশিষ্ট্য নয়।",
+      "label": "",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Separate Legal Entity",
+      "explanation": "Partnership-এর গুরুত্বপূর্ণ বৈশিষ্ট্যের মধ্যে Agreement, Business, Profit Sharing, Mutual Agency এবং Unlimited Liability রয়েছে। Separate Legal Entity partnership-এর সাধারণ বৈশিষ্ট্য নয়।"
+    },
+    {
+      "id": 26,
+      "question": "Partnership-এর হিসাব প্রস্তুতের সঠিক ক্রম কোনটি?",
+      "options": [
+        "Trading A/c → Profit & Loss A/c → Profit & Loss Appropriation A/c → Partners' Capital/Current A/c",
+        "Capital A/c → Trading A/c → Cash A/c → P&L A/c",
+        "P&L Appropriation A/c → Trading A/c → Capital A/c",
+        "Cash A/c → Capital A/c → Trading A/c"
+      ],
+      "correctAnswer": "A",
+      "correctOption": "Trading A/c → Profit & Loss A/c → Profit & Loss Appropriation A/c → Partners' Capital/Current A/c",
+      "solution": "সাধারণভাবে হিসাবের ধাপ হল Trading A/c, তারপর Profit & Loss A/c, তারপর Profit & Loss Appropriation A/c এবং শেষে Partners' Capital/Current Accounts।",
+      "label": "MODEL QUES",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Trading A/c → Profit & Loss A/c → Profit & Loss Appropriation A/c → Partners' Capital/Current A/c",
+      "explanation": "সাধারণভাবে হিসাবের ধাপ হল Trading A/c, তারপর Profit & Loss A/c, তারপর Profit & Loss Appropriation A/c এবং শেষে Partners' Capital/Current Accounts।"
+    },
+    {
+      "id": 27,
+      "question": "Partnership firm-এর liability সাধারণত—",
+      "options": [
+        "Limited",
+        "Unlimited",
+        "Zero",
+        "Fixed"
+      ],
+      "correctAnswer": "B",
+      "correctOption": "Unlimited",
+      "solution": "সাধারণ partnership firm-এ partners-এর liability unlimited। Firm-এর সম্পত্তি দিয়ে দায় মেটানো সম্ভব না হলে নির্দিষ্ট পরিস্থিতিতে partners-এর ব্যক্তিগত সম্পত্তিও দায় মেটানোর জন্য ব্যবহৃত হতে পারে।",
+      "label": "IMP",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Unlimited",
+      "explanation": "সাধারণ partnership firm-এ partners-এর liability unlimited। Firm-এর সম্পত্তি দিয়ে দায় মেটানো সম্ভব না হলে নির্দিষ্ট পরিস্থিতিতে partners-এর ব্যক্তিগত সম্পত্তিও দায় মেটানোর জন্য ব্যবহৃত হতে পারে।"
+    },
+    {
+      "id": 28,
+      "question": "Partnership Deed-এ সাধারণত কী কী বিষয় উল্লেখ থাকে?",
+      "options": [
+        "Profit-sharing ratio",
+        "Partners' capital",
+        "Salary/Commission/Interest-এর শর্ত",
+        "উপরের সবকটি"
+      ],
+      "correctAnswer": "D",
+      "correctOption": "উপরের সবকটি",
+      "solution": "Partnership Deed-এ Capital, Profit-sharing ratio, Salary, Commission, Interest on Capital, Interest on Drawings, Admission/Retirement-এর নিয়ম ইত্যাদি উল্লেখ থাকতে পারে।",
+      "label": "",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "উপরের সবকটি",
+      "explanation": "Partnership Deed-এ Capital, Profit-sharing ratio, Salary, Commission, Interest on Capital, Interest on Drawings, Admission/Retirement-এর নিয়ম ইত্যাদি উল্লেখ থাকতে পারে।"
+    },
+    {
+      "id": 29,
+      "question": "Partnership Deed-এ Interest on Capital-এর কোনো উল্লেখ না থাকলে—",
+      "options": [
+        "6% সুদ দেওয়া হবে",
+        "10% সুদ দেওয়া হবে",
+        "12% সুদ দেওয়া হবে",
+        "Interest on Capital দেওয়া হবে না"
+      ],
+      "correctAnswer": "D",
+      "correctOption": "Interest on Capital দেওয়া হবে না",
+      "solution": "চুক্তিতে Interest on Capital-এর ব্যবস্থা না থাকলে partners-কে Capital-এর ওপর আলাদা সুদ দেওয়া হয় না।",
+      "label": "IMP",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Interest on Capital দেওয়া হবে না",
+      "explanation": "চুক্তিতে Interest on Capital-এর ব্যবস্থা না থাকলে partners-কে Capital-এর ওপর আলাদা সুদ দেওয়া হয় না।"
+    },
+    {
+      "id": 30,
+      "question": "Partnership Deed না থাকলে Partner-এর Loan-এর ওপর Interest-এর হার কত?",
+      "options": [
+        "4% p.a.",
+        "5% p.a.",
+        "6% p.a.",
+        "10% p.a."
+      ],
+      "correctAnswer": "C",
+      "correctOption": "6% p.a.",
+      "solution": "চুক্তিতে অন্য কিছু না থাকলে partner firm-কে loan দিলে সেই loan-এর ওপর 6% p.a. interest প্রাপ্য।",
+      "label": "HS 2017/2018",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "6% p.a.",
+      "explanation": "চুক্তিতে অন্য কিছু না থাকলে partner firm-কে loan দিলে সেই loan-এর ওপর 6% p.a. interest প্রাপ্য।"
+    },
+    {
+      "id": 31,
+      "question": "Partnership Deed না থাকলে partners-এর Profit-sharing Ratio হবে—",
+      "options": [
+        "1 : 1",
+        "Capital-এর অনুপাতে",
+        "Drawings-এর অনুপাতে",
+        "Salary-এর অনুপাতে"
+      ],
+      "correctAnswer": "A",
+      "correctOption": "1 : 1",
+      "solution": "Agreement-এ profit/loss sharing ratio উল্লেখ না থাকলে partners সমানভাবে profit ও loss ভাগ করেন। দুই partner হলে ratio 1:1।",
+      "label": "IMP",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "1 : 1",
+      "explanation": "Agreement-এ profit/loss sharing ratio উল্লেখ না থাকলে partners সমানভাবে profit ও loss ভাগ করেন। দুই partner হলে ratio 1:1।"
+    },
+    {
+      "id": 32,
+      "question": "Partnership Deed না থাকলে কোনো Partner business পরিচালনার জন্য Salary দাবি করতে পারবেন কি?",
+      "options": [
+        "হ্যাঁ, সবসময়",
+        "না",
+        "শুধু Managing Partner হলে",
+        "শুধু বেশি Capital থাকলে"
+      ],
+      "correctAnswer": "B",
+      "correctOption": "না",
+      "solution": "Agreement-এ Salary/Remuneration-এর ব্যবস্থা না থাকলে partner business পরিচালনার জন্য আলাদা salary দাবি করতে পারেন না।",
+      "label": "",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "না",
+      "explanation": "Agreement-এ Salary/Remuneration-এর ব্যবস্থা না থাকলে partner business পরিচালনার জন্য আলাদা salary দাবি করতে পারেন না।"
+    },
+    {
+      "id": 33,
+      "question": "একজন Partner firm-কে ₹20,000 loan দিলেন। Partnership Deed নেই। Firm-এর লাভ/ক্ষতি যাই হোক, loan-এর ওপর বার্ষিক Interest কত হবে?",
+      "options": [
+        "₹600",
+        "₹1,000",
+        "₹1,200",
+        "₹2,000"
+      ],
+      "correctAnswer": "C",
+      "correctOption": "₹1,200",
+      "solution": "Loan = ₹20,000 এবং Interest = 6% p.a. তাই Interest = ₹20,000 × 6/100 = ₹1,200।",
+      "label": "IMP",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "₹1,200",
+      "explanation": "Loan = ₹20,000 এবং Interest = 6% p.a. তাই Interest = ₹20,000 × 6/100 = ₹1,200।"
+    },
+    {
+      "id": 34,
+      "question": "কোনো partnership deed না থাকলে Interest on Drawings—",
+      "options": [
+        "অবশ্যই 6%",
+        "অবশ্যই 5%",
+        "10%",
+        "নেওয়া হবে না"
+      ],
+      "correctAnswer": "D",
+      "correctOption": "নেওয়া হবে না",
+      "solution": "Agreement না থাকলে partner-এর drawings-এর ওপর interest নেওয়ার নিয়ম নেই।",
+      "label": "IMP",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "নেওয়া হবে না",
+      "explanation": "Agreement না থাকলে partner-এর drawings-এর ওপর interest নেওয়ার নিয়ম নেই।"
+    },
+    {
+      "id": 35,
+      "question": "একজন Partner-এর loan-এর Interest কোন Account-এ সাধারণত charge করা হয়?",
+      "options": [
+        "Profit & Loss Account",
+        "Trading Account",
+        "Capital Account",
+        "Cash Account"
+      ],
+      "correctAnswer": "A",
+      "correctOption": "Profit & Loss Account",
+      "solution": "Partner-এর loan-এর interest firm-এর জন্য charge/expense হিসেবে গণ্য হয়। তাই এটি Profit & Loss Account-এ charge করা হয়, Profit & Loss Appropriation Account-এ নয়।",
+      "label": "",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Profit & Loss Account",
+      "explanation": "Partner-এর loan-এর interest firm-এর জন্য charge/expense হিসেবে গণ্য হয়। তাই এটি Profit & Loss Account-এ charge করা হয়, Profit & Loss Appropriation Account-এ নয়।"
+    },
+    {
+      "id": 36,
+      "question": "Interest on Capital হল—",
+      "options": [
+        "Business-এর সাধারণ operating expense",
+        "Profit-এর appropriation",
+        "Asset",
+        "Liability to outsider"
+      ],
+      "correctAnswer": "B",
+      "correctOption": "Profit-এর appropriation",
+      "solution": "Interest on Capital অংশীদারদের মধ্যে লাভ বণ্টনের আগে appropriation হিসেবে দেখানো হয়। P&L Appropriation Account-এর Debit side-এ এটি দেখানো হয়।",
+      "label": "MODEL QUES",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Profit-এর appropriation",
+      "explanation": "Interest on Capital অংশীদারদের মধ্যে লাভ বণ্টনের আগে appropriation হিসেবে দেখানো হয়। P&L Appropriation Account-এর Debit side-এ এটি দেখানো হয়।"
+    },
+    {
+      "id": 37,
+      "question": "Active Partner-কে Salary দেওয়া হলে তা কোথায় দেখানো হয়?",
+      "options": [
+        "Trading Account",
+        "Profit & Loss Appropriation Account",
+        "Balance Sheet-এর Asset side",
+        "Cash Book-এর credit side মাত্র"
+      ],
+      "correctAnswer": "B",
+      "correctOption": "Profit & Loss Appropriation Account",
+      "solution": "Partner's Salary হল profit appropriation। তাই এটি P&L Appropriation A/c-এর Debit side-এ দেখানো হয়।",
+      "label": "MODEL QUES",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Profit & Loss Appropriation Account",
+      "explanation": "Partner's Salary হল profit appropriation। তাই এটি P&L Appropriation A/c-এর Debit side-এ দেখানো হয়।"
+    },
+    {
+      "id": 38,
+      "question": "অংশীদারদের Profit & Loss Appropriation Account-এর Credit side-এ কোনটি দেখা যায়?",
+      "options": [
+        "Interest on Capital",
+        "Partner's Salary",
+        "Profit transferred from P&L Account এবং Interest on Drawings",
+        "Partner's Commission"
+      ],
+      "correctAnswer": "C",
+      "correctOption": "Profit transferred from P&L Account এবং Interest on Drawings",
+      "solution": "P&L Appropriation A/c-এর Credit side-এ সাধারণত Profit transferred from P&L A/c এবং Interest on Drawings থাকে। Debit side-এ Interest on Capital, Salary, Commission এবং Share of Profit transfer থাকে।",
+      "label": "",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "Profit transferred from P&L Account এবং Interest on Drawings",
+      "explanation": "P&L Appropriation A/c-এর Credit side-এ সাধারণত Profit transferred from P&L A/c এবং Interest on Drawings থাকে। Debit side-এ Interest on Capital, Salary, Commission এবং Share of Profit transfer থাকে।"
+    },
+    {
+      "id": 39,
+      "question": "একজন Partner firm-কে ₹1,00,000 loan দিলেন 9 মাসের জন্য। Partnership Deed নেই। Interest rate 6% p.a. হলে Interest on Loan কত হবে?",
+      "options": [
+        "₹3,000",
+        "₹4,000",
+        "₹4,500",
+        "₹6,000"
+      ],
+      "correctAnswer": "C",
+      "correctOption": "₹4,500",
+      "solution": "Interest = Principal × Rate × Time = ₹1,00,000 × 6/100 × 9/12 = ₹4,500।",
+      "label": "",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "₹4,500",
+      "explanation": "Interest = Principal × Rate × Time = ₹1,00,000 × 6/100 × 9/12 = ₹4,500।"
+    },
+    {
+      "id": 40,
+      "question": "একটি firm-এর Net Profit ₹2,10,000। একজন partner-কে Net Profit-এর ওপর 5% Commission দেওয়া হবে after charging such commission। Commission-এর পরিমাণ কত?",
+      "options": [
+        "₹9,500",
+        "₹10,000",
+        "₹10,500",
+        "₹12,000"
+      ],
+      "correctAnswer": "B",
+      "correctOption": "₹10,000",
+      "solution": "Commission after charging commission = Net Profit × 5/105 = ₹2,10,000 × 5/105 = ₹10,000। Check: ₹2,10,000 − ₹10,000 = ₹2,00,000; 5% of ₹2,00,000 = ₹10,000।",
+      "label": "HS 2018",
+      "type": "mcq",
+      "marks": 1,
+      "answer": "₹10,000",
+      "explanation": "Commission after charging commission = Net Profit × 5/105 = ₹2,10,000 × 5/105 = ₹10,000। Check: ₹2,10,000 − ₹10,000 = ₹2,00,000; 5% of ₹2,00,000 = ₹10,000।"
+    }
+  ]
+}
