@@ -127,7 +127,27 @@ const SUBJECTS={
 const NAMES={bangla:'Bengali',english:'English',physics:'Physics','life-science':'Life Science',mathematics:'Mathematics',geography:'Geography',history:'History','computer-science':'Computer Science',accountancy:'Accountancy','commercial-law':'Commercial Law','cost-tax':'Cost Tax','business-studies':'Business Studies','political-science':'Political Science','রাষ্ট্রবিজ্ঞান':'রাষ্ট্রবিজ্ঞান'};
 let cls=params().get('class')||'class5',sem=(params().get('semester')||'1').match(/[1-4]/)?.[0]||'1',sub=params().get('subject')||'bangla',bank={},editing=null;
 if(sessionStorage.getItem('practiceEditorUnlocked')!=='1')location.href='index.html';
-const esc=s=>escapeHtml(s);function read(){try{return JSON.parse(localStorage.getItem(BANK_KEY)||'{}')}catch{return {}}}function key(){return `${cls}|${sem}|${sub}`}
+const CLOUD_TABLE='practice_question_banks';
+const esc=s=>escapeHtml(s);
+function read(){try{return JSON.parse(localStorage.getItem(BANK_KEY)||'{}')}catch{return {}}}
+function key(){return `${cls}|${sem}|${sub}`}
+async function getCloudBank(){
+  try{
+    if(!window.supabaseClient)return null;
+    const {data,error}=await window.supabaseClient.from(CLOUD_TABLE).select('questions').eq('bank_key',key()).maybeSingle();
+    if(error){console.warn('Practice question cloud load failed:',error);return null;}
+    return Array.isArray(data?.questions)?data.questions.slice(0,MAX):null;
+  }catch(e){console.warn('Practice question cloud load failed:',e);return null;}
+}
+async function saveCloudBank(){
+  if(!window.supabaseClient)throw new Error('Supabase connection not available');
+  const user=window.smartEduAuth?await window.smartEduAuth.user():null;
+  if(!user)throw new Error('User session not found');
+  const payload={bank_key:key(),class_id:cls,semester:String(sem),subject:sub,questions:(bank[key()]||[]).slice(0,MAX),updated_by:user.id,updated_at:new Date().toISOString()};
+  const {error}=await window.supabaseClient.from(CLOUD_TABLE).upsert(payload,{onConflict:'bank_key'});
+  if(error)throw error;
+}
+
 function baseQuestions(){
   const name=NAMES[sub]||sub;
   const templates=[
@@ -154,15 +174,26 @@ function baseQuestions(){
   ]
   return templates.map((t,i)=>{let q={type:t[0],question:t[1],marks:t[4],answer:t[3],explanation:t[5]};if(t[0]==='mcq')q.options=t[2];if(t[0]==='true_false')q.answer=i%2?'মিথ্যা':'সত্য';return q});
 }
-async function seed(){bank=read();const k=key();if(!Array.isArray(bank[k])){try{const r=await fetch(`data/practice/${cls}/semester-${sem}/${sub}.json`);const d=await r.json();bank[k]=(d.questions||[]).slice(0,MAX)}catch{bank[k]=baseQuestions().slice(0,MAX)}}else bank[k]=bank[k].slice(0,MAX);localStorage.setItem(BANK_KEY,JSON.stringify(bank))}
+async function seed(){
+  bank=read();
+  const k=key();
+  const cloud=await getCloudBank();
+  if(Array.isArray(cloud)){
+    bank[k]=cloud.slice(0,MAX);
+  }else if(!Array.isArray(bank[k])){
+    try{const r=await fetch(`data/practice/${cls}/semester-${sem}/${sub}.json`);const d=await r.json();bank[k]=(d.questions||[]).slice(0,MAX)}catch{bank[k]=baseQuestions().slice(0,MAX)}
+  }else bank[k]=bank[k].slice(0,MAX);
+  localStorage.setItem(BANK_KEY,JSON.stringify(bank));
+}
 function fillSubjects(){const sel=document.getElementById('editorSubject');sel.innerHTML=(SUBJECTS[cls]||[]).map(s=>`<option value="${esc(s)}">${esc(NAMES[s]||s)}</option>`).join('');if(!SUBJECTS[cls].includes(sub))sub=SUBJECTS[cls][0];sel.value=sub}
 function render(){document.getElementById('editorClass').value=cls;document.getElementById('editorSemester').value=sem;fillSubjects();document.getElementById('editorSubject').value=sub;const qs=bank[key()]||[];document.getElementById('subjectTitle').textContent=`${NAMES[sub]||sub} • ${cls.replace('class','Class ')} • Semester ${sem}`;document.getElementById('questionCount').textContent=`${qs.length} / ${MAX} Questions`;document.getElementById('questionList').innerHTML=qs.map((q,i)=>`<article class="question-row"><span class="q-number">${i+1}</span><div class="q-info"><h3>${esc(q.question||'Untitled Question')}</h3><p>${esc(typeName(q.type))} • ${q.marks||1} Mark${Number(q.marks||1)>1?'s':''}</p></div><div class="row-actions"><button class="edit-btn" data-edit="${i}">✎ Edit</button><button class="delete-btn" data-delete="${i}">🗑 Delete</button></div></article>`).join('');document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openEditor(Number(b.dataset.edit)));document.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>removeQuestion(Number(b.dataset.delete)))}
 function typeName(t){return({mcq:'MCQ',short:'Short Answer',true_false:'True / False',fill_blank:'Fill in the Blank',paragraph:'Paragraph',essay:'Essay'})[t]||'Question'}
 function openEditor(i){editing=i;const q=bank[key()][i]||{type:'mcq',question:'',options:['','','',''],answer:'',marks:1};document.getElementById('modalEyebrow').textContent=`QUESTION ${i+1}`;document.getElementById('qType').value=q.type||'mcq';document.getElementById('qMarks').value=q.marks||1;document.getElementById('qText').value=q.question||'';document.getElementById('editorError').textContent='';extra(q);document.getElementById('editorModal').classList.remove('hidden')}
 function extra(q={}){const type=document.getElementById('qType').value,box=document.getElementById('qExtra');if(type==='mcq'){const o=q.options||['','','',''];box.innerHTML=`<div class="option-editor">${[0,1,2,3].map(i=>`<div class="option-line"><b>${String.fromCharCode(65+i)})</b><input id="opt${i}" value="${esc(o[i]||'')}" placeholder="Option ${String.fromCharCode(65+i)}"></div>`).join('')}</div><div class="answer-row"><select id="qAnswer"><option value="">Correct option</option>${[0,1,2,3].map(i=>`<option value="${i}" ${(o[i]||'')===q.answer?'selected':''}>${String.fromCharCode(65+i)}) ${esc(o[i]||'Option '+String.fromCharCode(65+i))}</option>`).join('')}</select><textarea id="qExplanation" rows="3" placeholder="Solution">${esc(q.explanation||'')}</textarea></div>`}else if(type==='true_false')box.innerHTML=`<div class="answer-row"><select id="qAnswer"><option value="সত্য" ${q.answer==='সত্য'?'selected':''}>সত্য</option><option value="মিথ্যা" ${q.answer==='মিথ্যা'?'selected':''}>মিথ্যা</option></select><textarea id="qExplanation" rows="3" placeholder="Solution">${esc(q.explanation||'')}</textarea></div>`;else box.innerHTML=`<div class="answer-row"><input id="qAnswer" value="${esc(q.answer||'')}" placeholder="Correct / Model Answer"><textarea id="qExplanation" rows="3" placeholder="Solution">${esc(q.explanation||'')}</textarea></div>`}
 function addQuestion(){if(bank[key()].length>=MAX)return alert('একটি Class + Semester + Subject-এ সর্বোচ্চ ২০টি প্রশ্ন রাখা যাবে।');bank[key()].push({type:'mcq',question:'',options:['','','',''],answer:'',marks:1});openEditor(bank[key()].length-1)}
-function saveEditor(){const err=document.getElementById('editorError'),text=document.getElementById('qText').value.trim(),type=document.getElementById('qType').value,marks=Math.max(1,Math.min(20,Number(document.getElementById('qMarks').value)||1));if(!text){err.textContent='Question লিখুন।';return}let q={type,question:text,marks};if(type==='mcq'){q.options=[0,1,2,3].map(i=>document.getElementById('opt'+i).value.trim());if(q.options.some(x=>!x)){err.textContent='চারটি option পূরণ করুন।';return}const ai=Number(document.getElementById('qAnswer').value);if(!Number.isInteger(ai)){err.textContent='Correct option নির্বাচন করুন।';return}q.answer=q.options[ai]}else{q.answer=document.getElementById('qAnswer').value.trim();if(!q.answer){err.textContent='Correct / Model Answer লিখুন।';return}}q.explanation=document.getElementById('qExplanation')?.value.trim()||'';bank[key()][editing]=q;localStorage.setItem(BANK_KEY,JSON.stringify(bank));closeEditor();render();document.getElementById('saveMsg').textContent='✓ Question saved.'}
-function removeQuestion(i){if(!confirm(`Question ${i+1} delete করবেন?`))return;bank[key()].splice(i,1);localStorage.setItem(BANK_KEY,JSON.stringify(bank));render()}function closeEditor(){document.getElementById('editorModal').classList.add('hidden')}
-document.getElementById('editorClass').onchange=async e=>{cls=e.target.value;sub=SUBJECTS[cls][0];await seed();render()};document.getElementById('editorSemester').onchange=async e=>{sem=e.target.value;await seed();render()};document.getElementById('editorSubject').onchange=async e=>{sub=e.target.value;await seed();render()};document.getElementById('addQuestion').onclick=addQuestion;document.getElementById('saveEditor').onclick=saveEditor;document.getElementById('cancelEditor').onclick=closeEditor;document.getElementById('closeEditor').onclick=closeEditor;document.getElementById('qType').onchange=()=>extra({});seed().then(render);
+async function saveEditor(){const err=document.getElementById('editorError'),text=document.getElementById('qText').value.trim(),type=document.getElementById('qType').value,marks=Math.max(1,Math.min(20,Number(document.getElementById('qMarks').value)||1));if(!text){err.textContent='Question লিখুন।';return}let q={type,question:text,marks};if(type==='mcq'){q.options=[0,1,2,3].map(i=>document.getElementById('opt'+i).value.trim());if(q.options.some(x=>!x)){err.textContent='চারটি option পূরণ করুন।';return}const ai=Number(document.getElementById('qAnswer').value);if(!Number.isInteger(ai)){err.textContent='Correct option নির্বাচন করুন।';return}q.answer=q.options[ai]}else{q.answer=document.getElementById('qAnswer').value.trim();if(!q.answer){err.textContent='Correct / Model Answer লিখুন।';return}}q.explanation=document.getElementById('qExplanation')?.value.trim()||'';bank[key()][editing]=q;localStorage.setItem(BANK_KEY,JSON.stringify(bank));try{await saveCloudBank();document.getElementById('saveMsg').textContent='✓ Question saved to database.'}catch(e){console.error(e);document.getElementById('saveMsg').textContent='✓ Local save হয়েছে, database save হয়নি.';alert('Question local-এ save হয়েছে, কিন্তু database-এ save হয়নি।\nSupabase practice_question_banks table setup করা আছে কি না দেখুন।\n\n'+(e.message||e));return}closeEditor();render()}
+async function removeQuestion(i){if(!confirm(`Question ${i+1} delete করবেন?`))return;bank[key()].splice(i,1);localStorage.setItem(BANK_KEY,JSON.stringify(bank));try{await saveCloudBank();document.getElementById('saveMsg').textContent='✓ Question deleted and database updated.'}catch(e){alert('Question local-এ delete হয়েছে, কিন্তু database update হয়নি।\n'+(e.message||e));}render()}function closeEditor(){document.getElementById('editorModal').classList.add('hidden')}
+async function savePaperCloud(){localStorage.setItem(BANK_KEY,JSON.stringify(bank));try{await saveCloudBank();document.getElementById('saveMsg').textContent='✓ Question paper saved to database.'}catch(e){console.error(e);alert('Question paper local-এ save হয়েছে, কিন্তু database-এ save হয়নি।\nSupabase setup check করুন।\n\n'+(e.message||e));}}
+document.getElementById('editorClass').onchange=async e=>{cls=e.target.value;sub=SUBJECTS[cls][0];await seed();render()};document.getElementById('editorSemester').onchange=async e=>{sem=e.target.value;await seed();render()};document.getElementById('editorSubject').onchange=async e=>{sub=e.target.value;await seed();render()};document.getElementById('addQuestion').onclick=addQuestion;document.getElementById('saveEditor').onclick=saveEditor;document.getElementById('savePaper').onclick=savePaperCloud;document.getElementById('cancelEditor').onclick=closeEditor;document.getElementById('closeEditor').onclick=closeEditor;document.getElementById('qType').onchange=()=>extra({});seed().then(render);
 
 </script></body></html>
