@@ -6,7 +6,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <!-- End Supabase connection -->
-</head><body><header class="topbar"><button id="backPractice" class="icon-btn">←</button><div class="brand" id="practiceTitle">Practice</div><div class="top-actions"><button class="calc-fab" type="button" onclick="openPracticeCalculator()">🧮 Calculator</button><button class="icon-btn" id="themeBtn">☾</button><a href="profile.html" class="avatar">AK</a></div></header><main class="practice-wrap"><section class="practice-head"><div><p class="eyebrow">PRACTICE ONLY</p><h1 id="paperTitle">Question Paper</h1><p id="paperMeta" class="muted"></p></div><span class="practice-badge">No Exam • No Result</span></section><div id="questionList"></div></main>
+<style>
+.calc-fab{border:1px solid #ddd2ff;background:linear-gradient(135deg,#ffffff,#f4efff);color:#5b22c9;padding:10px 14px;border-radius:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(91,34,201,.10);transition:.18s ease;font-size:14px}.calc-fab:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(91,34,201,.16);border-color:#cdbbff}.calc-fab:active{transform:translateY(0);}.dark .calc-fab{background:linear-gradient(135deg,#272032,#211a31);color:#d9caff;border-color:#40355a}.calc-overlay{position:fixed;inset:0;background:rgba(13,14,25,.52);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:18px;z-index:9999}.calc-overlay.hidden{display:none!important}.calc-box{width:min(430px,100%);max-height:92vh;overflow:auto;background:var(--card,#fff);color:var(--text,#111a35);border:1px solid var(--line,#e7e8f0);border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.22);padding:16px}.calc-head{display:flex;align-items:center;justify-content:space-between;font-size:18px;margin-bottom:10px}.calc-close{border:0;background:var(--soft,#f1edff);color:var(--primary,#5b22c9);width:36px;height:36px;border-radius:11px;font-size:23px;cursor:pointer}.calc-tabs{display:grid;grid-template-columns:1fr 1.35fr;gap:8px;margin-bottom:12px}.calc-tab{border:1px solid var(--line,#e7e8f0);background:var(--bg,#f7f8fc);color:var(--muted,#687089);padding:10px 8px;border-radius:11px;font-weight:800;cursor:pointer}.calc-tab.active{background:linear-gradient(135deg,#5b22c9,#7744e8);color:#fff;border-color:transparent}.calc-display{width:100%;height:62px;border:1px solid var(--line,#e7e8f0);border-radius:14px;background:var(--bg,#f7f8fc);color:var(--text,#111a35);font-size:27px;font-weight:700;text-align:right;padding:8px 13px;margin-bottom:12px;outline:none}.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.calc-key{border:1px solid var(--line,#e7e8f0);background:var(--bg,#f7f8fc);color:var(--text,#111a35);min-height:48px;border-radius:12px;font-size:17px;font-weight:800;cursor:pointer;transition:.15s}.calc-key:hover{background:var(--soft,#f1edff);border-color:#cbb8ff;color:var(--primary,#5b22c9)}.calc-key.equal{background:linear-gradient(135deg,#5b22c9,#7744e8);color:#fff;border-color:transparent}.calc-science{display:none;margin-top:10px}.calc-science.show{display:block}.calc-hint{font-size:11px;color:var(--muted,#687089);text-align:center;margin-top:10px}.dark .calc-key{background:#20222e}.dark .calc-display{background:#20222e}.dark .calc-tab{background:#20222e}
+</style></head><body><header class="topbar"><button id="backPractice" class="icon-btn">←</button><div class="brand" id="practiceTitle">Practice</div><div class="top-actions"><button class="calc-fab" type="button" id="openCalcBtn">🧮 Calculator</button><button class="icon-btn" id="themeBtn">☾</button><a href="profile.html" class="avatar">AK</a></div></header><main class="practice-wrap"><section class="practice-head"><div><p class="eyebrow">PRACTICE ONLY</p><h1 id="paperTitle">Question Paper</h1><p id="paperMeta" class="muted"></p></div><span class="practice-badge">No Exam • No Result</span></section><div id="questionList"></div></main>
 <div id="calcOverlay" class="calc-overlay hidden" aria-hidden="true">
   <div class="calc-box" role="dialog" aria-label="Calculator">
     <div class="calc-head"><strong>Calculator</strong><button class="calc-close" id="calcClose" type="button">×</button></div>
@@ -162,39 +164,57 @@ document.getElementById('backPractice').onclick=()=>history.back();init().catch(
 </script>
 <script>
 (function(){
-  const overlay=document.getElementById('calcOverlay'); if(!overlay)return;
-  const display=document.getElementById('calcDisplay'), basic=document.getElementById('calcBasicGrid'), sci=document.getElementById('calcScienceGrid');
-  const normalTab=document.getElementById('normalCalcTab'), scienceTab=document.getElementById('scienceCalcTab');
-  let expr='';
-  function sync(){display.value=expr||'0';}
-  function add(v){expr+=v;sync();display.focus();}
-  function clear(){expr='';sync();}
-  function back(){expr=expr.slice(0,-1);sync();}
+  const overlay=document.getElementById('calcOverlay');
+  const openBtn=document.getElementById('openCalcBtn');
+  if(!overlay || !openBtn) return;
+  const display=document.getElementById('calcDisplay');
+  const basic=document.getElementById('calcBasicGrid');
+  const sci=document.getElementById('calcScienceGrid');
+  const scienceBox=document.getElementById('calcScience');
+  const normalTab=document.getElementById('normalCalcTab');
+  const scienceTab=document.getElementById('scienceCalcTab');
+  const closeBtn=document.getElementById('calcClose');
+  let expr='', ans='';
+  function sync(){ display.value=expr || '0'; }
+  function add(v){ expr += v; sync(); }
+  function clear(){ expr=''; sync(); }
+  function back(){ expr=expr.slice(0,-1); sync(); }
   function calculate(){
     try{
-      let e=expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/π/g,'Math.PI').replace(/e/g,'Math.E').replace(/\^/g,'**');
-      if(!/^[0-9+\-*/().,%\sA-Za-z_*\.]+$/.test(e))throw new Error();
+      let e=expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/π/g,'Math.PI').replace(/\be\b/g,'Math.E').replace(/\^/g,'**');
       e=e.replace(/(\d+(?:\.\d+)?)%/g,'($1/100)');
+      if(!/^[0-9+\-*/().,%\sA-Za-z_*\.]+$/.test(e)) throw new Error();
       const val=Function('"use strict";return ('+e+')')();
-      if(!Number.isFinite(val))throw new Error(); expr=String(Math.round(val*1e12)/1e12);sync();
-    }catch{display.value='Error';setTimeout(sync,700);}
+      if(!Number.isFinite(val)) throw new Error();
+      ans=String(Math.round(val*1e12)/1e12); expr=ans; sync();
+    }catch{ display.value='Error'; setTimeout(sync,700); }
+  }
+  function factorial(){
+    const x=parseInt(expr||'0',10);
+    if(x<0 || x>170 || !Number.isFinite(x)) return;
+    let f=1; for(let i=2;i<=x;i++) f*=i; expr=String(f); sync();
   }
   function scientific(fn){
-    const x=parseFloat(expr||display.value||'0'); if(!Number.isFinite(x))return;
-    let v; const rad=x*Math.PI/180;
-    if(fn==='sin')v=Math.sin(rad); if(fn==='cos')v=Math.cos(rad); if(fn==='tan')v=Math.tan(rad); if(fn==='sqrt')v=Math.sqrt(x); if(fn==='cbrt')v=Math.cbrt(x); if(fn==='log')v=Math.log10(x); if(fn==='ln')v=Math.log(x); if(fn==='square')v=x*x; if(fn==='cube')v=x*x*x; if(fn==='recip')v=1/x; if(fn==='exp')v=Math.exp(x);
-    if(!Number.isFinite(v))return; expr=String(Math.round(v*1e12)/1e12);sync();
+    if(fn==='ans'){ if(ans) add(ans); return; }
+    const x=parseFloat(expr||display.value||'0'); if(!Number.isFinite(x)) return;
+    const rad=x*Math.PI/180; let v;
+    if(fn==='sin')v=Math.sin(rad); else if(fn==='cos')v=Math.cos(rad); else if(fn==='tan')v=Math.tan(rad);
+    else if(fn==='sqrt')v=Math.sqrt(x); else if(fn==='cbrt')v=Math.cbrt(x); else if(fn==='log')v=Math.log10(x); else if(fn==='ln')v=Math.log(x);
+    else if(fn==='square')v=x*x; else if(fn==='cube')v=x*x*x; else if(fn==='recip')v=1/x; else if(fn==='exp')v=Math.exp(x);
+    if(!Number.isFinite(v)) return; expr=String(Math.round(v*1e12)/1e12); sync();
   }
-  const basicKeys=[['C','clear'],['⌫','back'],['%','add:%'],['÷','add:/'],['7','add:7'],['8','add:8'],['9','add:9'],['×','add:*'],['4','add:4'],['5','add:5'],['6','add:6'],['−','add:-'],['1','add:1'],['2','add:2'],['3','add:3'],['+','add:+'],['0','add:0'],['.','add:.'],['(', 'add:('],['=','equal']];
+  const basicKeys=[['C','clear'],['⌫','back'],['%','add:%'],['÷','add:/'],['7','add:7'],['8','add:8'],['9','add:9'],['×','add:*'],['4','add:4'],['5','add:5'],['6','add:6'],['−','add:-'],['1','add:1'],['2','add:2'],['3','add:3'],['+','add:+'],['0','add:0'],['.','add:.'],['(','add:('],['=','equal']];
   const sciKeys=[['sin','sin'],['cos','cos'],['tan','tan'],['√','sqrt'],['∛','cbrt'],['x²','square'],['x³','cube'],['1/x','recip'],['log','log'],['ln','ln'],['eˣ','exp'],['π','add:π'],['e','add:e'],['^','add:^'],['!','factorial'],['Ans','ans']];
-  function draw(arr,el){el.innerHTML='';arr.forEach(([label,action])=>{const b=document.createElement('button');b.type='button';b.className='calc-key'+(action==='equal'?' equal':'');b.textContent=label;b.onclick=()=>{if(action==='clear')clear();else if(action==='back')back();else if(action==='equal')calculate();else if(action==='factorial'){const x=parseInt(expr||'0',10);if(x>=0&&x<=170){let f=1;for(let i=2;i<=x;i++)f*=i;expr=String(f);sync();}}else if(action==='ans'){}else if(action.startsWith('add:'))add(action.slice(4));else scientific(action);};el.appendChild(b);});}
-  draw(basicKeys,basic);draw(sciKeys,sci);
-  function showScience(on){document.getElementById('calcScience').classList.toggle('show',on);normalTab.classList.toggle('active',!on);scienceTab.classList.toggle('active',on);}
-  normalTab.onclick=()=>showScience(false);scienceTab.onclick=()=>showScience(true);
-  document.getElementById('calcClose').onclick=()=>{overlay.classList.add('hidden');overlay.setAttribute('aria-hidden','true');};
-  overlay.addEventListener('click',e=>{if(e.target===overlay)document.getElementById('calcClose').click();});
-  window.openPracticeCalculator=()=>{overlay.classList.remove('hidden');overlay.setAttribute('aria-hidden','false');sync();};
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.classList.contains('hidden'))document.getElementById('calcClose').click();});
+  function draw(arr,el){ el.innerHTML=''; arr.forEach(([label,action])=>{ const b=document.createElement('button'); b.type='button'; b.className='calc-key'+(action==='equal'?' equal':''); b.textContent=label; b.addEventListener('click',()=>{ if(action==='clear')clear(); else if(action==='back')back(); else if(action==='equal')calculate(); else if(action==='factorial')factorial(); else if(action.startsWith('add:'))add(action.slice(4)); else scientific(action); }); el.appendChild(b); }); }
+  draw(basicKeys,basic); draw(sciKeys,sci);
+  function showScience(on){ scienceBox.classList.toggle('show',on); normalTab.classList.toggle('active',!on); scienceTab.classList.toggle('active',on); }
+  normalTab.addEventListener('click',()=>showScience(false)); scienceTab.addEventListener('click',()=>showScience(true));
+  function openCalc(){ overlay.classList.remove('hidden'); overlay.setAttribute('aria-hidden','false'); sync(); setTimeout(()=>display.focus(),50); }
+  function closeCalc(){ overlay.classList.add('hidden'); overlay.setAttribute('aria-hidden','true'); }
+  openBtn.addEventListener('click',openCalc); closeBtn.addEventListener('click',closeCalc);
+  overlay.addEventListener('click',e=>{ if(e.target===overlay) closeCalc(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!overlay.classList.contains('hidden')) closeCalc(); });
+  window.openPracticeCalculator=openCalc;
 })();
 </script>
 </body></html>
