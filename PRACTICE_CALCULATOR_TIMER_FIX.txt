@@ -1,0 +1,1 @@
+Practice pages now include Calculator + Science Calculator. OMR total timer is stored in teacher_papers.omr_timer_seconds and carried through the student OMR flow. The timer is global for the full 40-question exam.

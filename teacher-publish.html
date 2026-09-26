@@ -171,7 +171,7 @@ document.getElementById('publish').onclick=async()=>{
   const teacher=tp.name||localStorage.getItem('smartEduUserName')||'Teacher';
   const teacherId=tp.id||teacher.toLowerCase().replace(/[^a-z0-9]+/g,'-');
   const id='paper-'+Date.now();
-  const published={id,name:setName.value.trim(),target:target.value.trim()||teacher,password:accessCode.value.trim().toUpperCase(),questions:qs,publishedAt:new Date().toISOString(),teacher,teacherId};
+  const published={id,name:setName.value.trim(),target:target.value.trim()||teacher,password:accessCode.value.trim().toUpperCase(),questions:qs,omrTimerSeconds:Number(localStorage.getItem('teacherOMRTimerSeconds') || (qs.find(q=>q.type==='omr')?.omrTimerSeconds) || 300),publishedAt:new Date().toISOString(),teacher,teacherId};
 
   // Cloud copy: this is what makes the same Teacher Paper available on other phones.
   await publishToSupabase(published);

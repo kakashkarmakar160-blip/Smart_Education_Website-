@@ -7,7 +7,20 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <!-- End Supabase connection -->
-</head><body><header class="topbar"><button id="backExam" class="icon-btn">←</button><div class="brand">Student Exam</div><div class="top-actions"><div class="timer" id="timer">05:00</div><button class="icon-btn" id="themeBtn">☾</button><a href="profile.html" class="avatar">AK</a></div></header><main class="student-exam-wrap"><section class="exam-top"><div><p class="eyebrow">PRACTICE MODE</p><h1 id="examTitle">Model Question Set</h1><p id="examMeta" class="muted">Question 1</p></div><span class="progress-pill" id="progress">1 / 1</span></section><section class="question-focus" id="questionBox"></section><div class="exam-nav"><button id="prevBtn" class="outline">← Previous</button><button id="nextBtn" class="primary">Next Question →</button></div></main><script data-internal-js="js/app.js">
+</head><body><header class="topbar"><button id="backExam" class="icon-btn">←</button><div class="brand">Student Exam</div><div class="top-actions"><button class="calc-fab" type="button" onclick="openPracticeCalculator()">🧮 Calculator</button><div class="timer" id="timer">05:00</div><button class="icon-btn" id="themeBtn">☾</button><a href="profile.html" class="avatar">AK</a></div></header><main class="student-exam-wrap"><section class="exam-top"><div><p class="eyebrow">PRACTICE MODE</p><h1 id="examTitle">Model Question Set</h1><p id="examMeta" class="muted">Question 1</p></div><span class="progress-pill" id="progress">1 / 1</span></section><section class="question-focus" id="questionBox"></section><div class="exam-nav"><button id="prevBtn" class="outline">← Previous</button><button id="nextBtn" class="primary">Next Question →</button></div></main>
+<div id="calcOverlay" class="calc-overlay hidden" aria-hidden="true">
+  <div class="calc-box" role="dialog" aria-label="Calculator">
+    <div class="calc-head"><strong>Calculator</strong><button class="calc-close" id="calcClose" type="button">×</button></div>
+    <div class="calc-tabs"><button class="calc-tab active" id="normalCalcTab" type="button">Calculator</button><button class="calc-tab" id="scienceCalcTab" type="button">Science Calculator</button></div>
+    <input id="calcDisplay" class="calc-display" value="0" inputmode="decimal" aria-label="Calculator display">
+    <div class="calc-grid" id="calcBasicGrid"></div>
+    <div class="calc-science" id="calcScience">
+      <div class="calc-grid" id="calcScienceGrid"></div>
+    </div>
+    <div class="calc-hint">Scientific functions use degrees for sin, cos and tan.</div>
+  </div>
+</div>
+<script data-internal-js="js/app.js">
 const THEME_KEY='smartEduTheme';
 
 function applyTheme(){
@@ -273,4 +286,42 @@ document.getElementById('prevBtn').addEventListener('click',prev);
 document.getElementById('backExam').addEventListener('click',()=>{if(sessionStorage.getItem('teacherExam')) location.assign('./student-paper.html'); else history.back();});
 getData().catch(console.error);
 
-</script></body></html>
+</script>
+<script>
+(function(){
+  const overlay=document.getElementById('calcOverlay'); if(!overlay)return;
+  const display=document.getElementById('calcDisplay'), basic=document.getElementById('calcBasicGrid'), sci=document.getElementById('calcScienceGrid');
+  const normalTab=document.getElementById('normalCalcTab'), scienceTab=document.getElementById('scienceCalcTab');
+  let expr='';
+  function sync(){display.value=expr||'0';}
+  function add(v){expr+=v;sync();display.focus();}
+  function clear(){expr='';sync();}
+  function back(){expr=expr.slice(0,-1);sync();}
+  function calculate(){
+    try{
+      let e=expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/π/g,'Math.PI').replace(/e/g,'Math.E').replace(/\^/g,'**');
+      if(!/^[0-9+\-*/().,%\sA-Za-z_*\.]+$/.test(e))throw new Error();
+      e=e.replace(/(\d+(?:\.\d+)?)%/g,'($1/100)');
+      const val=Function('"use strict";return ('+e+')')();
+      if(!Number.isFinite(val))throw new Error(); expr=String(Math.round(val*1e12)/1e12);sync();
+    }catch{display.value='Error';setTimeout(sync,700);}
+  }
+  function scientific(fn){
+    const x=parseFloat(expr||display.value||'0'); if(!Number.isFinite(x))return;
+    let v; const rad=x*Math.PI/180;
+    if(fn==='sin')v=Math.sin(rad); if(fn==='cos')v=Math.cos(rad); if(fn==='tan')v=Math.tan(rad); if(fn==='sqrt')v=Math.sqrt(x); if(fn==='cbrt')v=Math.cbrt(x); if(fn==='log')v=Math.log10(x); if(fn==='ln')v=Math.log(x); if(fn==='square')v=x*x; if(fn==='cube')v=x*x*x; if(fn==='recip')v=1/x; if(fn==='exp')v=Math.exp(x);
+    if(!Number.isFinite(v))return; expr=String(Math.round(v*1e12)/1e12);sync();
+  }
+  const basicKeys=[['C','clear'],['⌫','back'],['%','add:%'],['÷','add:/'],['7','add:7'],['8','add:8'],['9','add:9'],['×','add:*'],['4','add:4'],['5','add:5'],['6','add:6'],['−','add:-'],['1','add:1'],['2','add:2'],['3','add:3'],['+','add:+'],['0','add:0'],['.','add:.'],['(', 'add:('],['=','equal']];
+  const sciKeys=[['sin','sin'],['cos','cos'],['tan','tan'],['√','sqrt'],['∛','cbrt'],['x²','square'],['x³','cube'],['1/x','recip'],['log','log'],['ln','ln'],['eˣ','exp'],['π','add:π'],['e','add:e'],['^','add:^'],['!','factorial'],['Ans','ans']];
+  function draw(arr,el){el.innerHTML='';arr.forEach(([label,action])=>{const b=document.createElement('button');b.type='button';b.className='calc-key'+(action==='equal'?' equal':'');b.textContent=label;b.onclick=()=>{if(action==='clear')clear();else if(action==='back')back();else if(action==='equal')calculate();else if(action==='factorial'){const x=parseInt(expr||'0',10);if(x>=0&&x<=170){let f=1;for(let i=2;i<=x;i++)f*=i;expr=String(f);sync();}}else if(action==='ans'){}else if(action.startsWith('add:'))add(action.slice(4));else scientific(action);};el.appendChild(b);});}
+  draw(basicKeys,basic);draw(sciKeys,sci);
+  function showScience(on){document.getElementById('calcScience').classList.toggle('show',on);normalTab.classList.toggle('active',!on);scienceTab.classList.toggle('active',on);}
+  normalTab.onclick=()=>showScience(false);scienceTab.onclick=()=>showScience(true);
+  document.getElementById('calcClose').onclick=()=>{overlay.classList.add('hidden');overlay.setAttribute('aria-hidden','true');};
+  overlay.addEventListener('click',e=>{if(e.target===overlay)document.getElementById('calcClose').click();});
+  window.openPracticeCalculator=()=>{overlay.classList.remove('hidden');overlay.setAttribute('aria-hidden','false');sync();};
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.classList.contains('hidden'))document.getElementById('calcClose').click();});
+})();
+</script>
+</body></html>

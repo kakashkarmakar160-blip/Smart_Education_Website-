@@ -193,6 +193,9 @@ function qval(id){return document.getElementById(id)?.value?.trim()||'';}
 function marksFor(type=currentType){return Number(document.querySelector(`.marks[data-for="${type}"]`)?.value||1);}
 function getOMRBank(){try{return JSON.parse(localStorage.getItem('teacherOMRBankV1')||'{"W":[],"X":[],"Y":[],"Z":[]}')}catch{return {W:[],X:[],Y:[],Z:[]};}}
 function setOMRBank(bank){localStorage.setItem('teacherOMRBankV1',JSON.stringify(bank));}
+function getOMRGlobalTimer(){const v=Number(localStorage.getItem('teacherOMRTimerSeconds')||300);return Number.isFinite(v)&&v>0?v:300;}
+function setOMRGlobalTimer(v){const sec=Number(v)||300;localStorage.setItem('teacherOMRTimerSeconds',String(sec));const b=getOMRBank();omrSets.forEach(s=>{(b[s]||[]).forEach(q=>{if(q)q.omrTimerSeconds=sec;});});setOMRBank(b);rebuildTeacherQuestions();}
+
 function getOMRSlot(set=omrSet,index=omrIndex){const b=getOMRBank();return b?.[set]?.[index]||null;}
 function rebuildTeacherQuestions(){
   const normal=teacherQuestions.filter(q=>q.type!=='omr');
@@ -216,7 +219,7 @@ function saveCurrentOMRSlot(requireAnswer=true){
     subject:document.getElementById('subject').value,
     class_name:document.getElementById('classSemester').value,
     omrSet,omrQuestionNo:omrIndex+1,
-    omrTimerSeconds:Number(document.getElementById('omrTimer')?.value||localStorage.getItem('teacherOMRTimerSeconds')||300),
+    omrTimerSeconds:getOMRGlobalTimer(),
     solution:{enabled:Boolean(qval('explanation')),steps:qval('explanation')?[qval('explanation')]:[]}
   };
   setOMRBank(bank);rebuildTeacherQuestions();
@@ -232,7 +235,7 @@ function loadOMRSlot(){
   if(q?.class_name)cls.value=q.class_name;
   const exp=document.getElementById('explanation'); if(exp)exp.value=q?.solution?.steps?.[0]||'';
   renderDynamicFields();
-  const timer=document.getElementById('omrTimer'); if(timer){timer.value=String(q?.omrTimerSeconds||localStorage.getItem('teacherOMRTimerSeconds')||300);localStorage.setItem('teacherOMRTimerSeconds',timer.value);}
+  const timer=document.getElementById('omrTimer'); if(timer){timer.value=String(getOMRGlobalTimer());}
   const r=document.querySelector(`input[name="omrCorrect"][value="${q?.answer||''}"]`); if(r)r.checked=true;
   updateOMRNav();updateMiniPreview();
   if(qEl)qEl.focus();
@@ -370,6 +373,7 @@ document.querySelectorAll('.marks').forEach(s=>s.addEventListener('change',()=>{
 document.getElementById('subject').addEventListener('change',updateMiniPreview);document.getElementById('classSemester').addEventListener('change',updateMiniPreview);
 document.getElementById('question').addEventListener('input',e=>{document.getElementById('questionCount').textContent=`${e.target.value.length} / 1000`;updateMiniPreview();});
 document.getElementById('explanation').addEventListener('input',e=>document.getElementById('explanationCount').textContent=`${e.target.value.length} / 1000`);
+document.addEventListener('change',e=>{if(e.target&&e.target.id==='omrTimer'){setOMRGlobalTimer(e.target.value);}});
 document.getElementById('saveQuestion').addEventListener('click',saveDraft);document.getElementById('saveQuestionBottom').addEventListener('click',saveDraft);document.getElementById('resetQuestion').addEventListener('click',resetQuestion);document.addEventListener('input',updateMiniPreview);
 const symbolSets={
   'Math':[ ['+','Plus / যোগ'],['−','Minus / বিয়োগ'],['×','Multiplication / গুণ'],['÷','Division / ভাগ'],['=','Equal to / সমান'],['≠','Not equal to / অসমান'],['<','Less than / ছোট'],['>','Greater than / বড়'],['≤','Less than or equal to'],['≥','Greater than or equal to'],['±','Plus-minus'],['%','Percentage / শতকরা'],[':','Ratio / অনুপাত'],['::','Proportion / সমানুপাত'],['∴','Therefore / অতএব'],['∵','Because / কারণ'],['≈','Approximately equal'],['∝','Proportional to'],['∞','Infinity / অসীম'],['√','Square root / বর্গমূল'],['∛','Cube root / ঘনমূল'],['∜','Fourth root / চতুর্থ মূল'],['^','Power / ঘাত'],['π','Pi / পাই'],['°','Degree / ডিগ্রি'],['′','Prime / মিনিট'],['″','Double prime / সেকেন্ড'],['∠','Angle / কোণ'],['⟂','Perpendicular / লম্ব'],['∥','Parallel / সমান্তরাল'],['△','Triangle / ত্রিভুজ'],['≅','Congruent / সর্বসম'],['∼','Similar / সদৃশ'],['∈','Belongs to / অন্তর্ভুক্ত'],['∉','Does not belong to'],['⊂','Subset / উপসেট'],['∪','Union / সংযোগ'],['∩','Intersection / ছেদ'],['∅','Empty set / শূন্য সেট'],['Σ','Sigma / যোগফল'],['Δ','Delta / পরিবর্তন'],['×10ⁿ','Scientific notation'],['!','Factorial'],['x²','Square'],['x³','Cube'],['xʸ','Power'],['1/x','Reciprocal'],['10ˣ','Ten to power x'],['eˣ','Exponential'],['log','Common logarithm'],['ln','Natural logarithm'],['e','Euler number'],['i','Imaginary unit'],['Ans','Previous answer'],['⌊x⌋','Floor'],['⌈x⌉','Ceiling'],['□⁄□','Fraction / ভগ্নাংশ']],
