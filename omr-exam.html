@@ -5,7 +5,31 @@
 
 .omr-tools{display:flex;justify-content:center;align-items:center;gap:16px;margin:10px 0 20px;min-height:54px}.tool-btn{width:54px;height:54px;border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:50%;font-size:28px;display:grid;place-items:center;cursor:pointer;box-shadow:var(--shadow)}.tool-btn:hover{background:var(--soft)}.today-btn{width:auto;height:44px;border-radius:8px;padding:0 16px;font-size:14px;font-weight:900}.rough-overlay,.today-overlay{position:fixed;inset:0;background:rgba(15,32,48,.45);z-index:1000;display:grid;place-items:center;padding:16px}.rough-overlay.hidden,.today-overlay.hidden{display:none}.rough-card{width:min(760px,96vw);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;box-shadow:0 15px 45px rgba(0,0,0,.2)}.rough-head{display:flex;justify-content:space-between;align-items:center;font-size:18px;margin-bottom:10px}.rough-close{border:0;background:transparent;font-size:22px;cursor:pointer;color:var(--text)}#roughCanvas{width:100%;height:min(55vh,420px);display:block;border:1px solid var(--line);border-radius:8px;background:#fff;touch-action:none}.rough-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:12px}.today-card{width:min(340px,90vw);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px;text-align:center;box-shadow:0 15px 45px rgba(0,0,0,.2)}.today-title{font-weight:900;font-size:18px}.today-date{font-size:24px;font-weight:900;margin:14px 0 20px;color:var(--primary)}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script></head>
-<body><header class="top"><div><div class="title">OMR EXAMINATION</div><div class="sub" id="studentLine">Student</div></div><div class="timer" id="timer">05:00</div></header><main class="wrap"><section class="head"><div><div class="sub">Question Booklet Set</div><h1 id="setTitle">W</h1></div><div class="badge" id="progress">QUESTION 1 / 40</div></section><section class="qcard" id="qcard"></section><section class="sheet"><div class="sheet-title">12. ANSWER</div><div class="sheet-grid" id="sheet"></div><div class="sub" style="text-align:center;margin-top:10px">Select A, B, C or D for the current question. Once selected, that question's answer is locked and cannot be changed.</div></section><div class="nav"><button class="btn" id="back">← BACK</button><button class="btn primary" id="next">NEXT QUESTION →</button></div></main>
+<body><header class="top"><div><div class="title">OMR EXAMINATION</div><div class="sub" id="studentLine">Student</div></div><div class="timer" id="timer">05:00</div></header><main class="wrap"><section class="head"><div><div class="sub">Question Booklet Set</div><h1 id="setTitle">W</h1></div><div class="badge" id="progress">QUESTION 1 / 40</div></section><section class="qcard" id="qcard"></section><section class="sheet"><div class="sheet-title">12. ANSWER</div><div class="sheet-grid" id="sheet"></div><div class="sub" style="text-align:center;margin-top:10px">Select A, B, C or D for the current question. Once selected, that question's answer is locked and cannot be changed.</div></section><div class="nav"><button class="btn" id="back">← BACK</button><button class="btn primary" id="next">NEXT QUESTION →</button></div>
+<div class="omr-tools" aria-label="Exam tools">
+  <button class="tool-btn" id="roughBtn" type="button" title="Pen / Rough Work" aria-label="Open rough work">✏️</button>
+  <button class="btn today-btn" id="todayBtn" type="button">Today's</button>
+</div>
+</main>
+
+<div class="rough-overlay hidden" id="roughOverlay">
+  <div class="rough-card" role="dialog" aria-modal="true" aria-label="Rough work pad">
+    <div class="rough-head"><strong>✏️ Rough Work</strong><button class="rough-close" id="roughClose" type="button" aria-label="Close">×</button></div>
+    <canvas id="roughCanvas"></canvas>
+    <div class="rough-actions">
+      <button class="btn" id="roughClear" type="button">Clear</button>
+      <button class="btn primary" id="roughDone" type="button">Done</button>
+    </div>
+  </div>
+</div>
+
+<div class="today-overlay hidden" id="todayOverlay">
+  <div class="today-card" role="dialog" aria-modal="true" aria-label="Today's date">
+    <div class="today-title">📅 Today's Date</div>
+    <div class="today-date" id="todayDate"></div>
+    <button class="btn primary" id="todayClose" type="button">Close</button>
+  </div>
+</div>
 <script>
 let data=JSON.parse(sessionStorage.getItem('teacherExam')||'null');let info=JSON.parse(sessionStorage.getItem('omrStudentInfo')||'null');if(!data||!info){location.href='student-paper.html';}
 const all=Array.isArray(data?.questions)?data.questions:[];const questions=all.filter(q=>q.type==='omr'&&String(q.omrSet||'W').toUpperCase()===String(info?.set||'W').toUpperCase()).slice(0,40);let index=0,answers={},remaining=Number(data?.omr_timer_seconds||data?.omrTimerSeconds||(questions[0]?.omrTimerSeconds)||300),timerId;
