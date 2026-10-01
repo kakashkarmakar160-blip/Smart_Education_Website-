@@ -1,0 +1,31 @@
+SMART EDUCATION — NOTES INTERFACE UPDATE
+
+Updated only:
+teacher-notes.html
+
+The Notes editor has been redesigned to closely follow the supplied Microsoft-Word/Paint-style ribbon reference while keeping the existing Notes database flow.
+
+Included working tools:
+- Notes Title / Teacher Name / Chapter / Subject / Semester / Class
+- New Notes / Delete / Preview / Publish / Unpublish / Edit / Copy Code
+- Paste / Select / Crop / Resize / Rotate
+- Undo / Redo / Bold / Italic / Underline
+- Font family / font size / Heading
+- Text colour / highlight colour / colour palette
+- Alignment / bullet / numbered list
+- Pictures with crop and 350 KB maximum
+- Background Logo watermark with 350 KB maximum
+- Math & Science symbol keyboard
+- Shapes: rectangle, circle, triangle, arrow, line
+- Table insertion
+- Page Break / Blank Page / Cover Page
+- Simple chart insertion
+- Save as PDF
+- My Notes: Edit / Preview / Publish-Unpublish / Copy Code / Delete
+- Notes search
+
+No other website files were intentionally changed.
+
+IMPORTANT:
+Run notes-system.sql in Supabase if the Notes table/storage bucket has not already been created.
+Each uploaded image/logo is limited to 350 KB by the editor.
