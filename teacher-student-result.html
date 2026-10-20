@@ -131,9 +131,9 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&
 let r=null;
 try{const {data:{user}}=await window.supabaseClient.auth.getUser();if(user){const {data,error}=await window.supabaseClient.from('teacher_exam_results').select('*').eq('result_id',wanted).eq('teacher_user_id',user.id).maybeSingle();if(error)throw error;if(data){r=data.result||{};r.id=data.result_id;r.studentName=data.student_name||r.studentName||r.student?.name||'Student';r.student=r.student||{};r.student.name=r.studentName;}}}catch(e){console.error(e);}
 if(!r){try{const results=JSON.parse(localStorage.getItem('teacherResults')||'[]');r=results.find(x=>x.id===wanted)||null;}catch{}}
-window.__seTeacherResultData=r||null;if(!r){head.innerHTML='<div><h1>Result পাওয়া যায়নি</h1><p class="muted">Teacher Profile-এ ফিরে যাও।</p></div>';return;}
+if(!r){head.innerHTML='<div><h1>Result পাওয়া যায়নি</h1><p class="muted">Teacher Profile-এ ফিরে যাও।</p></div>';return;}
 const qs=r.questions||[],ans=r.answers||{},awarded=Array.isArray(r.awardedMarks)?r.awardedMarks:qs.map((q,i)=>ans[i]?.correct?Number(q.marks||1):0);
 head.innerHTML=`<div><p class="eyebrow">STUDENT ANSWER REVIEW</p><h1>${esc(r.student?.name||r.studentName||'Student')}</h1><p class="muted">${esc(r.title||'Question Paper')} • ${esc(r.subject||'')} • ${Number(r.obtained)||0}/${Number(r.totalMarks)||0} • ${Number(r.percentage)||0}%</p></div><div class="preview-actions"><a class="outline" href="teacher-profile.html">Back to Profile</a><a class="primary" href="teacher-marksheet-edit.html?resultId=${encodeURIComponent(r.id)}">Edit Marks</a></div>`;
 body.innerHTML=qs.map((q,i)=>{const a=ans[i];let given=a?.value||'Not Answered';if(q.type==='mcq'&&a?.chosen!==undefined)given=q.options?.[a.chosen]??given;return `<article class="review-question"><div><b>${i+1}. ${esc(q.question)}</b><p>Your Answer: ${esc(given)}</p><p>Correct Answer: ${esc(q.answer||'')}</p></div><div><strong>${Number(awarded[i]||0)}/${Number(q.marks||1)}</strong></div></article>`;}).join('');
 })();
-</script><script src="profile-enhancements.js"></script></body></html>
+</script></body></html>
