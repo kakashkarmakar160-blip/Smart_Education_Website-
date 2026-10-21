@@ -179,7 +179,19 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
 
   const studentAvatarMap={};
-  try{const ids=[...new Set(cloudResults.map(r=>r.student_user_id||r.student?.id).filter(Boolean))];if(ids.length){const pr=await window.supabaseClient.from('profiles').select('*').in('id',ids);if(!pr.error)(pr.data||[]).forEach(a=>{const photo=a.student_dp_url||a.avatar_url||a.avatar_data_url||a.profile_photo||a.profile_picture||a.photo_url||a.dp||a.avatar;if(photo)studentAvatarMap[a.id]=photo;});const av=await window.supabaseClient.from('user_preferences').select('user_id,avatar_data_url,display_name').in('user_id',ids);if(!av.error)(av.data||[]).forEach(a=>{if(a.avatar_data_url)studentAvatarMap[a.user_id]=a.avatar_data_url;});}}catch(e){console.warn('Student avatar lookup skipped:',e)}
+  try{
+    const ids=[...new Set(cloudResults.map(r=>r.student_user_id||r.student?.id).filter(Boolean))];
+    if(ids.length){
+      // Use the narrowly-scoped public profile RPC so RLS on profiles does not silently hide students' DPs from their teacher.
+      const publicProfiles=await window.supabaseClient.rpc('get_public_profile_cards',{p_user_ids:ids});
+      if(!publicProfiles.error)(publicProfiles.data||[]).forEach(a=>{const photo=a.student_dp_url||a.avatar_url;if(photo)studentAvatarMap[String(a.id)]=photo;});
+      // Compatibility fallback for projects that have not run the profile-card SQL yet.
+      const pr=await window.supabaseClient.from('profiles').select('id,name,student_dp_url,teacher_dp_url,avatar_url').in('id',ids);
+      if(!pr.error)(pr.data||[]).forEach(a=>{const photo=a.student_dp_url||a.avatar_url;if(photo)studentAvatarMap[String(a.id)]=photo;});
+      const av=await window.supabaseClient.from('user_preferences').select('user_id,avatar_data_url,display_name').in('user_id',ids);
+      if(!av.error)(av.data||[]).forEach(a=>{if(a.avatar_data_url)studentAvatarMap[String(a.user_id)]=a.avatar_data_url;});
+    }
+  }catch(e){console.warn('Student avatar lookup skipped:',e)}
   document.getElementById('created').textContent=qs.length;
   document.getElementById('published').textContent=allPapers.length;
   document.getElementById('students').textContent=new Set(cloudResults.map(r=>r.student_user_id||r.student?.id||r.studentName)).size;

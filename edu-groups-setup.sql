@@ -83,3 +83,21 @@ drop policy if exists "edu shared links teacher update" on public.edu_shared_lin
 create policy "edu shared links teacher update" on public.edu_shared_links for update to authenticated using (teacher_user_id=auth.uid()) with check (teacher_user_id=auth.uid());
 drop policy if exists "edu shared links teacher delete" on public.edu_shared_links;
 create policy "edu shared links teacher delete" on public.edu_shared_links for delete to authenticated using (teacher_user_id=auth.uid());
+
+
+-- Safely expose only the fields needed for names and profile photos in teacher results and group chat.
+-- This avoids granting broad SELECT access to every profiles column.
+create or replace function public.get_public_profile_cards(p_user_ids uuid[])
+returns table (id uuid, name text, student_dp_url text, teacher_dp_url text, avatar_url text)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select p.id, p.name, p.student_dp_url, p.teacher_dp_url, p.avatar_url
+  from public.profiles p
+  where p.id = any(coalesce(p_user_ids, array[]::uuid[]))
+    and auth.uid() is not null;
+$$;
+revoke all on function public.get_public_profile_cards(uuid[]) from public, anon;
+grant execute on function public.get_public_profile_cards(uuid[]) to authenticated;
