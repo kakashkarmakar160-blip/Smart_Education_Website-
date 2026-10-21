@@ -8,3 +8,6 @@ Changes in this build:
 - The small Home button on the home page now displays a dark graduation-cap icon.
 
 Important: these changes were syntax-checked locally. Actual cloud saving and realtime/chat behavior still require testing on the deployed website with the Supabase project and its RLS policies.
+
+
+DP Save reliability update (V2): Save DP now reads the selected file directly when the button is pressed instead of depending only on the prior change-event variable; it rechecks file type/300 KB limit, shows a saving state, updates an existing profile row first, and only reports success after Supabase returns a saved row. Errors now show the actual Supabase/browser message.
