@@ -56,3 +56,13 @@ drop policy if exists "enrollments teacher insert" on public.class_enrollments;
 create policy "enrollments teacher insert" on public.class_enrollments for insert to authenticated with check(exists(select 1 from public.teacher_classes c where c.id=class_id and c.teacher_id=auth.uid()));
 drop policy if exists "enrollments teacher update" on public.class_enrollments;
 create policy "enrollments teacher update" on public.class_enrollments for update to authenticated using(exists(select 1 from public.teacher_classes c where c.id=class_id and c.teacher_id=auth.uid())) with check(exists(select 1 from public.teacher_classes c where c.id=class_id and c.teacher_id=auth.uid()));
+
+
+-- Allow class owners to edit their own resource links (Manage Class)
+DROP POLICY IF EXISTS "resources owner update" ON public.class_resources;
+CREATE POLICY "resources owner update"
+ON public.class_resources FOR UPDATE TO authenticated
+USING (EXISTS (SELECT 1 FROM public.teacher_classes c WHERE c.id = class_id AND c.teacher_id = auth.uid()))
+WITH CHECK (EXISTS (SELECT 1 FROM public.teacher_classes c WHERE c.id = class_id AND c.teacher_id = auth.uid()));
+
+NOTIFY pgrst, 'reload schema';
