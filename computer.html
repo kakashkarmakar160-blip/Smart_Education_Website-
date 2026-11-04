@@ -21,6 +21,8 @@ a{text-decoration:none;color:inherit}
 .stack{font-size:36px;height:40px;line-height:1;margin-bottom:18px}.hat{font-size:38px;height:40px;line-height:1;margin-bottom:18px}.abacus{font-size:34px;height:40px;line-height:1;margin-bottom:18px}
 .class-card h2{font-size:22px;margin:0 0 6px}.class-card .meta{color:var(--muted);margin:0 0 2px;font-size:15px}.subjects{font-size:16px;line-height:1.5;max-width:90%;color:var(--text)}.subjects span{white-space:nowrap}.arrow{position:absolute;right:18px;bottom:18px;width:40px;height:40px;border-radius:50%;background:var(--soft);display:grid;place-items:center;color:var(--primary);font-size:23px;font-weight:900}
 .note{margin-top:22px;color:var(--muted);font-size:13px}.hidden{display:none!important}
+.teacher-class-section{margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}.teacher-class-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.teacher-class-heading h2{margin:4px 0;font-size:24px}.teacher-class-heading p:not(.eyebrow){margin:0;color:var(--muted);font-size:14px}.teacher-class-count{background:var(--soft);color:var(--primary);padding:8px 12px;border-radius:20px;font-weight:800;white-space:nowrap}.teacher-market-card{min-height:220px;padding:16px;display:flex;flex-direction:column;gap:8px}.teacher-market-card .teacher-logo{width:100%;height:105px;object-fit:cover;border-radius:13px;background:var(--soft)}.teacher-market-card .teacher-logo-placeholder{height:105px;border-radius:13px;background:var(--soft);display:grid;place-items:center;font-size:40px}.teacher-market-card h2{font-size:19px;margin:2px 0}.teacher-market-card .teacher-meta{font-size:13px;color:var(--muted);margin:0}.teacher-market-card .teacher-price{font-weight:900;color:#13834c;font-size:18px}.teacher-market-card .arrow{bottom:14px}.teacher-class-empty{padding:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;color:var(--muted)}
+@media(max-width:560px){.teacher-class-heading{align-items:flex-start;flex-direction:column}.teacher-market-card{min-height:190px}}
 @media(max-width:1000px){.class-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.topbar{padding:0 14px}.brand{font-size:17px}.container{padding:18px 14px 55px}.class-grid{grid-template-columns:1fr}.page-head h1{font-size:28px}.class-card{min-height:190px}}
 </style>
@@ -46,6 +48,12 @@ a{text-decoration:none;color:inherit}
     <p>Class 5 থেকে Class 12 পর্যন্ত Computer practice ও exam-এর জন্য একটি class নির্বাচন করুন।</p>
   </section>
   <section id="classGrid" class="class-grid"></section>
+  <section id="teacherClassSection" class="teacher-class-section hidden">
+    <div class="teacher-class-heading"><div><p class="eyebrow">TEACHER CLASSES</p><h2>শিক্ষকদের প্রকাশিত ক্লাস</h2><p>এখানে সব শিক্ষকের Publish করা Class একসঙ্গে দেখা যাবে।</p></div><span class="teacher-class-count" id="teacherClassCount">0 Classes</span></div>
+    <div id="teacherClassGrid" class="class-grid"></div>
+    <p id="teacherClassEmpty" class="teacher-class-empty hidden">এখনও কোনও শিক্ষক Class Publish করেননি।</p>
+    <p id="teacherClassError" class="teacher-class-empty hidden"></p>
+  </section>
   <p class="note">Class নির্বাচন করলে Computer Room খুলবে। সেখানে subject paper, practice, exam ও result-এর options থাকবে।</p>
 </main>
 <script>
@@ -71,6 +79,23 @@ function icon(i){const c=icons[i%icons.length];if(c==='stack')return '<div class
 function openClass(id){const m=id.match(/class(\d+)/);const n=m?m[1]:'12';localStorage.setItem('computerSelectedClass',id);location.href='computer-room.html?class='+encodeURIComponent(n)+'&semester=1'}
 function render(){document.getElementById('classGrid').innerHTML=CLASSES.map((c,i)=>`<article class="class-card" role="button" tabindex="0" data-class="${c[0]}">${icon(i)}<h2>${escapeHtml(c[1])}</h2><p class="meta">${c[2]} Subjects • 4 Semesters</p><div class="subjects">${c[3].slice(0,4).map(x=>`<span>${escapeHtml(x)}</span>`).join('')}${c[3].length>4?`<span>+${c[3].length-4} more</span>`:''}</div><div class="arrow">→</div></article>`).join('');document.querySelectorAll('.class-card').forEach(x=>{x.onclick=()=>openClass(x.dataset.class);x.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')openClass(x.dataset.class)}})}
 applyTheme();document.getElementById('themeBtn').onclick=()=>{localStorage.setItem(THEME_KEY,localStorage.getItem(THEME_KEY)==='dark'?'light':'dark');applyTheme()};document.getElementById('profileBtn').onclick=()=>location.href='profile.html';render();
+function safeImage(value){return typeof value==='string'&&(/^(data:image\/|https:\/\/)/i).test(value)?value:''}
+function openTeacherClass(id){location.href='class-marketplace.html?class='+encodeURIComponent(id)+'#student'}
+async function loadTeacherPublishedClasses(){
+ const section=document.getElementById('teacherClassSection'),grid=document.getElementById('teacherClassGrid'),empty=document.getElementById('teacherClassEmpty'),err=document.getElementById('teacherClassError'),count=document.getElementById('teacherClassCount');
+ section.classList.remove('hidden');
+ const db=window.supabaseClient;
+ if(!db){err.textContent='Supabase সংযোগ পাওয়া যায়নি।';err.classList.remove('hidden');return}
+ try{
+  const result=await db.from('teacher_classes').select('*').eq('published',true).order('created_at',{ascending:false});
+  if(result.error)throw result.error;
+  const rows=result.data||[];count.textContent=rows.length+' Classes';
+  if(!rows.length){empty.classList.remove('hidden');return}
+  grid.innerHTML=rows.map(c=>{const cls=c.school_class||c.class_level||'Class';const logo=safeImage(c.logo_data||c.logo_url||c.class_logo);const subject=c.subject||'Subject';const sem=c.semester||'Semester';return `<article class="class-card teacher-market-card" role="button" tabindex="0" data-teacher-class="${escapeHtml(c.id)}">${logo?`<img class="teacher-logo" src="${escapeHtml(logo)}" alt="Class logo">`:'<div class="teacher-logo-placeholder">🎓</div>'}<h2>${escapeHtml(c.class_name||'Teacher Class')}</h2><p class="teacher-meta">${escapeHtml(cls)} · ${escapeHtml(sem)} · ${escapeHtml(subject)}</p><p class="teacher-meta">Teacher: ${escapeHtml(c.teacher_name||'Smart Education Teacher')}</p><div class="teacher-price">₹${Number(c.price||0)}</div><div class="arrow">→</div></article>`}).join('');
+  grid.querySelectorAll('[data-teacher-class]').forEach(card=>{const go=()=>openTeacherClass(card.dataset.teacherClass);card.addEventListener('click',go);card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}})});
+ }catch(e){err.textContent='শিক্ষকদের Class লোড করা যায়নি: '+(e.message||'Unknown error');err.classList.remove('hidden')}
+}
+loadTeacherPublishedClasses();
 </script>
 </body>
 </html>
