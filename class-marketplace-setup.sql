@@ -66,3 +66,37 @@ USING (EXISTS (SELECT 1 FROM public.teacher_classes c WHERE c.id = class_id AND 
 WITH CHECK (EXISTS (SELECT 1 FROM public.teacher_classes c WHERE c.id = class_id AND c.teacher_id = auth.uid()));
 
 NOTIFY pgrst, 'reload schema';
+
+-- Compatibility migration for existing Marketplace tables and older deployments
+ALTER TABLE public.teacher_classes ADD COLUMN IF NOT EXISTS teacher_name text;
+ALTER TABLE public.class_resources ADD COLUMN IF NOT EXISTS teacher_id uuid REFERENCES auth.users(id) ON DELETE CASCADE;
+ALTER TABLE public.class_resources ADD COLUMN IF NOT EXISTS url text;
+ALTER TABLE public.class_resources ADD COLUMN IF NOT EXISTS resource_url text;
+ALTER TABLE public.class_resources ADD COLUMN IF NOT EXISTS cover_data text;
+ALTER TABLE public.class_resources ADD COLUMN IF NOT EXISTS cover_url text;
+ALTER TABLE public.class_resources ADD COLUMN IF NOT EXISTS image_url text;
+UPDATE public.class_resources SET resource_url = url WHERE resource_url IS NULL AND url IS NOT NULL;
+UPDATE public.class_resources SET url = resource_url WHERE url IS NULL AND resource_url IS NOT NULL;
+ALTER TABLE public.class_admission_requests ADD COLUMN IF NOT EXISTS teacher_id uuid REFERENCES auth.users(id) ON DELETE CASCADE;
+ALTER TABLE public.class_enrollments ADD COLUMN IF NOT EXISTS teacher_id uuid REFERENCES auth.users(id) ON DELETE CASCADE;
+ALTER TABLE public.class_enrollments ADD COLUMN IF NOT EXISTS status text NOT NULL DEFAULT 'active';
+ALTER TABLE public.class_enrollments ADD COLUMN IF NOT EXISTS student_name text;
+-- Backfill owner IDs so legacy records continue to work
+UPDATE public.class_resources r SET teacher_id=c.teacher_id FROM public.teacher_classes c WHERE c.id=r.class_id AND r.teacher_id IS NULL;
+UPDATE public.class_admission_requests r SET teacher_id=c.teacher_id FROM public.teacher_classes c WHERE c.id=r.class_id AND r.teacher_id IS NULL;
+UPDATE public.class_enrollments e SET teacher_id=c.teacher_id FROM public.teacher_classes c WHERE c.id=e.class_id AND e.teacher_id IS NULL;
+UPDATE public.teacher_classes SET teacher_name=COALESCE(teacher_name,'Teacher') WHERE teacher_name IS NULL;
+CREATE INDEX IF NOT EXISTS class_resources_teacher_idx ON public.class_resources(teacher_id);
+NOTIFY pgrst, 'reload schema';
+
+-- Ensure inserted resource/admission/enrollment owner IDs match the actual class owner
+DROP POLICY IF EXISTS "resources owner insert" ON public.class_resources;
+CREATE POLICY "resources owner insert" ON public.class_resources FOR INSERT TO authenticated
+WITH CHECK (teacher_id = auth.uid() AND EXISTS (SELECT 1 FROM public.teacher_classes c WHERE c.id = class_id AND c.teacher_id = auth.uid()));
+DROP POLICY IF EXISTS "requests student insert" ON public.class_admission_requests;
+CREATE POLICY "requests student insert" ON public.class_admission_requests FOR INSERT TO authenticated
+WITH CHECK (student_id = auth.uid() AND status = 'pending' AND EXISTS (SELECT 1 FROM public.teacher_classes c WHERE c.id = class_id AND c.teacher_id = teacher_id AND c.published = true));
+DROP POLICY IF EXISTS "enrollments teacher insert" ON public.class_enrollments;
+CREATE POLICY "enrollments teacher insert" ON public.class_enrollments FOR INSERT TO authenticated
+WITH CHECK (teacher_id = auth.uid() AND EXISTS (SELECT 1 FROM public.teacher_classes c WHERE c.id = class_id AND c.teacher_id = auth.uid()));
+NOTIFY pgrst, 'reload schema';
