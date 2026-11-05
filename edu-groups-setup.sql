@@ -101,3 +101,28 @@ as $$
 $$;
 revoke all on function public.get_public_profile_cards(uuid[]) from public, anon;
 grant execute on function public.get_public_profile_cards(uuid[]) to authenticated;
+
+
+-- Group creator may be either a Student or Teacher. The creator (teacher_user_id
+-- legacy column name) is the Group Admin and may add/remove any authenticated user.
+drop policy if exists "edu groups teacher insert" on public.edu_groups;
+drop policy if exists "edu groups teacher update" on public.edu_groups;
+drop policy if exists "edu groups teacher delete" on public.edu_groups;
+create policy "edu groups creator insert" on public.edu_groups for insert to authenticated
+ with check (teacher_user_id = auth.uid());
+create policy "edu groups creator update" on public.edu_groups for update to authenticated
+ using (teacher_user_id = auth.uid()) with check (teacher_user_id = auth.uid());
+create policy "edu groups creator delete" on public.edu_groups for delete to authenticated
+ using (teacher_user_id = auth.uid());
+
+-- Group Admin (creator) can add or remove any user; each user can still join/leave themselves.
+drop policy if exists "edu group members insert self or owner" on public.edu_group_members;
+create policy "edu group members insert self or admin" on public.edu_group_members for insert to authenticated
+ with check (student_user_id = auth.uid() or exists (
+   select 1 from public.edu_groups g where g.id = group_id and g.teacher_user_id = auth.uid()
+ ));
+drop policy if exists "edu group members leave self or owner" on public.edu_group_members;
+create policy "edu group members delete self or admin" on public.edu_group_members for delete to authenticated
+ using (student_user_id = auth.uid() or exists (
+   select 1 from public.edu_groups g where g.id = group_id and g.teacher_user_id = auth.uid()
+ ));
