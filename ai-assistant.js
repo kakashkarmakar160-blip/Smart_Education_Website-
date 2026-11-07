@@ -37,5 +37,5 @@ let opacity=Math.max(.35,Math.min(.95,Number(d.transparency??78)/100));
 let st=document.createElement('style');st.id='seGlassDesign';st.textContent=`body:not(.dark) .card,body:not(.dark) .box,body:not(.dark) .panel,body:not(.dark) .hero,body:not(.dark) .intro,body:not(.dark) .topbar,body:not(.dark) .top,body:not(.dark) .role-card,body:not(.dark) .tool-card,body:not(.dark) .student-category,body:not(.dark) .student-resource,body:not(.dark) .teacher-paper{background-color:rgba(255,255,255,${opacity})!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:rgba(255,255,255,.8)!important}body:not(.dark) .card,body:not(.dark) .panel,body:not(.dark) .role-card{box-shadow:0 8px 28px rgba(80,75,110,.09)!important}`;
 document.head.append(st);
 }
-document.addEventListener('DOMContentLoaded',()=>{design();setup();settingsPanel()});
+document.addEventListener('DOMContentLoaded',()=>{if(location.pathname.split('/').pop()==='student-exam.html')return;design();setup();settingsPanel()});
 })();
